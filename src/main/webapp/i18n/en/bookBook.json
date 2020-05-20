@@ -1,0 +1,29 @@
+{
+  "gatewayApp": {
+    "bookBook": {
+      "home": {
+        "title": "Books",
+        "createLabel": "Create a new Book",
+        "createOrEditLabel": "Create or edit a Book",
+        "notFound": "No Books found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Book {{ id }}?"
+      },
+      "detail": {
+        "title": "Book"
+      },
+      "title": "Title",
+      "author": "Author",
+      "description": "Description",
+      "bookStatus": "Book Status"
+    }
+  },
+  "bookApp": {
+    "bookBook": {
+      "created": "A new Book is created with identifier {{ param }}",
+      "updated": "A Book is updated with identifier {{ param }}",
+      "deleted": "A Book is deleted with identifier {{ param }}"
+    }
+  }
+}

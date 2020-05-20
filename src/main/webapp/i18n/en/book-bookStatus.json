@@ -1,0 +1,9 @@
+{
+  "gatewayApp": {
+    "BookStatus": {
+      "null": "",
+      "AVAILABLE": "AVAILABLE",
+      "UNAVAILABLE": "UNAVAILABLE"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "gatewayApp": {
+    "RentalStatus": {
+      "null": "",
+      "OK": "OK",
+      "RENTED": "RENTED",
+      "OVERDUE": "OVERDUE"
+    }
+  }
+}

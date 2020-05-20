@@ -2,7 +2,8 @@
   "generator-jhipster": {
     "promptValues": {
       "packageName": "com.skcc.gateway",
-      "nativeLanguage": "ko"
+      "nativeLanguage": "ko",
+      "microservicePath": "/Users/juyounglee/book"
     },
     "jhipsterVersion": "6.8.0",
     "applicationType": "gateway",
