@@ -1,0 +1,13 @@
+{
+  "gatewayApp": {
+    "Categories": {
+      "null": "",
+      "IT": "IT",
+      "LITERATURE": "LITERATURE",
+      "HISTORY": "HISTORY",
+      "SCIENCE": "SCIENCE",
+      "ART": "ART",
+      "LANGUAGE": "LANGUAGE"
+    }
+  }
+}

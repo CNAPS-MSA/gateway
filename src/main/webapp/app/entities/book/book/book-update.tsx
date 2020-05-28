@@ -129,6 +129,31 @@ export const BookUpdate = (props: IBookUpdateProps) => {
                   <option value="UNAVAILABLE">{translate('gatewayApp.BookStatus.UNAVAILABLE')}</option>
                 </AvInput>
               </AvGroup>
+              <AvGroup>
+                <Label id="categoryLabel" for="book-category">
+                  <Translate contentKey="gatewayApp.bookBook.category">Category</Translate>
+                </Label>
+                <AvInput
+                  id="book-category"
+                  type="select"
+                  className="form-control"
+                  name="category"
+                  value={(!isNew && bookEntity.category) || 'IT'}
+                >
+                  <option value="IT">{translate('gatewayApp.Categories.IT')}</option>
+                  <option value="LITERATURE">{translate('gatewayApp.Categories.LITERATURE')}</option>
+                  <option value="HISTORY">{translate('gatewayApp.Categories.HISTORY')}</option>
+                  <option value="SCIENCE">{translate('gatewayApp.Categories.SCIENCE')}</option>
+                  <option value="ART">{translate('gatewayApp.Categories.ART')}</option>
+                  <option value="LANGUAGE">{translate('gatewayApp.Categories.LANGUAGE')}</option>
+                </AvInput>
+              </AvGroup>
+              <AvGroup>
+                <Label id="barcodeLabel" for="book-barcode">
+                  <Translate contentKey="gatewayApp.bookBook.barcode">Barcode</Translate>
+                </Label>
+                <AvField id="book-barcode" type="string" className="form-control" name="barcode" />
+              </AvGroup>
               <Button tag={Link} id="cancel-save" to="/book" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;

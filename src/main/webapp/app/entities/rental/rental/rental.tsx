@@ -67,11 +67,11 @@ export const Rental = (props: IRentalProps) => {
                 <th className="hand" onClick={sort('userId')}>
                   <Translate contentKey="gatewayApp.rentalRental.userId">User Id</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
-                <th className="hand" onClick={sort('lateFee')}>
-                  <Translate contentKey="gatewayApp.rentalRental.lateFee">Late Fee</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
                 <th className="hand" onClick={sort('rentalStatus')}>
                   <Translate contentKey="gatewayApp.rentalRental.rentalStatus">Rental Status</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th className="hand" onClick={sort('lateFee')}>
+                  <Translate contentKey="gatewayApp.rentalRental.lateFee">Late Fee</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
@@ -85,10 +85,10 @@ export const Rental = (props: IRentalProps) => {
                     </Button>
                   </td>
                   <td>{rental.userId}</td>
-                  <td>{rental.lateFee}</td>
                   <td>
                     <Translate contentKey={`gatewayApp.RentalStatus.${rental.rentalStatus}`} />
                   </td>
+                  <td>{rental.lateFee}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${rental.id}`} color="info" size="sm">

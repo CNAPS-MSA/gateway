@@ -66,6 +66,9 @@ describe('Book e2e test', () => {
     await bookUpdatePage.setDescriptionInput('description');
     expect(await bookUpdatePage.getDescriptionInput()).to.match(/description/);
     await bookUpdatePage.bookStatusSelectLastOption();
+    await bookUpdatePage.categorySelectLastOption();
+    await bookUpdatePage.setBarcodeInput('5');
+    expect(await bookUpdatePage.getBarcodeInput()).to.eq('5');
     await waitUntilDisplayed(bookUpdatePage.saveButton);
     await bookUpdatePage.save();
     await waitUntilHidden(bookUpdatePage.saveButton);

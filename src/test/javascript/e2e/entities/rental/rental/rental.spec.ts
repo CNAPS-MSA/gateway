@@ -61,9 +61,9 @@ describe('Rental e2e test', () => {
     await rentalComponentsPage.createButton.click();
     await rentalUpdatePage.setUserIdInput('5');
     expect(await rentalUpdatePage.getUserIdInput()).to.eq('5');
+    await rentalUpdatePage.rentalStatusSelectLastOption();
     await rentalUpdatePage.setLateFeeInput('5');
     expect(await rentalUpdatePage.getLateFeeInput()).to.eq('5');
-    await rentalUpdatePage.rentalStatusSelectLastOption();
     await waitUntilDisplayed(rentalUpdatePage.saveButton);
     await rentalUpdatePage.save();
     await waitUntilHidden(rentalUpdatePage.saveButton);

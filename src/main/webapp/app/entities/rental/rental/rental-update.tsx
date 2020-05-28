@@ -82,12 +82,6 @@ export const RentalUpdate = (props: IRentalUpdateProps) => {
                 <AvField id="rental-userId" type="string" className="form-control" name="userId" />
               </AvGroup>
               <AvGroup>
-                <Label id="lateFeeLabel" for="rental-lateFee">
-                  <Translate contentKey="gatewayApp.rentalRental.lateFee">Late Fee</Translate>
-                </Label>
-                <AvField id="rental-lateFee" type="string" className="form-control" name="lateFee" />
-              </AvGroup>
-              <AvGroup>
                 <Label id="rentalStatusLabel" for="rental-rentalStatus">
                   <Translate contentKey="gatewayApp.rentalRental.rentalStatus">Rental Status</Translate>
                 </Label>
@@ -96,12 +90,17 @@ export const RentalUpdate = (props: IRentalUpdateProps) => {
                   type="select"
                   className="form-control"
                   name="rentalStatus"
-                  value={(!isNew && rentalEntity.rentalStatus) || 'OK'}
+                  value={(!isNew && rentalEntity.rentalStatus) || 'RENT_AVAILABLE'}
                 >
-                  <option value="OK">{translate('gatewayApp.RentalStatus.OK')}</option>
-                  <option value="RENTED">{translate('gatewayApp.RentalStatus.RENTED')}</option>
-                  <option value="OVERDUE">{translate('gatewayApp.RentalStatus.OVERDUE')}</option>
+                  <option value="RENT_AVAILABLE">{translate('gatewayApp.RentalStatus.RENT_AVAILABLE')}</option>
+                  <option value="RENT_UNAVAILABLE">{translate('gatewayApp.RentalStatus.RENT_UNAVAILABLE')}</option>
                 </AvInput>
+              </AvGroup>
+              <AvGroup>
+                <Label id="lateFeeLabel" for="rental-lateFee">
+                  <Translate contentKey="gatewayApp.rentalRental.lateFee">Late Fee</Translate>
+                </Label>
+                <AvField id="rental-lateFee" type="string" className="form-control" name="lateFee" />
               </AvGroup>
               <Button tag={Link} id="cancel-save" to="/rental" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
