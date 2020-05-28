@@ -5,8 +5,8 @@ export default class RentalUpdatePage {
   saveButton: ElementFinder = element(by.id('save-entity'));
   cancelButton: ElementFinder = element(by.id('cancel-save'));
   userIdInput: ElementFinder = element(by.css('input#rental-userId'));
-  lateFeeInput: ElementFinder = element(by.css('input#rental-lateFee'));
   rentalStatusSelect: ElementFinder = element(by.css('select#rental-rentalStatus'));
+  lateFeeInput: ElementFinder = element(by.css('input#rental-lateFee'));
 
   getPageTitle() {
     return this.pageTitle;
@@ -18,14 +18,6 @@ export default class RentalUpdatePage {
 
   async getUserIdInput() {
     return this.userIdInput.getAttribute('value');
-  }
-
-  async setLateFeeInput(lateFee) {
-    await this.lateFeeInput.sendKeys(lateFee);
-  }
-
-  async getLateFeeInput() {
-    return this.lateFeeInput.getAttribute('value');
   }
 
   async setRentalStatusSelect(rentalStatus) {
@@ -42,6 +34,14 @@ export default class RentalUpdatePage {
       .last()
       .click();
   }
+  async setLateFeeInput(lateFee) {
+    await this.lateFeeInput.sendKeys(lateFee);
+  }
+
+  async getLateFeeInput() {
+    return this.lateFeeInput.getAttribute('value');
+  }
+
   async save() {
     await this.saveButton.click();
   }

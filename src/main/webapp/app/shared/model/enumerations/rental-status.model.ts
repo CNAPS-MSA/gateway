@@ -1,5 +1,4 @@
 export const enum RentalStatus {
-  OK = 'OK',
-  RENTED = 'RENTED',
-  OVERDUE = 'OVERDUE'
+  RENT_AVAILABLE = 'RENT_AVAILABLE',
+  RENT_UNAVAILABLE = 'RENT_UNAVAILABLE'
 }
