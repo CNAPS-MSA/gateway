@@ -16,7 +16,9 @@
       "title": "Title",
       "author": "Author",
       "description": "Description",
-      "bookStatus": "Book Status"
+      "bookStatus": "Book Status",
+      "category": "Category",
+      "barcode": "Barcode"
     }
   },
   "bookApp": {
