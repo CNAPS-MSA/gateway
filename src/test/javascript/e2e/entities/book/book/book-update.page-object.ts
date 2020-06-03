@@ -8,6 +8,8 @@ export default class BookUpdatePage {
   authorInput: ElementFinder = element(by.css('input#book-author'));
   descriptionInput: ElementFinder = element(by.css('input#book-description'));
   bookStatusSelect: ElementFinder = element(by.css('select#book-bookStatus'));
+  categorySelect: ElementFinder = element(by.css('select#book-category'));
+  barcodeInput: ElementFinder = element(by.css('input#book-barcode'));
 
   getPageTitle() {
     return this.pageTitle;
@@ -51,6 +53,28 @@ export default class BookUpdatePage {
       .last()
       .click();
   }
+  async setCategorySelect(category) {
+    await this.categorySelect.sendKeys(category);
+  }
+
+  async getCategorySelect() {
+    return this.categorySelect.element(by.css('option:checked')).getText();
+  }
+
+  async categorySelectLastOption() {
+    await this.categorySelect
+      .all(by.tagName('option'))
+      .last()
+      .click();
+  }
+  async setBarcodeInput(barcode) {
+    await this.barcodeInput.sendKeys(barcode);
+  }
+
+  async getBarcodeInput() {
+    return this.barcodeInput.getAttribute('value');
+  }
+
   async save() {
     await this.saveButton.click();
   }
