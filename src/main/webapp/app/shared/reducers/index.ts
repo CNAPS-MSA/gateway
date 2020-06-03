@@ -12,6 +12,7 @@ import activate, { ActivateState } from 'app/modules/account/activate/activate.r
 import password, { PasswordState } from 'app/modules/account/password/password.reducer';
 import settings, { SettingsState } from 'app/modules/account/settings/settings.reducer';
 import passwordReset, { PasswordResetState } from 'app/modules/account/password-reset/password-reset.reducer';
+/* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 // prettier-ignore
 import rental, {
   RentalState
@@ -36,8 +37,6 @@ import book, {
 import user, {
   UserState
 } from 'app/entities/user/user/user.reducer';
-/* jhipster-needle-add-reducer-import - JHipster will add reducer here */
-
 export interface IRootState {
   readonly authentication: AuthenticationState;
   readonly locale: LocaleState;

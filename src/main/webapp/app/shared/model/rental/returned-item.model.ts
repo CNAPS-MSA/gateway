@@ -4,6 +4,7 @@ export interface IReturnedItem {
   id?: number;
   bookId?: number;
   returnedDate?: Moment;
+  bookTitle?: string;
   rentalId?: number;
 }
 

@@ -10,12 +10,24 @@ services:
       - SPRING_CLOUD_CONFIG_URI=http://admin:$${jhipster.registry.password}@jhipster-registry:8761/config
       - SPRING_DATASOURCE_URL=jdbc:mariadb://gateway-mariadb:3306/gateway
       - JHIPSTER_SLEEP=120 # gives time for mariadb server to start
+      - KAFKA_BOOTSTRAPSERVERS=kafka:9092
     ports:
       - 8080:8080
   gateway-mariadb:
     extends:
       file: mariadb.yml
       service: gateway-mariadb
+  kafka:
+    extends:
+      file: kafka.yml
+      service: kafka
+    environment:
+      - KAFKA_ADVERTISED_HOST_NAME=kafka
+      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
+  zookeeper:
+    extends:
+      file: kafka.yml
+      service: zookeeper
   jhipster-registry:
     extends:
       file: jhipster-registry.yml

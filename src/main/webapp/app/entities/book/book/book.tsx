@@ -76,12 +76,6 @@ export const Book = (props: IBookProps) => {
                 <th className="hand" onClick={sort('bookStatus')}>
                   <Translate contentKey="gatewayApp.bookBook.bookStatus">Book Status</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
-                <th className="hand" onClick={sort('category')}>
-                  <Translate contentKey="gatewayApp.bookBook.category">Category</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th className="hand" onClick={sort('barcode')}>
-                  <Translate contentKey="gatewayApp.bookBook.barcode">Barcode</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
                 <th />
               </tr>
             </thead>
@@ -99,10 +93,6 @@ export const Book = (props: IBookProps) => {
                   <td>
                     <Translate contentKey={`gatewayApp.BookStatus.${book.bookStatus}`} />
                   </td>
-                  <td>
-                    <Translate contentKey={`gatewayApp.Categories.${book.category}`} />
-                  </td>
-                  <td>{book.barcode}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${book.id}`} color="info" size="sm">

@@ -65,6 +65,8 @@ describe('OverdueItem e2e test', () => {
     expect(await overdueItemUpdatePage.getBookIdInput()).to.eq('5');
     await overdueItemUpdatePage.setDueDateInput('01-01-2001');
     expect(await overdueItemUpdatePage.getDueDateInput()).to.eq('2001-01-01');
+    await overdueItemUpdatePage.setBookTitleInput('bookTitle');
+    expect(await overdueItemUpdatePage.getBookTitleInput()).to.match(/bookTitle/);
     await overdueItemUpdatePage.rentalSelectLastOption();
     await waitUntilDisplayed(overdueItemUpdatePage.saveButton);
     await overdueItemUpdatePage.save();

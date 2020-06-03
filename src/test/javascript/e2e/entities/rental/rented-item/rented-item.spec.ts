@@ -65,6 +65,8 @@ describe('RentedItem e2e test', () => {
     expect(await rentedItemUpdatePage.getRentedDateInput()).to.eq('2001-01-01');
     await rentedItemUpdatePage.setDueDateInput('01-01-2001');
     expect(await rentedItemUpdatePage.getDueDateInput()).to.eq('2001-01-01');
+    await rentedItemUpdatePage.setBookTitleInput('bookTitle');
+    expect(await rentedItemUpdatePage.getBookTitleInput()).to.match(/bookTitle/);
     await rentedItemUpdatePage.rentalSelectLastOption();
     await waitUntilDisplayed(rentedItemUpdatePage.saveButton);
     await rentedItemUpdatePage.save();

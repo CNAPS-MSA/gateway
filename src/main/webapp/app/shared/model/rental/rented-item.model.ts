@@ -5,6 +5,7 @@ export interface IRentedItem {
   bookId?: number;
   rentedDate?: Moment;
   dueDate?: Moment;
+  bookTitle?: string;
   rentalId?: number;
 }
 

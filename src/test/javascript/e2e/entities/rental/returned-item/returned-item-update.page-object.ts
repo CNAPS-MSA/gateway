@@ -6,6 +6,7 @@ export default class ReturnedItemUpdatePage {
   cancelButton: ElementFinder = element(by.id('cancel-save'));
   bookIdInput: ElementFinder = element(by.css('input#returned-item-bookId'));
   returnedDateInput: ElementFinder = element(by.css('input#returned-item-returnedDate'));
+  bookTitleInput: ElementFinder = element(by.css('input#returned-item-bookTitle'));
   rentalSelect: ElementFinder = element(by.css('select#returned-item-rental'));
 
   getPageTitle() {
@@ -26,6 +27,14 @@ export default class ReturnedItemUpdatePage {
 
   async getReturnedDateInput() {
     return this.returnedDateInput.getAttribute('value');
+  }
+
+  async setBookTitleInput(bookTitle) {
+    await this.bookTitleInput.sendKeys(bookTitle);
+  }
+
+  async getBookTitleInput() {
+    return this.bookTitleInput.getAttribute('value');
   }
 
   async rentalSelectLastOption() {
