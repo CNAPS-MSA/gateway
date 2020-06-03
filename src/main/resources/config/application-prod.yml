@@ -110,8 +110,7 @@ jhipster:
     rate-limiting:
       enabled: false
     authorized-microservices-endpoints: # Access Control Policy, if left empty for a route, all endpoints will be accessible
-      rental: /api # recommended prod configuration
-      book: /api
+      app1: /api # recommended prod configuration
   http:
     cache: # Used by the CachingHttpHeadersFilter
       timeToLiveInDays: 1461

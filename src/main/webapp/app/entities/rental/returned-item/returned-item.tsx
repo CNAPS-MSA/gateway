@@ -71,6 +71,9 @@ export const ReturnedItem = (props: IReturnedItemProps) => {
                   <Translate contentKey="gatewayApp.rentalReturnedItem.returnedDate">Returned Date</Translate>{' '}
                   <FontAwesomeIcon icon="sort" />
                 </th>
+                <th className="hand" onClick={sort('bookTitle')}>
+                  <Translate contentKey="gatewayApp.rentalReturnedItem.bookTitle">Book Title</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
                 <th>
                   <Translate contentKey="gatewayApp.rentalReturnedItem.rental">Rental</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
@@ -89,6 +92,7 @@ export const ReturnedItem = (props: IReturnedItemProps) => {
                   <td>
                     <TextFormat type="date" value={returnedItem.returnedDate} format={APP_LOCAL_DATE_FORMAT} />
                   </td>
+                  <td>{returnedItem.bookTitle}</td>
                   <td>{returnedItem.rentalId ? <Link to={`rental/${returnedItem.rentalId}`}>{returnedItem.rentalId}</Link> : ''}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">

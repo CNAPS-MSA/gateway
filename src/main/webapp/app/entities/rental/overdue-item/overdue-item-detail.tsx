@@ -40,6 +40,12 @@ export const OverdueItemDetail = (props: IOverdueItemDetailProps) => {
             <TextFormat value={overdueItemEntity.dueDate} type="date" format={APP_LOCAL_DATE_FORMAT} />
           </dd>
           <dt>
+            <span id="bookTitle">
+              <Translate contentKey="gatewayApp.rentalOverdueItem.bookTitle">Book Title</Translate>
+            </span>
+          </dt>
+          <dd>{overdueItemEntity.bookTitle}</dd>
+          <dt>
             <Translate contentKey="gatewayApp.rentalOverdueItem.rental">Rental</Translate>
           </dt>
           <dd>{overdueItemEntity.rentalId ? overdueItemEntity.rentalId : ''}</dd>

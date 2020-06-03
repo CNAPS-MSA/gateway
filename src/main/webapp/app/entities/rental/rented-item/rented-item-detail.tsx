@@ -48,6 +48,12 @@ export const RentedItemDetail = (props: IRentedItemDetailProps) => {
             <TextFormat value={rentedItemEntity.dueDate} type="date" format={APP_LOCAL_DATE_FORMAT} />
           </dd>
           <dt>
+            <span id="bookTitle">
+              <Translate contentKey="gatewayApp.rentalRentedItem.bookTitle">Book Title</Translate>
+            </span>
+          </dt>
+          <dd>{rentedItemEntity.bookTitle}</dd>
+          <dt>
             <Translate contentKey="gatewayApp.rentalRentedItem.rental">Rental</Translate>
           </dt>
           <dd>{rentedItemEntity.rentalId ? rentedItemEntity.rentalId : ''}</dd>

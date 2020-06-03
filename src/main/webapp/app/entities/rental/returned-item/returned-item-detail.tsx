@@ -40,6 +40,12 @@ export const ReturnedItemDetail = (props: IReturnedItemDetailProps) => {
             <TextFormat value={returnedItemEntity.returnedDate} type="date" format={APP_LOCAL_DATE_FORMAT} />
           </dd>
           <dt>
+            <span id="bookTitle">
+              <Translate contentKey="gatewayApp.rentalReturnedItem.bookTitle">Book Title</Translate>
+            </span>
+          </dt>
+          <dd>{returnedItemEntity.bookTitle}</dd>
+          <dt>
             <Translate contentKey="gatewayApp.rentalReturnedItem.rental">Rental</Translate>
           </dt>
           <dd>{returnedItemEntity.rentalId ? returnedItemEntity.rentalId : ''}</dd>

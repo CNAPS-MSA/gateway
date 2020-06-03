@@ -36,9 +36,11 @@
     "redux-promise-middleware": "6.1.2",
     "redux-thunk": "2.3.0",
     "tslib": "1.10.0",
-    "uuid": "3.3.3"
+    "uuid": "3.3.3",
+    "webpack": "^4.43.0"
   },
   "devDependencies": {
+    "@openapitools/openapi-generator-cli": "1.0.10-4.2.3",
     "@types/chai": "4.1.7",
     "@types/enzyme": "3.9.1",
     "@types/jest": "24.0.23",
@@ -114,8 +116,6 @@
     "ts-node": "8.5.4",
     "typescript": "3.7.3",
     "webdriver-manager": "12.1.7",
-    "@openapitools/openapi-generator-cli": "1.0.10-4.2.3",
-    "webpack": "4.41.2",
     "webpack-cli": "3.3.10",
     "webpack-dev-server": "3.9.0",
     "webpack-merge": "4.2.2",

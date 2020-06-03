@@ -16,6 +16,7 @@
       "bookId": "Book Id",
       "rentedDate": "Rented Date",
       "dueDate": "Due Date",
+      "bookTitle": "Book Title",
       "rental": "Rental"
     }
   },

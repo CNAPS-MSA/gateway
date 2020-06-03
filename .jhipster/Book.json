@@ -1,52 +1,43 @@
 {
-  "fluentMethods": true,
-  "clientRootFolder": "book",
-  "relationships": [],
-  "fields": [
-    {
-      "fieldName": "title",
-      "fieldType": "String",
-      "fieldValidateRules": [
-        "required"
-      ]
-    },
-    {
-      "fieldName": "author",
-      "fieldType": "String",
-      "fieldValidateRules": [
-        "required"
-      ]
-    },
-    {
-      "fieldName": "description",
-      "fieldType": "String",
-      "fieldValidateRules": [
-        "required"
-      ]
-    },
-    {
-      "fieldName": "bookStatus",
-      "fieldType": "BookStatus",
-      "fieldValues": "AVAILABLE,UNAVAILABLE"
-    },
-    {
-      "fieldName": "category",
-      "fieldType": "Categories",
-      "fieldValues": "IT,LITERATURE,HISTORY,SCIENCE,ART,LANGUAGE"
-    },
-    {
-      "fieldName": "barcode",
-      "fieldType": "Integer"
-    }
-  ],
-  "changelogDate": "20200506084946",
-  "dto": "mapstruct",
-  "searchEngine": false,
-  "service": "serviceImpl",
-  "entityTableName": "book",
-  "databaseType": "sql",
-  "readOnly": false,
-  "jpaMetamodelFiltering": true,
-  "pagination": "pagination",
-  "microserviceName": "book"
+    "fluentMethods": true,
+    "clientRootFolder": "book",
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "title",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "author",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "bookStatus",
+            "fieldType": "BookStatus",
+            "fieldValues": "AVAILABLE,UNAVAILABLE"
+        }
+    ],
+    "changelogDate": "20200506084946",
+    "dto": "mapstruct",
+    "searchEngine": false,
+    "service": "serviceImpl",
+    "entityTableName": "book",
+    "databaseType": "sql",
+    "readOnly": false,
+    "jpaMetamodelFiltering": true,
+    "pagination": "pagination",
+    "microserviceName": "book"
 }

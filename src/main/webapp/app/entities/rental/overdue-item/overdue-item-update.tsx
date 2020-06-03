@@ -93,6 +93,12 @@ export const OverdueItemUpdate = (props: IOverdueItemUpdateProps) => {
                 <AvField id="overdue-item-dueDate" type="date" className="form-control" name="dueDate" />
               </AvGroup>
               <AvGroup>
+                <Label id="bookTitleLabel" for="overdue-item-bookTitle">
+                  <Translate contentKey="gatewayApp.rentalOverdueItem.bookTitle">Book Title</Translate>
+                </Label>
+                <AvField id="overdue-item-bookTitle" type="text" name="bookTitle" />
+              </AvGroup>
+              <AvGroup>
                 <Label for="overdue-item-rental">
                   <Translate contentKey="gatewayApp.rentalOverdueItem.rental">Rental</Translate>
                 </Label>

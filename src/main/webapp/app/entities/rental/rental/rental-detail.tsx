@@ -32,17 +32,17 @@ export const RentalDetail = (props: IRentalDetailProps) => {
           </dt>
           <dd>{rentalEntity.userId}</dd>
           <dt>
-            <span id="rentalStatus">
-              <Translate contentKey="gatewayApp.rentalRental.rentalStatus">Rental Status</Translate>
-            </span>
-          </dt>
-          <dd>{rentalEntity.rentalStatus}</dd>
-          <dt>
             <span id="lateFee">
               <Translate contentKey="gatewayApp.rentalRental.lateFee">Late Fee</Translate>
             </span>
           </dt>
           <dd>{rentalEntity.lateFee}</dd>
+          <dt>
+            <span id="rentalStatus">
+              <Translate contentKey="gatewayApp.rentalRental.rentalStatus">Rental Status</Translate>
+            </span>
+          </dt>
+          <dd>{rentalEntity.rentalStatus}</dd>
         </dl>
         <Button tag={Link} to="/rental" replace color="info">
           <FontAwesomeIcon icon="arrow-left" />{' '}

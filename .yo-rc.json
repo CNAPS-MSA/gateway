@@ -3,7 +3,7 @@
     "promptValues": {
       "packageName": "com.skcc.gateway",
       "nativeLanguage": "ko",
-      "microservicePath": "/Users/juyounglee/book"
+      "microservicePath": "/Users/juyounglee/rental"
     },
     "jhipsterVersion": "6.8.0",
     "applicationType": "gateway",
@@ -19,7 +19,7 @@
     "devDatabaseType": "h2Memory",
     "prodDatabaseType": "mariadb",
     "searchEngine": false,
-    "messageBroker": false,
+    "messageBroker": "kafka",
     "serviceDiscoveryType": "eureka",
     "buildTool": "maven",
     "enableSwaggerCodegen": false,

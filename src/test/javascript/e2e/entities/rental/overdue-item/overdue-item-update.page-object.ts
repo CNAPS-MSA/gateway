@@ -6,6 +6,7 @@ export default class OverdueItemUpdatePage {
   cancelButton: ElementFinder = element(by.id('cancel-save'));
   bookIdInput: ElementFinder = element(by.css('input#overdue-item-bookId'));
   dueDateInput: ElementFinder = element(by.css('input#overdue-item-dueDate'));
+  bookTitleInput: ElementFinder = element(by.css('input#overdue-item-bookTitle'));
   rentalSelect: ElementFinder = element(by.css('select#overdue-item-rental'));
 
   getPageTitle() {
@@ -26,6 +27,14 @@ export default class OverdueItemUpdatePage {
 
   async getDueDateInput() {
     return this.dueDateInput.getAttribute('value');
+  }
+
+  async setBookTitleInput(bookTitle) {
+    await this.bookTitleInput.sendKeys(bookTitle);
+  }
+
+  async getBookTitleInput() {
+    return this.bookTitleInput.getAttribute('value');
   }
 
   async rentalSelectLastOption() {

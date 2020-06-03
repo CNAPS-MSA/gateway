@@ -70,6 +70,9 @@ export const OverdueItem = (props: IOverdueItemProps) => {
                 <th className="hand" onClick={sort('dueDate')}>
                   <Translate contentKey="gatewayApp.rentalOverdueItem.dueDate">Due Date</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
+                <th className="hand" onClick={sort('bookTitle')}>
+                  <Translate contentKey="gatewayApp.rentalOverdueItem.bookTitle">Book Title</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
                 <th>
                   <Translate contentKey="gatewayApp.rentalOverdueItem.rental">Rental</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
@@ -88,6 +91,7 @@ export const OverdueItem = (props: IOverdueItemProps) => {
                   <td>
                     <TextFormat type="date" value={overdueItem.dueDate} format={APP_LOCAL_DATE_FORMAT} />
                   </td>
+                  <td>{overdueItem.bookTitle}</td>
                   <td>{overdueItem.rentalId ? <Link to={`rental/${overdueItem.rentalId}`}>{overdueItem.rentalId}</Link> : ''}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">

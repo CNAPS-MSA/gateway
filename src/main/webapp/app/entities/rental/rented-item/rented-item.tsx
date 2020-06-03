@@ -73,6 +73,9 @@ export const RentedItem = (props: IRentedItemProps) => {
                 <th className="hand" onClick={sort('dueDate')}>
                   <Translate contentKey="gatewayApp.rentalRentedItem.dueDate">Due Date</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
+                <th className="hand" onClick={sort('bookTitle')}>
+                  <Translate contentKey="gatewayApp.rentalRentedItem.bookTitle">Book Title</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
                 <th>
                   <Translate contentKey="gatewayApp.rentalRentedItem.rental">Rental</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
@@ -94,6 +97,7 @@ export const RentedItem = (props: IRentedItemProps) => {
                   <td>
                     <TextFormat type="date" value={rentedItem.dueDate} format={APP_LOCAL_DATE_FORMAT} />
                   </td>
+                  <td>{rentedItem.bookTitle}</td>
                   <td>{rentedItem.rentalId ? <Link to={`rental/${rentedItem.rentalId}`}>{rentedItem.rentalId}</Link> : ''}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">

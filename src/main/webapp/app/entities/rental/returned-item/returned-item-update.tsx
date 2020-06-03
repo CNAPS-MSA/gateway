@@ -93,6 +93,12 @@ export const ReturnedItemUpdate = (props: IReturnedItemUpdateProps) => {
                 <AvField id="returned-item-returnedDate" type="date" className="form-control" name="returnedDate" />
               </AvGroup>
               <AvGroup>
+                <Label id="bookTitleLabel" for="returned-item-bookTitle">
+                  <Translate contentKey="gatewayApp.rentalReturnedItem.bookTitle">Book Title</Translate>
+                </Label>
+                <AvField id="returned-item-bookTitle" type="text" name="bookTitle" />
+              </AvGroup>
+              <AvGroup>
                 <Label for="returned-item-rental">
                   <Translate contentKey="gatewayApp.rentalReturnedItem.rental">Rental</Translate>
                 </Label>

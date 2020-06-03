@@ -7,6 +7,7 @@ export default class RentedItemUpdatePage {
   bookIdInput: ElementFinder = element(by.css('input#rented-item-bookId'));
   rentedDateInput: ElementFinder = element(by.css('input#rented-item-rentedDate'));
   dueDateInput: ElementFinder = element(by.css('input#rented-item-dueDate'));
+  bookTitleInput: ElementFinder = element(by.css('input#rented-item-bookTitle'));
   rentalSelect: ElementFinder = element(by.css('select#rented-item-rental'));
 
   getPageTitle() {
@@ -35,6 +36,14 @@ export default class RentedItemUpdatePage {
 
   async getDueDateInput() {
     return this.dueDateInput.getAttribute('value');
+  }
+
+  async setBookTitleInput(bookTitle) {
+    await this.bookTitleInput.sendKeys(bookTitle);
+  }
+
+  async getBookTitleInput() {
+    return this.bookTitleInput.getAttribute('value');
   }
 
   async rentalSelectLastOption() {

@@ -99,6 +99,12 @@ export const RentedItemUpdate = (props: IRentedItemUpdateProps) => {
                 <AvField id="rented-item-dueDate" type="date" className="form-control" name="dueDate" />
               </AvGroup>
               <AvGroup>
+                <Label id="bookTitleLabel" for="rented-item-bookTitle">
+                  <Translate contentKey="gatewayApp.rentalRentedItem.bookTitle">Book Title</Translate>
+                </Label>
+                <AvField id="rented-item-bookTitle" type="text" name="bookTitle" />
+              </AvGroup>
+              <AvGroup>
                 <Label for="rented-item-rental">
                   <Translate contentKey="gatewayApp.rentalRentedItem.rental">Rental</Translate>
                 </Label>

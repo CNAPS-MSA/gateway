@@ -1,5 +1,6 @@
 package com.skcc.gateway.service;
 
+import com.skcc.gateway.adaptor.GatewayKafkaProducer;
 import com.skcc.gateway.config.Constants;
 import com.skcc.gateway.domain.Authority;
 import com.skcc.gateway.domain.User;
@@ -43,11 +44,14 @@ public class UserService {
 
     private final CacheManager cacheManager;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository, CacheManager cacheManager) {
+    private final GatewayKafkaProducer gatewayKafkaProducer;
+
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository, CacheManager cacheManager, GatewayKafkaProducer gatewayKafkaProducer) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.authorityRepository = authorityRepository;
         this.cacheManager = cacheManager;
+        this.gatewayKafkaProducer = gatewayKafkaProducer;
     }
 
     public Optional<User> activateRegistration(String key) {
@@ -302,5 +306,9 @@ public class UserService {
         if (user.getEmail() != null) {
             Objects.requireNonNull(cacheManager.getCache(UserRepository.USERS_BY_EMAIL_CACHE)).evict(user.getEmail());
         }
+    }
+
+    public void createRental(Long userId){
+        gatewayKafkaProducer.createRental(userId);
     }
 }

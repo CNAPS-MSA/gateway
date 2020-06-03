@@ -14,8 +14,8 @@
         "title": "Rental"
       },
       "userId": "User Id",
-      "rentalStatus": "Rental Status",
       "lateFee": "Late Fee",
+      "rentalStatus": "Rental Status",
       "rentedItem": "Rented Item",
       "overdueItem": "Overdue Item",
       "returnedItem": "Returned Item"

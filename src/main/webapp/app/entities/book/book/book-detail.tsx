@@ -49,18 +49,6 @@ export const BookDetail = (props: IBookDetailProps) => {
             </span>
           </dt>
           <dd>{bookEntity.bookStatus}</dd>
-          <dt>
-            <span id="category">
-              <Translate contentKey="gatewayApp.bookBook.category">Category</Translate>
-            </span>
-          </dt>
-          <dd>{bookEntity.category}</dd>
-          <dt>
-            <span id="barcode">
-              <Translate contentKey="gatewayApp.bookBook.barcode">Barcode</Translate>
-            </span>
-          </dt>
-          <dd>{bookEntity.barcode}</dd>
         </dl>
         <Button tag={Link} to="/book" replace color="info">
           <FontAwesomeIcon icon="arrow-left" />{' '}

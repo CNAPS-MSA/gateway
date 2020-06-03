@@ -4,6 +4,7 @@ export interface IOverdueItem {
   id?: number;
   bookId?: number;
   dueDate?: Moment;
+  bookTitle?: string;
   rentalId?: number;
 }
 

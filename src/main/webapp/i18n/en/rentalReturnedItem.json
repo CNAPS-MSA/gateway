@@ -15,6 +15,7 @@
       },
       "bookId": "Book Id",
       "returnedDate": "Returned Date",
+      "bookTitle": "Book Title",
       "rental": "Rental"
     }
   },

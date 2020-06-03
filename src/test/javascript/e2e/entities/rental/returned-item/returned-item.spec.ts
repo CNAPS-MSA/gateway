@@ -65,6 +65,8 @@ describe('ReturnedItem e2e test', () => {
     expect(await returnedItemUpdatePage.getBookIdInput()).to.eq('5');
     await returnedItemUpdatePage.setReturnedDateInput('01-01-2001');
     expect(await returnedItemUpdatePage.getReturnedDateInput()).to.eq('2001-01-01');
+    await returnedItemUpdatePage.setBookTitleInput('bookTitle');
+    expect(await returnedItemUpdatePage.getBookTitleInput()).to.match(/bookTitle/);
     await returnedItemUpdatePage.rentalSelectLastOption();
     await waitUntilDisplayed(returnedItemUpdatePage.saveButton);
     await returnedItemUpdatePage.save();
