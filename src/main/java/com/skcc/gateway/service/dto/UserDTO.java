@@ -50,6 +50,16 @@ public class UserDTO {
 
     private Set<String> authorities;
 
+    private Long point;
+
+    public Long getPoint() {
+        return point;
+    }
+
+    public void setPoint(Long point) {
+        this.point = point;
+    }
+
     public UserDTO() {
         // Empty constructor needed for Jackson.
     }
@@ -70,6 +80,7 @@ public class UserDTO {
         this.authorities = user.getAuthorities().stream()
             .map(Authority::getName)
             .collect(Collectors.toSet());
+        this.point = user.getPoint();
     }
 
     public Long getId() {

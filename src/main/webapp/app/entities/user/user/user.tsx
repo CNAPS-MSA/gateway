@@ -70,6 +70,10 @@ export const User = (props: IUserProps) => {
                 <th className="hand" onClick={sort('email')}>
                   <Translate contentKey="gatewayApp.userUser.email">Email</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
+
+                <th className="hand" onClick={sort('point')}>
+                  <Translate contentKey="gatewayApp.userUser.point">Point</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
                 <th />
               </tr>
             </thead>
@@ -83,6 +87,7 @@ export const User = (props: IUserProps) => {
                   </td>
                   <td>{user.name}</td>
                   <td>{user.email}</td>
+                  <td>{user.point}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${user.id}`} color="info" size="sm">
