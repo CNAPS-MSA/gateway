@@ -240,4 +240,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
     public void setPoint(Long point) {
         this.point = point;
     }
+
+    public Long savePoints(int points){
+        this.point+=(long)points;
+        return this.point;
+    }
 }

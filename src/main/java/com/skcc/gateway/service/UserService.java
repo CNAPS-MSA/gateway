@@ -1,5 +1,6 @@
 package com.skcc.gateway.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.skcc.gateway.adaptor.GatewayKafkaProducer;
 import com.skcc.gateway.config.Constants;
 import com.skcc.gateway.domain.Authority;
@@ -25,6 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
+import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
 /**
@@ -123,7 +125,7 @@ public class UserService {
         Set<Authority> authorities = new HashSet<>();
         authorityRepository.findById(AuthoritiesConstants.USER).ifPresent(authorities::add);
         newUser.setAuthorities(authorities);
-        newUser.setPoint((long)0);
+        newUser.setPoint((long)1000);
         userRepository.save(newUser);
         this.clearUserCaches(newUser);
         log.debug("Created Information for User: {}", newUser);
@@ -167,7 +169,7 @@ public class UserService {
                 .collect(Collectors.toSet());
             user.setAuthorities(authorities);
         }
-        user.setPoint((long)0);
+        user.setPoint((long)1000);
         userRepository.save(user);
         this.clearUserCaches(user);
         log.debug("Created Information for User: {}", user);
@@ -311,7 +313,7 @@ public class UserService {
         }
     }
 
-    public void createRental(Long userId){
+    public void createRental(Long userId) throws InterruptedException, ExecutionException, JsonProcessingException {
         gatewayKafkaProducer.createRental(userId);
     }
 }
