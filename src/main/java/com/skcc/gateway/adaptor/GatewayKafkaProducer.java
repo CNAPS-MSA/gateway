@@ -6,18 +6,21 @@ import com.skcc.gateway.config.KafkaProperties;
 import com.skcc.gateway.domain.CreateRentalEvent;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.clients.producer.RecordMetadata;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import java.time.Instant;
+import java.util.concurrent.ExecutionException;
 
 @Service
 public class GatewayKafkaProducer {
     private final Logger log = LoggerFactory.getLogger(GatewayKafkaProducer.class);
 
-    private static final String TOPIC = "topic_user";
+    private static final String TOPIC_RENTAL = "topic_rental";
 
     private final KafkaProperties kafkaProperties;
 
@@ -38,17 +41,14 @@ public class GatewayKafkaProducer {
         log.info("Kafka producer initialized");
     }
 
-    public void createRental(Long userId){
-        try {
-            CreateRentalEvent createRentalEvent = new CreateRentalEvent(userId);
-            String message = objectMapper.writeValueAsString(createRentalEvent);
-            ProducerRecord<String, String> record = new ProducerRecord<>(TOPIC, message);
-            producer.send(record);
+    public PublishResult createRental(Long userId) throws ExecutionException, InterruptedException, JsonProcessingException{
 
-        } catch (JsonProcessingException e) {
-            logger.error("Could not send book List",e);
-            e.printStackTrace();
-        }
+        CreateRentalEvent createRentalEvent = new CreateRentalEvent(userId);
+        String message = objectMapper.writeValueAsString(createRentalEvent);
+        RecordMetadata metadata = producer.send(new ProducerRecord<>(TOPIC_RENTAL, message)).get();
+        return new PublishResult(metadata.topic(), metadata.partition(), metadata.offset(), Instant.ofEpochMilli(metadata.timestamp()));
+
+
     }
 
 
@@ -56,5 +56,19 @@ public class GatewayKafkaProducer {
     public void shutdown(){
         log.info("Shutdown Kafka producer");
         producer.close();
+    }
+
+    private static class PublishResult {
+        public final String topic;
+        public final int partition;
+        public final long offset;
+        public final Instant timestamp;
+
+        private PublishResult(String topic, int partition, long offset, Instant timestamp) {
+            this.topic = topic;
+            this.partition = partition;
+            this.offset = offset;
+            this.timestamp = timestamp;
+        }
     }
 }

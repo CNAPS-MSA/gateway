@@ -1,5 +1,6 @@
 package com.skcc.gateway.web.rest;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.skcc.gateway.config.Constants;
 import com.skcc.gateway.domain.User;
 import com.skcc.gateway.repository.UserRepository;
@@ -31,6 +32,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.*;
+import java.util.concurrent.ExecutionException;
 
 /**
  * REST controller for managing users.
@@ -91,7 +93,7 @@ public class UserResource {
      */
     @PostMapping("/users")
     @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
-    public ResponseEntity<User> createUser(@Valid @RequestBody UserDTO userDTO) throws URISyntaxException {
+    public ResponseEntity<User> createUser(@Valid @RequestBody UserDTO userDTO) throws URISyntaxException, InterruptedException, ExecutionException, JsonProcessingException {
         log.debug("REST request to save User : {}", userDTO);
 
         if (userDTO.getId() != null) {
@@ -103,7 +105,7 @@ public class UserResource {
             throw new EmailAlreadyUsedException();
         } else {
             User newUser = userService.createUser(userDTO);
-            userService.createRental(newUser.getId());
+            userService.createRental(newUser.getId()); //rental 생성
             mailService.sendCreationEmail(newUser);
             return ResponseEntity.created(new URI("/api/users/" + newUser.getLogin()))
                 .headers(HeaderUtil.createAlert(applicationName,  "userManagement.created", newUser.getLogin()))
