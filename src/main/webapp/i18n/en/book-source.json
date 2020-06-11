@@ -1,0 +1,9 @@
+{
+  "gatewayApp": {
+    "Source": {
+      "null": "",
+      "Donated": "Donated",
+      "Purchased": "Purchased"
+    }
+  }
+}

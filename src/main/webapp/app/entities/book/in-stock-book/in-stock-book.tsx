@@ -6,14 +6,14 @@ import { Translate, ICrudGetAllAction, TextFormat, getSortState, IPaginationBase
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { IRootState } from 'app/shared/reducers';
-import { getEntities } from './book.reducer';
-import { IBook } from 'app/shared/model/book/book.model';
+import { getEntities } from './in-stock-book.reducer';
+import { IInStockBook } from 'app/shared/model/book/in-stock-book.model';
 import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
 import { ITEMS_PER_PAGE } from 'app/shared/util/pagination.constants';
 
-export interface IBookProps extends StateProps, DispatchProps, RouteComponentProps<{ url: string }> {}
+export interface IInStockBookProps extends StateProps, DispatchProps, RouteComponentProps<{ url: string }> {}
 
-export const Book = (props: IBookProps) => {
+export const InStockBook = (props: IInStockBookProps) => {
   const [paginationState, setPaginationState] = useState(getSortState(props.location, ITEMS_PER_PAGE));
 
   const getAllEntities = () => {
@@ -45,19 +45,19 @@ export const Book = (props: IBookProps) => {
       activePage: currentPage
     });
 
-  const { bookList, match, loading, totalItems } = props;
+  const { inStockBookList, match, loading, totalItems } = props;
   return (
     <div>
-      <h2 id="book-heading">
-        <Translate contentKey="gatewayApp.bookBook.home.title">Books</Translate>
+      <h2 id="in-stock-book-heading">
+        <Translate contentKey="gatewayApp.bookInStockBook.home.title">In Stock Books</Translate>
         <Link to={`${match.url}/new`} className="btn btn-primary float-right jh-create-entity" id="jh-create-entity">
           <FontAwesomeIcon icon="plus" />
           &nbsp;
-          <Translate contentKey="gatewayApp.bookBook.home.createLabel">Create new Book</Translate>
+          <Translate contentKey="gatewayApp.bookInStockBook.home.createLabel">Create new In Stock Book</Translate>
         </Link>
       </h2>
       <div className="table-responsive">
-        {bookList && bookList.length > 0 ? (
+        {inStockBookList && inStockBookList.length > 0 ? (
           <Table responsive>
             <thead>
               <tr>
@@ -65,63 +65,52 @@ export const Book = (props: IBookProps) => {
                   <Translate contentKey="global.field.id">ID</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('title')}>
-                  <Translate contentKey="gatewayApp.bookBook.title">Title</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="gatewayApp.bookInStockBook.title">Title</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('description')}>
-                  <Translate contentKey="gatewayApp.bookBook.description">Description</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="gatewayApp.bookInStockBook.description">Description</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('author')}>
-                  <Translate contentKey="gatewayApp.bookBook.author">Author</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="gatewayApp.bookInStockBook.author">Author</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('publisher')}>
-                  <Translate contentKey="gatewayApp.bookBook.publisher">Publisher</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="gatewayApp.bookInStockBook.publisher">Publisher</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('isbn')}>
-                  <Translate contentKey="gatewayApp.bookBook.isbn">Isbn</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="gatewayApp.bookInStockBook.isbn">Isbn</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('publicationDate')}>
-                  <Translate contentKey="gatewayApp.bookBook.publicationDate">Publication Date</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="gatewayApp.bookInStockBook.publicationDate">Publication Date</Translate>{' '}
+                  <FontAwesomeIcon icon="sort" />
                 </th>
-                <th className="hand" onClick={sort('classification')}>
-                  <Translate contentKey="gatewayApp.bookBook.classification">Classification</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th className="hand" onClick={sort('bookStatus')}>
-                  <Translate contentKey="gatewayApp.bookBook.bookStatus">Book Status</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th className="hand" onClick={sort('location')}>
-                  <Translate contentKey="gatewayApp.bookBook.location">Location</Translate> <FontAwesomeIcon icon="sort" />
+                <th className="hand" onClick={sort('source')}>
+                  <Translate contentKey="gatewayApp.bookInStockBook.source">Source</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
             </thead>
             <tbody>
-              {bookList.map((book, i) => (
+              {inStockBookList.map((inStockBook, i) => (
                 <tr key={`entity-${i}`}>
                   <td>
-                    <Button tag={Link} to={`${match.url}/${book.id}`} color="link" size="sm">
-                      {book.id}
+                    <Button tag={Link} to={`${match.url}/${inStockBook.id}`} color="link" size="sm">
+                      {inStockBook.id}
                     </Button>
                   </td>
-                  <td>{book.title}</td>
-                  <td>{book.description}</td>
-                  <td>{book.author}</td>
-                  <td>{book.publisher}</td>
-                  <td>{book.isbn}</td>
+                  <td>{inStockBook.title}</td>
+                  <td>{inStockBook.description}</td>
+                  <td>{inStockBook.author}</td>
+                  <td>{inStockBook.publisher}</td>
+                  <td>{inStockBook.isbn}</td>
                   <td>
-                    <TextFormat type="date" value={book.publicationDate} format={APP_LOCAL_DATE_FORMAT} />
+                    <TextFormat type="date" value={inStockBook.publicationDate} format={APP_LOCAL_DATE_FORMAT} />
                   </td>
                   <td>
-                    <Translate contentKey={`gatewayApp.Classification.${book.classification}`} />
-                  </td>
-                  <td>
-                    <Translate contentKey={`gatewayApp.BookStatus.${book.bookStatus}`} />
-                  </td>
-                  <td>
-                    <Translate contentKey={`gatewayApp.Location.${book.location}`} />
+                    <Translate contentKey={`gatewayApp.Source.${inStockBook.source}`} />
                   </td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
-                      <Button tag={Link} to={`${match.url}/${book.id}`} color="info" size="sm">
+                      <Button tag={Link} to={`${match.url}/${inStockBook.id}`} color="info" size="sm">
                         <FontAwesomeIcon icon="eye" />{' '}
                         <span className="d-none d-md-inline">
                           <Translate contentKey="entity.action.view">View</Translate>
@@ -129,7 +118,7 @@ export const Book = (props: IBookProps) => {
                       </Button>
                       <Button
                         tag={Link}
-                        to={`${match.url}/${book.id}/edit?page=${paginationState.activePage}&sort=${paginationState.sort},${paginationState.order}`}
+                        to={`${match.url}/${inStockBook.id}/edit?page=${paginationState.activePage}&sort=${paginationState.sort},${paginationState.order}`}
                         color="primary"
                         size="sm"
                       >
@@ -140,7 +129,7 @@ export const Book = (props: IBookProps) => {
                       </Button>
                       <Button
                         tag={Link}
-                        to={`${match.url}/${book.id}/delete?page=${paginationState.activePage}&sort=${paginationState.sort},${paginationState.order}`}
+                        to={`${match.url}/${inStockBook.id}/delete?page=${paginationState.activePage}&sort=${paginationState.sort},${paginationState.order}`}
                         color="danger"
                         size="sm"
                       >
@@ -158,12 +147,12 @@ export const Book = (props: IBookProps) => {
         ) : (
           !loading && (
             <div className="alert alert-warning">
-              <Translate contentKey="gatewayApp.bookBook.home.notFound">No Books found</Translate>
+              <Translate contentKey="gatewayApp.bookInStockBook.home.notFound">No In Stock Books found</Translate>
             </div>
           )
         )}
       </div>
-      <div className={bookList && bookList.length > 0 ? '' : 'd-none'}>
+      <div className={inStockBookList && inStockBookList.length > 0 ? '' : 'd-none'}>
         <Row className="justify-content-center">
           <JhiItemCount page={paginationState.activePage} total={totalItems} itemsPerPage={paginationState.itemsPerPage} i18nEnabled />
         </Row>
@@ -181,10 +170,10 @@ export const Book = (props: IBookProps) => {
   );
 };
 
-const mapStateToProps = ({ book }: IRootState) => ({
-  bookList: book.entities,
-  loading: book.loading,
-  totalItems: book.totalItems
+const mapStateToProps = ({ inStockBook }: IRootState) => ({
+  inStockBookList: inStockBook.entities,
+  loading: inStockBook.loading,
+  totalItems: inStockBook.totalItems
 });
 
 const mapDispatchToProps = {
@@ -194,4 +183,4 @@ const mapDispatchToProps = {
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;
 
-export default connect(mapStateToProps, mapDispatchToProps)(Book);
+export default connect(mapStateToProps, mapDispatchToProps)(InStockBook);

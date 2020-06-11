@@ -1,14 +1,19 @@
+import { Moment } from 'moment';
+import { Classification } from 'app/shared/model/enumerations/classification.model';
 import { BookStatus } from 'app/shared/model/enumerations/book-status.model';
-import { Categories } from 'app/shared/model/enumerations/categories.model';
+import { Location } from 'app/shared/model/enumerations/location.model';
 
 export interface IBook {
   id?: number;
   title?: string;
-  author?: string;
   description?: string;
+  author?: string;
+  publisher?: string;
+  isbn?: number;
+  publicationDate?: Moment;
+  classification?: Classification;
   bookStatus?: BookStatus;
-  category?: Categories;
-  barcode?: number;
+  location?: Location;
 }
 
 export const defaultValue: Readonly<IBook> = {};

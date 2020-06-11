@@ -14,11 +14,14 @@
         "title": "Book"
       },
       "title": "Title",
-      "author": "Author",
       "description": "Description",
+      "author": "Author",
+      "publisher": "Publisher",
+      "isbn": "Isbn",
+      "publicationDate": "Publication Date",
+      "classification": "Classification",
       "bookStatus": "Book Status",
-      "category": "Category",
-      "barcode": "Barcode"
+      "location": "Location"
     }
   },
   "bookApp": {

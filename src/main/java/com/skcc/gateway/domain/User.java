@@ -230,7 +230,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
     }
 
     /******add new value*****************/
-
+    @Column(name = "point")
     private Long point;
 
     public Long getPoint() {
