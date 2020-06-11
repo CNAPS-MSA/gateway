@@ -12,6 +12,7 @@
         "rentalRentedItem": "Rented Item",
         "rentalReturnedItem": "Returned Item",
         "rentalOverdueItem": "Overdue Item",
+        "bookInStockBook": "In Stock Book",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

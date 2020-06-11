@@ -12,6 +12,10 @@ import activate, { ActivateState } from 'app/modules/account/activate/activate.r
 import password, { PasswordState } from 'app/modules/account/password/password.reducer';
 import settings, { SettingsState } from 'app/modules/account/settings/settings.reducer';
 import passwordReset, { PasswordResetState } from 'app/modules/account/password-reset/password-reset.reducer';
+// prettier-ignore
+import inStockBook, {
+  InStockBookState
+} from 'app/entities/book/in-stock-book/in-stock-book.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 // prettier-ignore
 import rental, {
@@ -54,6 +58,7 @@ export interface IRootState {
   readonly returnedItem: ReturnedItemState;
   readonly book: BookState;
   readonly user: UserState;
+  readonly inStockBook: InStockBookState;
   /* jhipster-needle-add-reducer-type - JHipster will add reducer type here */
   readonly loadingBar: any;
 }
@@ -75,6 +80,7 @@ const rootReducer = combineReducers<IRootState>({
   returnedItem,
   book,
   user,
+  inStockBook,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
   loadingBar
 });

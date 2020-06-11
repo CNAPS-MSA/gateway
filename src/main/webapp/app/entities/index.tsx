@@ -10,6 +10,7 @@ import OverdueItem from './rental/overdue-item';
 import ReturnedItem from './rental/returned-item';
 import Book from './book/book';
 import User from './user/user';
+import InStockBook from './book/in-stock-book';
 /* jhipster-needle-add-route-import - JHipster will add routes here */
 
 const Routes = ({ match }) => (
@@ -22,6 +23,7 @@ const Routes = ({ match }) => (
       <ErrorBoundaryRoute path={`${match.url}returned-item`} component={ReturnedItem} />
       <ErrorBoundaryRoute path={`${match.url}book`} component={Book} />
       <ErrorBoundaryRoute path={`${match.url}user`} component={User} />
+      <ErrorBoundaryRoute path={`${match.url}in-stock-book`} component={InStockBook} />
       {/* jhipster-needle-add-route-path - JHipster will add routes here */}
     </Switch>
   </div>
