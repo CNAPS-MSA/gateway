@@ -5,11 +5,14 @@ export default class BookUpdatePage {
   saveButton: ElementFinder = element(by.id('save-entity'));
   cancelButton: ElementFinder = element(by.id('cancel-save'));
   titleInput: ElementFinder = element(by.css('input#book-title'));
-  authorInput: ElementFinder = element(by.css('input#book-author'));
   descriptionInput: ElementFinder = element(by.css('input#book-description'));
+  authorInput: ElementFinder = element(by.css('input#book-author'));
+  publisherInput: ElementFinder = element(by.css('input#book-publisher'));
+  isbnInput: ElementFinder = element(by.css('input#book-isbn'));
+  publicationDateInput: ElementFinder = element(by.css('input#book-publicationDate'));
+  classificationSelect: ElementFinder = element(by.css('select#book-classification'));
   bookStatusSelect: ElementFinder = element(by.css('select#book-bookStatus'));
-  categorySelect: ElementFinder = element(by.css('select#book-category'));
-  barcodeInput: ElementFinder = element(by.css('input#book-barcode'));
+  locationSelect: ElementFinder = element(by.css('select#book-location'));
 
   getPageTitle() {
     return this.pageTitle;
@@ -23,14 +26,6 @@ export default class BookUpdatePage {
     return this.titleInput.getAttribute('value');
   }
 
-  async setAuthorInput(author) {
-    await this.authorInput.sendKeys(author);
-  }
-
-  async getAuthorInput() {
-    return this.authorInput.getAttribute('value');
-  }
-
   async setDescriptionInput(description) {
     await this.descriptionInput.sendKeys(description);
   }
@@ -39,6 +34,52 @@ export default class BookUpdatePage {
     return this.descriptionInput.getAttribute('value');
   }
 
+  async setAuthorInput(author) {
+    await this.authorInput.sendKeys(author);
+  }
+
+  async getAuthorInput() {
+    return this.authorInput.getAttribute('value');
+  }
+
+  async setPublisherInput(publisher) {
+    await this.publisherInput.sendKeys(publisher);
+  }
+
+  async getPublisherInput() {
+    return this.publisherInput.getAttribute('value');
+  }
+
+  async setIsbnInput(isbn) {
+    await this.isbnInput.sendKeys(isbn);
+  }
+
+  async getIsbnInput() {
+    return this.isbnInput.getAttribute('value');
+  }
+
+  async setPublicationDateInput(publicationDate) {
+    await this.publicationDateInput.sendKeys(publicationDate);
+  }
+
+  async getPublicationDateInput() {
+    return this.publicationDateInput.getAttribute('value');
+  }
+
+  async setClassificationSelect(classification) {
+    await this.classificationSelect.sendKeys(classification);
+  }
+
+  async getClassificationSelect() {
+    return this.classificationSelect.element(by.css('option:checked')).getText();
+  }
+
+  async classificationSelectLastOption() {
+    await this.classificationSelect
+      .all(by.tagName('option'))
+      .last()
+      .click();
+  }
   async setBookStatusSelect(bookStatus) {
     await this.bookStatusSelect.sendKeys(bookStatus);
   }
@@ -53,28 +94,20 @@ export default class BookUpdatePage {
       .last()
       .click();
   }
-  async setCategorySelect(category) {
-    await this.categorySelect.sendKeys(category);
+  async setLocationSelect(location) {
+    await this.locationSelect.sendKeys(location);
   }
 
-  async getCategorySelect() {
-    return this.categorySelect.element(by.css('option:checked')).getText();
+  async getLocationSelect() {
+    return this.locationSelect.element(by.css('option:checked')).getText();
   }
 
-  async categorySelectLastOption() {
-    await this.categorySelect
+  async locationSelectLastOption() {
+    await this.locationSelect
       .all(by.tagName('option'))
       .last()
       .click();
   }
-  async setBarcodeInput(barcode) {
-    await this.barcodeInput.sendKeys(barcode);
-  }
-
-  async getBarcodeInput() {
-    return this.barcodeInput.getAttribute('value');
-  }
-
   async save() {
     await this.saveButton.click();
   }

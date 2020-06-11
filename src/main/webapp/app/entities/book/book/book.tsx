@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Button, Col, Row, Table } from 'reactstrap';
-import { Translate, ICrudGetAllAction, getSortState, IPaginationBaseState, JhiPagination, JhiItemCount } from 'react-jhipster';
+import { Translate, ICrudGetAllAction, TextFormat, getSortState, IPaginationBaseState, JhiPagination, JhiItemCount } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { IRootState } from 'app/shared/reducers';
@@ -67,20 +67,29 @@ export const Book = (props: IBookProps) => {
                 <th className="hand" onClick={sort('title')}>
                   <Translate contentKey="gatewayApp.bookBook.title">Title</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
+                <th className="hand" onClick={sort('description')}>
+                  <Translate contentKey="gatewayApp.bookBook.description">Description</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
                 <th className="hand" onClick={sort('author')}>
                   <Translate contentKey="gatewayApp.bookBook.author">Author</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
-                <th className="hand" onClick={sort('description')}>
-                  <Translate contentKey="gatewayApp.bookBook.description">Description</Translate> <FontAwesomeIcon icon="sort" />
+                <th className="hand" onClick={sort('publisher')}>
+                  <Translate contentKey="gatewayApp.bookBook.publisher">Publisher</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th className="hand" onClick={sort('isbn')}>
+                  <Translate contentKey="gatewayApp.bookBook.isbn">Isbn</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th className="hand" onClick={sort('publicationDate')}>
+                  <Translate contentKey="gatewayApp.bookBook.publicationDate">Publication Date</Translate> <FontAwesomeIcon icon="sort" />
+                </th>
+                <th className="hand" onClick={sort('classification')}>
+                  <Translate contentKey="gatewayApp.bookBook.classification">Classification</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th className="hand" onClick={sort('bookStatus')}>
                   <Translate contentKey="gatewayApp.bookBook.bookStatus">Book Status</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
-                <th className="hand" onClick={sort('category')}>
-                  <Translate contentKey="gatewayApp.bookBook.category">Category</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th className="hand" onClick={sort('barcode')}>
-                  <Translate contentKey="gatewayApp.bookBook.barcode">Barcode</Translate> <FontAwesomeIcon icon="sort" />
+                <th className="hand" onClick={sort('location')}>
+                  <Translate contentKey="gatewayApp.bookBook.location">Location</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
@@ -94,15 +103,22 @@ export const Book = (props: IBookProps) => {
                     </Button>
                   </td>
                   <td>{book.title}</td>
-                  <td>{book.author}</td>
                   <td>{book.description}</td>
+                  <td>{book.author}</td>
+                  <td>{book.publisher}</td>
+                  <td>{book.isbn}</td>
+                  <td>
+                    <TextFormat type="date" value={book.publicationDate} format={APP_LOCAL_DATE_FORMAT} />
+                  </td>
+                  <td>
+                    <Translate contentKey={`gatewayApp.Classification.${book.classification}`} />
+                  </td>
                   <td>
                     <Translate contentKey={`gatewayApp.BookStatus.${book.bookStatus}`} />
                   </td>
                   <td>
-                    <Translate contentKey={`gatewayApp.Categories.${book.category}`} />
+                    <Translate contentKey={`gatewayApp.Location.${book.location}`} />
                   </td>
-                  <td>{book.barcode}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${book.id}`} color="info" size="sm">

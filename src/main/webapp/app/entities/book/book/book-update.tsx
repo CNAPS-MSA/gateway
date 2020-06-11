@@ -79,40 +79,63 @@ export const BookUpdate = (props: IBookUpdateProps) => {
                 <Label id="titleLabel" for="book-title">
                   <Translate contentKey="gatewayApp.bookBook.title">Title</Translate>
                 </Label>
-                <AvField
-                  id="book-title"
-                  type="text"
-                  name="title"
-                  validate={{
-                    required: { value: true, errorMessage: translate('entity.validation.required') }
-                  }}
-                />
-              </AvGroup>
-              <AvGroup>
-                <Label id="authorLabel" for="book-author">
-                  <Translate contentKey="gatewayApp.bookBook.author">Author</Translate>
-                </Label>
-                <AvField
-                  id="book-author"
-                  type="text"
-                  name="author"
-                  validate={{
-                    required: { value: true, errorMessage: translate('entity.validation.required') }
-                  }}
-                />
+                <AvField id="book-title" type="text" name="title" />
               </AvGroup>
               <AvGroup>
                 <Label id="descriptionLabel" for="book-description">
                   <Translate contentKey="gatewayApp.bookBook.description">Description</Translate>
                 </Label>
-                <AvField
-                  id="book-description"
-                  type="text"
-                  name="description"
-                  validate={{
-                    required: { value: true, errorMessage: translate('entity.validation.required') }
-                  }}
-                />
+                <AvField id="book-description" type="text" name="description" />
+              </AvGroup>
+              <AvGroup>
+                <Label id="authorLabel" for="book-author">
+                  <Translate contentKey="gatewayApp.bookBook.author">Author</Translate>
+                </Label>
+                <AvField id="book-author" type="text" name="author" />
+              </AvGroup>
+              <AvGroup>
+                <Label id="publisherLabel" for="book-publisher">
+                  <Translate contentKey="gatewayApp.bookBook.publisher">Publisher</Translate>
+                </Label>
+                <AvField id="book-publisher" type="text" name="publisher" />
+              </AvGroup>
+              <AvGroup>
+                <Label id="isbnLabel" for="book-isbn">
+                  <Translate contentKey="gatewayApp.bookBook.isbn">Isbn</Translate>
+                </Label>
+                <AvField id="book-isbn" type="string" className="form-control" name="isbn" />
+              </AvGroup>
+              <AvGroup>
+                <Label id="publicationDateLabel" for="book-publicationDate">
+                  <Translate contentKey="gatewayApp.bookBook.publicationDate">Publication Date</Translate>
+                </Label>
+                <AvField id="book-publicationDate" type="date" className="form-control" name="publicationDate" />
+              </AvGroup>
+              <AvGroup>
+                <Label id="classificationLabel" for="book-classification">
+                  <Translate contentKey="gatewayApp.bookBook.classification">Classification</Translate>
+                </Label>
+                <AvInput
+                  id="book-classification"
+                  type="select"
+                  className="form-control"
+                  name="classification"
+                  value={(!isNew && bookEntity.classification) || 'Arts'}
+                >
+                  <option value="Arts">{translate('gatewayApp.Classification.Arts')}</option>
+                  <option value="Photography">{translate('gatewayApp.Classification.Photography')}</option>
+                  <option value="Biographies">{translate('gatewayApp.Classification.Biographies')}</option>
+                  <option value="BusinessMoney">{translate('gatewayApp.Classification.BusinessMoney')}</option>
+                  <option value="Children">{translate('gatewayApp.Classification.Children')}</option>
+                  <option value="ComputerTechnology">{translate('gatewayApp.Classification.ComputerTechnology')}</option>
+                  <option value="History">{translate('gatewayApp.Classification.History')}</option>
+                  <option value="Medical">{translate('gatewayApp.Classification.Medical')}</option>
+                  <option value="Travel">{translate('gatewayApp.Classification.Travel')}</option>
+                  <option value="Romance">{translate('gatewayApp.Classification.Romance')}</option>
+                  <option value="Science">{translate('gatewayApp.Classification.Science')}</option>
+                  <option value="Math">{translate('gatewayApp.Classification.Math')}</option>
+                  <option value="SelfHelp">{translate('gatewayApp.Classification.SelfHelp')}</option>
+                </AvInput>
               </AvGroup>
               <AvGroup>
                 <Label id="bookStatusLabel" for="book-bookStatus">
@@ -130,29 +153,19 @@ export const BookUpdate = (props: IBookUpdateProps) => {
                 </AvInput>
               </AvGroup>
               <AvGroup>
-                <Label id="categoryLabel" for="book-category">
-                  <Translate contentKey="gatewayApp.bookBook.category">Category</Translate>
+                <Label id="locationLabel" for="book-location">
+                  <Translate contentKey="gatewayApp.bookBook.location">Location</Translate>
                 </Label>
                 <AvInput
-                  id="book-category"
+                  id="book-location"
                   type="select"
                   className="form-control"
-                  name="category"
-                  value={(!isNew && bookEntity.category) || 'IT'}
+                  name="location"
+                  value={(!isNew && bookEntity.location) || 'JEONGJA'}
                 >
-                  <option value="IT">{translate('gatewayApp.Categories.IT')}</option>
-                  <option value="LITERATURE">{translate('gatewayApp.Categories.LITERATURE')}</option>
-                  <option value="HISTORY">{translate('gatewayApp.Categories.HISTORY')}</option>
-                  <option value="SCIENCE">{translate('gatewayApp.Categories.SCIENCE')}</option>
-                  <option value="ART">{translate('gatewayApp.Categories.ART')}</option>
-                  <option value="LANGUAGE">{translate('gatewayApp.Categories.LANGUAGE')}</option>
+                  <option value="JEONGJA">{translate('gatewayApp.Location.JEONGJA')}</option>
+                  <option value="PANGYO">{translate('gatewayApp.Location.PANGYO')}</option>
                 </AvInput>
-              </AvGroup>
-              <AvGroup>
-                <Label id="barcodeLabel" for="book-barcode">
-                  <Translate contentKey="gatewayApp.bookBook.barcode">Barcode</Translate>
-                </Label>
-                <AvField id="book-barcode" type="string" className="form-control" name="barcode" />
               </AvGroup>
               <Button tag={Link} id="cancel-save" to="/book" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />

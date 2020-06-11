@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Button, Row, Col } from 'reactstrap';
-import { Translate, ICrudGetAction } from 'react-jhipster';
+import { Translate, ICrudGetAction, TextFormat } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { IRootState } from 'app/shared/reducers';
@@ -32,17 +32,43 @@ export const BookDetail = (props: IBookDetailProps) => {
           </dt>
           <dd>{bookEntity.title}</dd>
           <dt>
+            <span id="description">
+              <Translate contentKey="gatewayApp.bookBook.description">Description</Translate>
+            </span>
+          </dt>
+          <dd>{bookEntity.description}</dd>
+          <dt>
             <span id="author">
               <Translate contentKey="gatewayApp.bookBook.author">Author</Translate>
             </span>
           </dt>
           <dd>{bookEntity.author}</dd>
           <dt>
-            <span id="description">
-              <Translate contentKey="gatewayApp.bookBook.description">Description</Translate>
+            <span id="publisher">
+              <Translate contentKey="gatewayApp.bookBook.publisher">Publisher</Translate>
             </span>
           </dt>
-          <dd>{bookEntity.description}</dd>
+          <dd>{bookEntity.publisher}</dd>
+          <dt>
+            <span id="isbn">
+              <Translate contentKey="gatewayApp.bookBook.isbn">Isbn</Translate>
+            </span>
+          </dt>
+          <dd>{bookEntity.isbn}</dd>
+          <dt>
+            <span id="publicationDate">
+              <Translate contentKey="gatewayApp.bookBook.publicationDate">Publication Date</Translate>
+            </span>
+          </dt>
+          <dd>
+            <TextFormat value={bookEntity.publicationDate} type="date" format={APP_LOCAL_DATE_FORMAT} />
+          </dd>
+          <dt>
+            <span id="classification">
+              <Translate contentKey="gatewayApp.bookBook.classification">Classification</Translate>
+            </span>
+          </dt>
+          <dd>{bookEntity.classification}</dd>
           <dt>
             <span id="bookStatus">
               <Translate contentKey="gatewayApp.bookBook.bookStatus">Book Status</Translate>
@@ -50,17 +76,11 @@ export const BookDetail = (props: IBookDetailProps) => {
           </dt>
           <dd>{bookEntity.bookStatus}</dd>
           <dt>
-            <span id="category">
-              <Translate contentKey="gatewayApp.bookBook.category">Category</Translate>
+            <span id="location">
+              <Translate contentKey="gatewayApp.bookBook.location">Location</Translate>
             </span>
           </dt>
-          <dd>{bookEntity.category}</dd>
-          <dt>
-            <span id="barcode">
-              <Translate contentKey="gatewayApp.bookBook.barcode">Barcode</Translate>
-            </span>
-          </dt>
-          <dd>{bookEntity.barcode}</dd>
+          <dd>{bookEntity.location}</dd>
         </dl>
         <Button tag={Link} to="/book" replace color="info">
           <FontAwesomeIcon icon="arrow-left" />{' '}
