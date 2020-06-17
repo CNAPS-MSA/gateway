@@ -241,8 +241,18 @@ public class User extends AbstractAuditingEntity implements Serializable {
         this.point = point;
     }
 
-    public Long savePoints(int points){
+    public User savePoints(int points){
         this.point+=(long)points;
-        return this.point;
+        return this;
+    }
+
+    public User usePoints(int points){
+        if(this.point>=(long)points) {
+            this.point -= (long) points;
+
+            return this;
+        }else{
+            return null;
+        }
     }
 }

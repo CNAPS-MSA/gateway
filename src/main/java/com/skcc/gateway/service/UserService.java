@@ -316,4 +316,9 @@ public class UserService {
     public void createRental(Long userId) throws InterruptedException, ExecutionException, JsonProcessingException {
         gatewayKafkaProducer.createRental(userId);
     }
+
+    public User usepoints(Long userId, int latefee) {
+        User user = userRepository.findById(userId).get();
+        return user.usePoints(latefee);
+    }
 }
