@@ -61,7 +61,7 @@ public class GatewayKafkaConsumer {
                             ObjectMapper objectMapper = new ObjectMapper();
                             SavePointsEvent savePointsEvent= objectMapper.readValue(record.value(), SavePointsEvent.class);
                             User user = userRepository.findById(savePointsEvent.getUserId()).get();
-                            user.savePoints(savePointsEvent.getPoints());
+                            user=user.savePoints(savePointsEvent.getPoints());
                             userRepository.save(user);
 
                         }
