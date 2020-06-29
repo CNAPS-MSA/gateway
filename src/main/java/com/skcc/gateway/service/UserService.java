@@ -47,7 +47,6 @@ public class UserService {
     private final CacheManager cacheManager;
 
     private final GatewayKafkaProducer gatewayKafkaProducer;
-
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository, CacheManager cacheManager, GatewayKafkaProducer gatewayKafkaProducer) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
@@ -125,7 +124,7 @@ public class UserService {
         Set<Authority> authorities = new HashSet<>();
         authorityRepository.findById(AuthoritiesConstants.USER).ifPresent(authorities::add);
         newUser.setAuthorities(authorities);
-        newUser.setPoint((long)1000);
+        newUser.setPoint(1000);
         userRepository.save(newUser);
         this.clearUserCaches(newUser);
         log.debug("Created Information for User: {}", newUser);
@@ -169,7 +168,7 @@ public class UserService {
                 .collect(Collectors.toSet());
             user.setAuthorities(authorities);
         }
-        user.setPoint((long)1000);
+        user.setPoint(1000);
         userRepository.save(user);
         this.clearUserCaches(user);
         log.debug("Created Information for User: {}", user);
@@ -223,7 +222,6 @@ public class UserService {
                 user.setImageUrl(userDTO.getImageUrl());
                 user.setActivated(userDTO.isActivated());
                 user.setLangKey(userDTO.getLangKey());
-                user.setPoint(userDTO.getPoint());
                 Set<Authority> managedAuthorities = user.getAuthorities();
                 managedAuthorities.clear();
                 userDTO.getAuthorities().stream()
@@ -313,12 +311,13 @@ public class UserService {
         }
     }
 
-    public void createRental(Long userId) throws InterruptedException, ExecutionException, JsonProcessingException {
-        gatewayKafkaProducer.createRental(userId);
-    }
+    public User usepoints(Long userId, int latefee) throws InterruptedException, ExecutionException, JsonProcessingException {
 
-    public User usepoints(Long userId, int latefee) {
         User user = userRepository.findById(userId).get();
         return user.usePoints(latefee);
+    }
+
+    public void createRental(Long id) throws InterruptedException, ExecutionException, JsonProcessingException {
+        gatewayKafkaProducer.createRental(id);
     }
 }

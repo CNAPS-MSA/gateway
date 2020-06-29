@@ -25,6 +25,7 @@
     "createdBy": "생성자",
     "createdDate": "생성일",
     "lastModifiedBy": "수정자",
-    "lastModifiedDate": "수정일"
+    "lastModifiedDate": "수정일",
+    "point": "포인트"
   }
 }

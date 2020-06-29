@@ -50,13 +50,13 @@ public class UserDTO {
 
     private Set<String> authorities;
 
-    private Long point;
+    private int point;
 
-    public Long getPoint() {
+    public int getPoint() {
         return point;
     }
 
-    public void setPoint(Long point) {
+    public void setPoint(int point) {
         this.point = point;
     }
 
@@ -77,10 +77,10 @@ public class UserDTO {
         this.createdDate = user.getCreatedDate();
         this.lastModifiedBy = user.getLastModifiedBy();
         this.lastModifiedDate = user.getLastModifiedDate();
+        this.point = user.getPoint();
         this.authorities = user.getAuthorities().stream()
             .map(Authority::getName)
             .collect(Collectors.toSet());
-        this.point = user.getPoint();
     }
 
     public Long getId() {
@@ -202,6 +202,7 @@ public class UserDTO {
             ", lastModifiedBy='" + lastModifiedBy + '\'' +
             ", lastModifiedDate=" + lastModifiedDate +
             ", authorities=" + authorities +
+            ", point=" +point +
             "}";
     }
 }

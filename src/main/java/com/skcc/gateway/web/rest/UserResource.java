@@ -192,7 +192,7 @@ public class UserResource {
     }
 
     @PutMapping("/usepoints")
-    public ResponseEntity usePoint(@RequestBody LatefeeDTO latefeeDTO){
+    public ResponseEntity usePoint(@RequestBody LatefeeDTO latefeeDTO) throws InterruptedException, ExecutionException, JsonProcessingException {
         User user=userService.usepoints(latefeeDTO.getUserId(), latefeeDTO.getLatefee());
         if(user!=null){
             return new ResponseEntity<>(HttpStatus.OK);

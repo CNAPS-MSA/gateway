@@ -3,7 +3,7 @@
     "promptValues": {
       "packageName": "com.skcc.gateway",
       "nativeLanguage": "ko",
-      "microservicePath": "/Users/juyounglee/rental"
+      "microservicePath": "/Users/juyounglee/bookCatalog"
     },
     "jhipsterVersion": "6.8.0",
     "applicationType": "gateway",
@@ -27,7 +27,7 @@
     "embeddableLaunchScript": false,
     "useSass": true,
     "clientPackageManager": "npm",
-    "clientFramework": "react",
+    "clientFramework": "vue",
     "clientTheme": "journal",
     "clientThemeVariant": "primary",
     "creationTimestamp": 1589788615709,

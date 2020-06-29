@@ -84,6 +84,17 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Column(name = "reset_date")
     private Instant resetDate = null;
 
+    @Column(name ="point")
+    private int point;
+
+    public int getPoint() {
+        return point;
+    }
+
+    public void setPoint(int point) {
+        this.point = point;
+    }
+
     @JsonIgnore
     @ManyToMany
     @JoinTable(
@@ -229,26 +240,15 @@ public class User extends AbstractAuditingEntity implements Serializable {
             "}";
     }
 
-    /******add new value*****************/
-    @Column(name = "point")
-    private Long point;
 
-    public Long getPoint() {
-        return point;
-    }
-
-    public void setPoint(Long point) {
-        this.point = point;
-    }
-
-    public User savePoints(int points){
-        this.point+=(long)points;
+    public User savePoints(int points) {
+        this.point+= points;
         return this;
     }
 
     public User usePoints(int points){
-        if(this.point>=(long)points) {
-            this.point -= (long) points;
+        if(this.point>=points) {
+            this.point -= points;
 
             return this;
         }else{
