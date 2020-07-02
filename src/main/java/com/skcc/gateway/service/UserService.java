@@ -1,5 +1,7 @@
 package com.skcc.gateway.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.skcc.gateway.adaptor.GatewayKafkaProducer;
 import com.skcc.gateway.config.Constants;
 import com.skcc.gateway.domain.Authority;
 import com.skcc.gateway.domain.User;
@@ -24,6 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
+import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
 /**
@@ -43,11 +46,14 @@ public class UserService {
 
     private final CacheManager cacheManager;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository, CacheManager cacheManager) {
+    private final GatewayKafkaProducer gatewayKafkaProducer;
+
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository, CacheManager cacheManager, GatewayKafkaProducer gatewayKafkaProducer) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.authorityRepository = authorityRepository;
         this.cacheManager = cacheManager;
+        this.gatewayKafkaProducer = gatewayKafkaProducer;
     }
 
     public Optional<User> activateRegistration(String key) {
@@ -300,5 +306,15 @@ public class UserService {
         if (user.getEmail() != null) {
             Objects.requireNonNull(cacheManager.getCache(UserRepository.USERS_BY_EMAIL_CACHE)).evict(user.getEmail());
         }
+    }
+
+    public User usepoints(Long userId, int latefee) throws InterruptedException, ExecutionException, JsonProcessingException {
+
+        User user = userRepository.findById(userId).get();
+        return user.usePoints(latefee);
+    }
+
+    public void createRental(Long id) throws InterruptedException, ExecutionException, JsonProcessingException {
+        gatewayKafkaProducer.createRental(id);
     }
 }

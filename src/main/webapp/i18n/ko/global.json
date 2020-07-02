@@ -7,6 +7,14 @@
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Entities",
+        "bookBook": "Book",
+        "bookInStockBook": "In Stock Book",
+        "bookCatalogBookCatalog": "Book Catalog",
+        "bookCatalogTopListBooks": "Top List Books",
+        "rentalRental": "Rental",
+        "rentalOverdueItem": "Overdue Item",
+        "rentalRentedItem": "Rented Item",
+        "rentalReturnedItem": "Returned Item",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

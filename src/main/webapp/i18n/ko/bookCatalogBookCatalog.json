@@ -1,0 +1,33 @@
+{
+  "gatewayApp": {
+    "bookCatalogBookCatalog": {
+      "home": {
+        "title": "Book Catalogs",
+        "createLabel": "Create a new Book Catalog",
+        "createOrEditLabel": "Create or edit a Book Catalog",
+        "notFound": "No Book Catalogs found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Book Catalog {{ id }}?"
+      },
+      "detail": {
+        "title": "Book Catalog"
+      },
+      "title": "Title",
+      "description": "Description",
+      "author": "Author",
+      "publicationDate": "Publication Date",
+      "classification": "Classification",
+      "rented": "Rented",
+      "rentCnt": "Rent Cnt",
+      "bookId": "Book Id"
+    }
+  },
+  "bookCatalogApp": {
+    "bookCatalogBookCatalog": {
+      "created": "A new Book Catalog is created with identifier {{ param }}",
+      "updated": "A Book Catalog is updated with identifier {{ param }}",
+      "deleted": "A Book Catalog is deleted with identifier {{ param }}"
+    }
+  }
+}

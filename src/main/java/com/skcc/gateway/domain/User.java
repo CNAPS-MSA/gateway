@@ -227,6 +227,33 @@ public class User extends AbstractAuditingEntity implements Serializable {
             ", activated='" + activated + '\'' +
             ", langKey='" + langKey + '\'' +
             ", activationKey='" + activationKey + '\'' +
+            ", point=" + point +'\''+
             "}";
+    }
+    /******add new value*****************/
+    @Column(name = "point")
+    private int point;
+
+    public int getPoint() {
+        return point;
+    }
+
+    public void setPoint(int point) {
+        this.point = point;
+    }
+
+    public User savePoints(int points){
+        this.point+=points;
+        return this;
+    }
+
+    public User usePoints(int points){
+        if(this.point>=points) {
+            this.point -=points;
+
+            return this;
+        }else{
+            return null;
+        }
     }
 }

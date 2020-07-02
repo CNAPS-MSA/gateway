@@ -1,0 +1,29 @@
+{
+  "gatewayApp": {
+    "rentalOverdueItem": {
+      "home": {
+        "title": "Overdue Items",
+        "createLabel": "Create a new Overdue Item",
+        "createOrEditLabel": "Create or edit a Overdue Item",
+        "notFound": "No Overdue Items found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Overdue Item {{ id }}?"
+      },
+      "detail": {
+        "title": "Overdue Item"
+      },
+      "bookId": "Book Id",
+      "dueDate": "Due Date",
+      "bookTitle": "Book Title",
+      "rental": "Rental"
+    }
+  },
+  "rentalApp": {
+    "rentalOverdueItem": {
+      "created": "A new Overdue Item is created with identifier {{ param }}",
+      "updated": "A Overdue Item is updated with identifier {{ param }}",
+      "deleted": "A Overdue Item is deleted with identifier {{ param }}"
+    }
+  }
+}

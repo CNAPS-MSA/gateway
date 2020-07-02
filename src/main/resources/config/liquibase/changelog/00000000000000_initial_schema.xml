@@ -106,6 +106,7 @@
             </column>
             <column name="event_date" type="timestamp"/>
             <column name="event_type" type="varchar(255)"/>
+            <column name="point" type="numeric" />
         </createTable>
 
         <createTable tableName="jhi_persistent_audit_evt_data">

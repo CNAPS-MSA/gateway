@@ -1,0 +1,29 @@
+{
+  "gatewayApp": {
+    "rentalReturnedItem": {
+      "home": {
+        "title": "Returned Items",
+        "createLabel": "Create a new Returned Item",
+        "createOrEditLabel": "Create or edit a Returned Item",
+        "notFound": "No Returned Items found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Returned Item {{ id }}?"
+      },
+      "detail": {
+        "title": "Returned Item"
+      },
+      "bookId": "Book Id",
+      "returnedDate": "Returned Date",
+      "bookTitle": "Book Title",
+      "rental": "Rental"
+    }
+  },
+  "rentalApp": {
+    "rentalReturnedItem": {
+      "created": "A new Returned Item is created with identifier {{ param }}",
+      "updated": "A Returned Item is updated with identifier {{ param }}",
+      "deleted": "A Returned Item is deleted with identifier {{ param }}"
+    }
+  }
+}

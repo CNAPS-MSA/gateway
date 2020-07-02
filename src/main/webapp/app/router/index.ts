@@ -26,6 +26,54 @@ const JhiAuditsComponent = () => import('../admin/audits/audits.vue');
 const JhiMetricsComponent = () => import('../admin/metrics/metrics.vue');
 const JhiGatewayComponent = () => import('../admin/gateway/gateway.vue');
 /* tslint:disable */
+// prettier-ignore
+const Book = () => import('../entities/book/book/book.vue');
+// prettier-ignore
+const BookUpdate = () => import('../entities/book/book/book-update.vue');
+// prettier-ignore
+const BookDetails = () => import('../entities/book/book/book-details.vue');
+// prettier-ignore
+const InStockBook = () => import('../entities/book/in-stock-book/in-stock-book.vue');
+// prettier-ignore
+const InStockBookUpdate = () => import('../entities/book/in-stock-book/in-stock-book-update.vue');
+// prettier-ignore
+const InStockBookDetails = () => import('../entities/book/in-stock-book/in-stock-book-details.vue');
+// prettier-ignore
+const BookCatalog = () => import('../entities/bookCatalog/book-catalog/book-catalog.vue');
+// prettier-ignore
+const BookCatalogUpdate = () => import('../entities/bookCatalog/book-catalog/book-catalog-update.vue');
+// prettier-ignore
+const BookCatalogDetails = () => import('../entities/bookCatalog/book-catalog/book-catalog-details.vue');
+// prettier-ignore
+const TopListBooks = () => import('../entities/bookCatalog/top-list-books/top-list-books.vue');
+// prettier-ignore
+const TopListBooksUpdate = () => import('../entities/bookCatalog/top-list-books/top-list-books-update.vue');
+// prettier-ignore
+const TopListBooksDetails = () => import('../entities/bookCatalog/top-list-books/top-list-books-details.vue');
+// prettier-ignore
+const Rental = () => import('../entities/rental/rental/rental.vue');
+// prettier-ignore
+const RentalUpdate = () => import('../entities/rental/rental/rental-update.vue');
+// prettier-ignore
+const RentalDetails = () => import('../entities/rental/rental/rental-details.vue');
+// prettier-ignore
+const OverdueItem = () => import('../entities/rental/overdue-item/overdue-item.vue');
+// prettier-ignore
+const OverdueItemUpdate = () => import('../entities/rental/overdue-item/overdue-item-update.vue');
+// prettier-ignore
+const OverdueItemDetails = () => import('../entities/rental/overdue-item/overdue-item-details.vue');
+// prettier-ignore
+const RentedItem = () => import('../entities/rental/rented-item/rented-item.vue');
+// prettier-ignore
+const RentedItemUpdate = () => import('../entities/rental/rented-item/rented-item-update.vue');
+// prettier-ignore
+const RentedItemDetails = () => import('../entities/rental/rented-item/rented-item-details.vue');
+// prettier-ignore
+const ReturnedItem = () => import('../entities/rental/returned-item/returned-item.vue');
+// prettier-ignore
+const ReturnedItemUpdate = () => import('../entities/rental/returned-item/returned-item-update.vue');
+// prettier-ignore
+const ReturnedItemDetails = () => import('../entities/rental/returned-item/returned-item-details.vue');
 // jhipster-needle-add-entity-to-router-import - JHipster will import entities to the router here
 
 Vue.use(Router);
@@ -149,6 +197,206 @@ export default new Router({
       name: 'JhiGatewayComponent',
       component: JhiGatewayComponent,
       meta: { authorities: [Authority.ADMIN] }
+    }
+    ,
+    {
+      path: '/book',
+      name: 'Book',
+      component: Book,
+      meta: { authorities: [Authority.USER] }
+    },
+    {
+      path: '/book/new',
+      name: 'BookCreate',
+      component: BookUpdate,
+      meta: { authorities: [Authority.USER] }
+    },
+    {
+      path: '/book/:bookId/edit',
+      name: 'BookEdit',
+      component: BookUpdate,
+      meta: { authorities: [Authority.USER] }
+    },
+    {
+      path: '/book/:bookId/view',
+      name: 'BookView',
+      component: BookDetails,
+      meta: { authorities: [Authority.USER] }
+    }
+    ,
+    {
+      path: '/in-stock-book',
+      name: 'InStockBook',
+      component: InStockBook,
+      meta: { authorities: [Authority.USER] }
+    },
+    {
+      path: '/in-stock-book/new',
+      name: 'InStockBookCreate',
+      component: InStockBookUpdate,
+      meta: { authorities: [Authority.USER] }
+    },
+    {
+      path: '/in-stock-book/:inStockBookId/edit',
+      name: 'InStockBookEdit',
+      component: InStockBookUpdate,
+      meta: { authorities: [Authority.USER] }
+    },
+    {
+      path: '/in-stock-book/:inStockBookId/view',
+      name: 'InStockBookView',
+      component: InStockBookDetails,
+      meta: { authorities: [Authority.USER] }
+    }
+    ,
+    {
+      path: '/book-catalog',
+      name: 'BookCatalog',
+      component: BookCatalog,
+      meta: { authorities: [Authority.USER] }
+    },
+    {
+      path: '/book-catalog/new',
+      name: 'BookCatalogCreate',
+      component: BookCatalogUpdate,
+      meta: { authorities: [Authority.USER] }
+    },
+    {
+      path: '/book-catalog/:bookCatalogId/edit',
+      name: 'BookCatalogEdit',
+      component: BookCatalogUpdate,
+      meta: { authorities: [Authority.USER] }
+    },
+    {
+      path: '/book-catalog/:bookCatalogId/view',
+      name: 'BookCatalogView',
+      component: BookCatalogDetails,
+      meta: { authorities: [Authority.USER] }
+    }
+    ,
+    {
+      path: '/top-list-books',
+      name: 'TopListBooks',
+      component: TopListBooks,
+      meta: { authorities: [Authority.USER] }
+    },
+    {
+      path: '/top-list-books/new',
+      name: 'TopListBooksCreate',
+      component: TopListBooksUpdate,
+      meta: { authorities: [Authority.USER] }
+    },
+    {
+      path: '/top-list-books/:topListBooksId/edit',
+      name: 'TopListBooksEdit',
+      component: TopListBooksUpdate,
+      meta: { authorities: [Authority.USER] }
+    },
+    {
+      path: '/top-list-books/:topListBooksId/view',
+      name: 'TopListBooksView',
+      component: TopListBooksDetails,
+      meta: { authorities: [Authority.USER] }
+    }
+    ,
+    {
+      path: '/rental',
+      name: 'Rental',
+      component: Rental,
+      meta: { authorities: [Authority.USER] }
+    },
+    {
+      path: '/rental/new',
+      name: 'RentalCreate',
+      component: RentalUpdate,
+      meta: { authorities: [Authority.USER] }
+    },
+    {
+      path: '/rental/:rentalId/edit',
+      name: 'RentalEdit',
+      component: RentalUpdate,
+      meta: { authorities: [Authority.USER] }
+    },
+    {
+      path: '/rental/:rentalId/view',
+      name: 'RentalView',
+      component: RentalDetails,
+      meta: { authorities: [Authority.USER] }
+    }
+    ,
+    {
+      path: '/overdue-item',
+      name: 'OverdueItem',
+      component: OverdueItem,
+      meta: { authorities: [Authority.USER] }
+    },
+    {
+      path: '/overdue-item/new',
+      name: 'OverdueItemCreate',
+      component: OverdueItemUpdate,
+      meta: { authorities: [Authority.USER] }
+    },
+    {
+      path: '/overdue-item/:overdueItemId/edit',
+      name: 'OverdueItemEdit',
+      component: OverdueItemUpdate,
+      meta: { authorities: [Authority.USER] }
+    },
+    {
+      path: '/overdue-item/:overdueItemId/view',
+      name: 'OverdueItemView',
+      component: OverdueItemDetails,
+      meta: { authorities: [Authority.USER] }
+    }
+    ,
+    {
+      path: '/rented-item',
+      name: 'RentedItem',
+      component: RentedItem,
+      meta: { authorities: [Authority.USER] }
+    },
+    {
+      path: '/rented-item/new',
+      name: 'RentedItemCreate',
+      component: RentedItemUpdate,
+      meta: { authorities: [Authority.USER] }
+    },
+    {
+      path: '/rented-item/:rentedItemId/edit',
+      name: 'RentedItemEdit',
+      component: RentedItemUpdate,
+      meta: { authorities: [Authority.USER] }
+    },
+    {
+      path: '/rented-item/:rentedItemId/view',
+      name: 'RentedItemView',
+      component: RentedItemDetails,
+      meta: { authorities: [Authority.USER] }
+    }
+    ,
+    {
+      path: '/returned-item',
+      name: 'ReturnedItem',
+      component: ReturnedItem,
+      meta: { authorities: [Authority.USER] }
+    },
+    {
+      path: '/returned-item/new',
+      name: 'ReturnedItemCreate',
+      component: ReturnedItemUpdate,
+      meta: { authorities: [Authority.USER] }
+    },
+    {
+      path: '/returned-item/:returnedItemId/edit',
+      name: 'ReturnedItemEdit',
+      component: ReturnedItemUpdate,
+      meta: { authorities: [Authority.USER] }
+    },
+    {
+      path: '/returned-item/:returnedItemId/view',
+      name: 'ReturnedItemView',
+      component: ReturnedItemDetails,
+      meta: { authorities: [Authority.USER] }
     }
     // jhipster-needle-add-entity-to-router - JHipster will add entities to the router here
   ]
