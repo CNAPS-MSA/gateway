@@ -26,7 +26,7 @@
                   <th v-on:click="changeOrder('createdDate')"><span v-text="$t('userManagement.createdDate')">Created Date</span> <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'createdDate'"></jhi-sort-indicator></th>
                   <th v-on:click="changeOrder('lastModifiedBy')"><span v-text="$t('userManagement.lastModifiedBy')">Last Modified By</span> <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'lastModifiedBy'"></jhi-sort-indicator></th>
                   <th id="modified-date-sort" v-on:click="changeOrder('lastModifiedDate')"><span v-text="$t('userManagement.lastModifiedDate')">Last Modified Date</span> <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'lastModifiedDate'"></jhi-sort-indicator></th>
-                  <th></th>
+                  <th><span v-text="$t('userManagement.point')">point</span></th>
                 </tr>
                 </thead>
                 <tbody v-if ="users">
@@ -49,6 +49,7 @@
                         <td v-if="user.createdDate">{{$d(Date.parse(user.createdDate), 'short') }}</td><td v-else>{{user.createdDate | formatDate}}</td>
                         <td>{{user.lastModifiedBy}}</td>
                         <td v-if="user.lastModifiedDate">{{$d(Date.parse(user.lastModifiedDate), 'short') }}</td><td v-else>{{user.lastModifiedDate | formatDate}}</td>
+                        <td>{{user.point}}</td>
                         <td class="text-right">
                             <div class="btn-group">
                                 <router-link :to="{name: 'JhiUserView', params: {userId: user.login}}" tag="button" class="btn btn-info btn-sm details">

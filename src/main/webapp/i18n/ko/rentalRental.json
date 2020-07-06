@@ -1,0 +1,31 @@
+{
+  "gatewayApp": {
+    "rentalRental": {
+      "home": {
+        "title": "Rentals",
+        "createLabel": "Create a new Rental",
+        "createOrEditLabel": "Create or edit a Rental",
+        "notFound": "No Rentals found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Rental {{ id }}?"
+      },
+      "detail": {
+        "title": "Rental"
+      },
+      "userId": "User Id",
+      "rentalStatus": "Rental Status",
+      "lateFee": "Late Fee",
+      "rentedItem": "Rented Item",
+      "overdueItem": "Overdue Item",
+      "returnedItem": "Returned Item"
+    }
+  },
+  "rentalApp": {
+    "rentalRental": {
+      "created": "A new Rental is created with identifier {{ param }}",
+      "updated": "A Rental is updated with identifier {{ param }}",
+      "deleted": "A Rental is deleted with identifier {{ param }}"
+    }
+  }
+}

@@ -1,5 +1,7 @@
 package com.skcc.gateway.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.skcc.gateway.adaptor.GatewayKafkaProducer;
 import com.skcc.gateway.config.Constants;
 import com.skcc.gateway.domain.Authority;
 import com.skcc.gateway.domain.User;
@@ -24,6 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
+import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
 /**
@@ -43,11 +46,14 @@ public class UserService {
 
     private final CacheManager cacheManager;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository, CacheManager cacheManager) {
+    private final GatewayKafkaProducer gatewayKafkaProducer;
+
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository, CacheManager cacheManager, GatewayKafkaProducer gatewayKafkaProducer) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.authorityRepository = authorityRepository;
         this.cacheManager = cacheManager;
+        this.gatewayKafkaProducer = gatewayKafkaProducer;
     }
 
     public Optional<User> activateRegistration(String key) {
@@ -78,7 +84,7 @@ public class UserService {
 
     public Optional<User> requestPasswordReset(String mail) {
         return userRepository.findOneByEmailIgnoreCase(mail)
-            .filter(User::getActivated)
+            .filter(User::isActivated)
             .map(user -> {
                 user.setResetKey(RandomUtil.generateResetKey());
                 user.setResetDate(Instant.now());
@@ -87,7 +93,7 @@ public class UserService {
             });
     }
 
-    public User registerUser(UserDTO userDTO, String password) {
+    public User registerUser(UserDTO userDTO, String password) throws InterruptedException, ExecutionException, JsonProcessingException {
         userRepository.findOneByLogin(userDTO.getLogin().toLowerCase()).ifPresent(existingUser -> {
             boolean removed = removeNonActivatedUser(existingUser);
             if (!removed) {
@@ -113,20 +119,22 @@ public class UserService {
         newUser.setImageUrl(userDTO.getImageUrl());
         newUser.setLangKey(userDTO.getLangKey());
         // new user is not active
-        newUser.setActivated(false);
+        newUser.setActivated(true);
         // new user gets registration key
         newUser.setActivationKey(RandomUtil.generateActivationKey());
         Set<Authority> authorities = new HashSet<>();
         authorityRepository.findById(AuthoritiesConstants.USER).ifPresent(authorities::add);
         newUser.setAuthorities(authorities);
+        newUser.setPoint(1000);
         userRepository.save(newUser);
+        createRental(newUser.getId());
         this.clearUserCaches(newUser);
         log.debug("Created Information for User: {}", newUser);
         return newUser;
     }
 
     private boolean removeNonActivatedUser(User existingUser) {
-        if (existingUser.getActivated()) {
+        if (existingUser.isActivated()) {
              return false;
         }
         userRepository.delete(existingUser);
@@ -135,7 +143,7 @@ public class UserService {
         return true;
     }
 
-    public User createUser(UserDTO userDTO) {
+    public User createUser(UserDTO userDTO) throws InterruptedException, ExecutionException, JsonProcessingException {
         User user = new User();
         user.setLogin(userDTO.getLogin().toLowerCase());
         user.setFirstName(userDTO.getFirstName());
@@ -162,7 +170,9 @@ public class UserService {
                 .collect(Collectors.toSet());
             user.setAuthorities(authorities);
         }
+        user.setPoint(1000);
         userRepository.save(user);
+        createRental(user.getId());
         this.clearUserCaches(user);
         log.debug("Created Information for User: {}", user);
         return user;
@@ -300,5 +310,15 @@ public class UserService {
         if (user.getEmail() != null) {
             Objects.requireNonNull(cacheManager.getCache(UserRepository.USERS_BY_EMAIL_CACHE)).evict(user.getEmail());
         }
+    }
+
+    public User usepoints(Long userId, int latefee)  {
+
+        User user = userRepository.findById(userId).get();
+        return user.usePoints(latefee);
+    }
+
+    public void createRental(Long id) throws InterruptedException, ExecutionException, JsonProcessingException {
+        gatewayKafkaProducer.createRental(id);
     }
 }

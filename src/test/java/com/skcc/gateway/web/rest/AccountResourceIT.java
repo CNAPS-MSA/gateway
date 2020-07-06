@@ -412,7 +412,7 @@ public class AccountResourceIT {
             .andExpect(status().isOk());
 
         user = userRepository.findOneByLogin(user.getLogin()).orElse(null);
-        assertThat(user.getActivated()).isTrue();
+        assertThat(user.isActivated()).isTrue();
     }
 
     @Test
@@ -456,7 +456,7 @@ public class AccountResourceIT {
         assertThat(updatedUser.getLangKey()).isEqualTo(userDTO.getLangKey());
         assertThat(updatedUser.getPassword()).isEqualTo(user.getPassword());
         assertThat(updatedUser.getImageUrl()).isEqualTo(userDTO.getImageUrl());
-        assertThat(updatedUser.getActivated()).isEqualTo(true);
+        assertThat(updatedUser.isActivated()).isEqualTo(true);
         assertThat(updatedUser.getAuthorities()).isEmpty();
     }
 

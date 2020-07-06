@@ -1,0 +1,29 @@
+{
+  "gatewayApp": {
+    "bookCatalogTopListBooks": {
+      "home": {
+        "title": "Top List Books",
+        "createLabel": "Create a new Top List Books",
+        "createOrEditLabel": "Create or edit a Top List Books",
+        "notFound": "No Top List Books found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete Top List Books {{ id }}?"
+      },
+      "detail": {
+        "title": "Top List Books"
+      },
+      "title": "Title",
+      "description": "Description",
+      "author": "Author",
+      "publisher": "Publisher"
+    }
+  },
+  "bookCatalogApp": {
+    "bookCatalogTopListBooks": {
+      "created": "A new Top List Books is created with identifier {{ param }}",
+      "updated": "A Top List Books is updated with identifier {{ param }}",
+      "deleted": "A Top List Books is deleted with identifier {{ param }}"
+    }
+  }
+}

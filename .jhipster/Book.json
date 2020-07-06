@@ -1,0 +1,59 @@
+{
+    "fluentMethods": true,
+    "clientRootFolder": "book",
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "title",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "author",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "publisher",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "isbn",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "publicationDate",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "classification",
+            "fieldType": "Classification",
+            "fieldValues": "Arts,Photography,Biographies,BusinessMoney,Children,ComputerTechnology,History,Medical,Travel,Romance,Science,Math,SelfHelp"
+        },
+        {
+            "fieldName": "bookStatus",
+            "fieldType": "BookStatus",
+            "fieldValues": "AVAILABLE,UNAVAILABLE"
+        },
+        {
+            "fieldName": "location",
+            "fieldType": "Location",
+            "fieldValues": "JEONGJA,PANGYO"
+        }
+    ],
+    "changelogDate": "20200506084946",
+    "dto": "mapstruct",
+    "searchEngine": false,
+    "service": "serviceImpl",
+    "entityTableName": "book",
+    "databaseType": "sql",
+    "readOnly": false,
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination",
+    "microserviceName": "book",
+    "name": "Book",
+    "embedded": false,
+    "applications": "*"
+}

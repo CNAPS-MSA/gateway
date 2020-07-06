@@ -1,0 +1,32 @@
+{
+  "gatewayApp": {
+    "bookInStockBook": {
+      "home": {
+        "title": "In Stock Books",
+        "createLabel": "Create a new In Stock Book",
+        "createOrEditLabel": "Create or edit a In Stock Book",
+        "notFound": "No In Stock Books found"
+      },
+      "delete": {
+        "question": "Are you sure you want to delete In Stock Book {{ id }}?"
+      },
+      "detail": {
+        "title": "In Stock Book"
+      },
+      "title": "Title",
+      "description": "Description",
+      "author": "Author",
+      "publisher": "Publisher",
+      "isbn": "Isbn",
+      "publicationDate": "Publication Date",
+      "source": "Source"
+    }
+  },
+  "bookApp": {
+    "bookInStockBook": {
+      "created": "A new In Stock Book is created with identifier {{ param }}",
+      "updated": "A In Stock Book is updated with identifier {{ param }}",
+      "deleted": "A In Stock Book is deleted with identifier {{ param }}"
+    }
+  }
+}

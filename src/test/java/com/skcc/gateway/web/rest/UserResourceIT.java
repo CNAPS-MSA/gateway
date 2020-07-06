@@ -294,7 +294,7 @@ public class UserResourceIT {
         managedUserVM.setFirstName(UPDATED_FIRSTNAME);
         managedUserVM.setLastName(UPDATED_LASTNAME);
         managedUserVM.setEmail(UPDATED_EMAIL);
-        managedUserVM.setActivated(updatedUser.getActivated());
+        managedUserVM.setActivated(updatedUser.isActivated());
         managedUserVM.setImageUrl(UPDATED_IMAGEURL);
         managedUserVM.setLangKey(UPDATED_LANGKEY);
         managedUserVM.setCreatedBy(updatedUser.getCreatedBy());
@@ -337,7 +337,7 @@ public class UserResourceIT {
         managedUserVM.setFirstName(UPDATED_FIRSTNAME);
         managedUserVM.setLastName(UPDATED_LASTNAME);
         managedUserVM.setEmail(UPDATED_EMAIL);
-        managedUserVM.setActivated(updatedUser.getActivated());
+        managedUserVM.setActivated(updatedUser.isActivated());
         managedUserVM.setImageUrl(UPDATED_IMAGEURL);
         managedUserVM.setLangKey(UPDATED_LANGKEY);
         managedUserVM.setCreatedBy(updatedUser.getCreatedBy());
@@ -391,7 +391,7 @@ public class UserResourceIT {
         managedUserVM.setFirstName(updatedUser.getFirstName());
         managedUserVM.setLastName(updatedUser.getLastName());
         managedUserVM.setEmail("jhipster@localhost");// this email should already be used by anotherUser
-        managedUserVM.setActivated(updatedUser.getActivated());
+        managedUserVM.setActivated(updatedUser.isActivated());
         managedUserVM.setImageUrl(updatedUser.getImageUrl());
         managedUserVM.setLangKey(updatedUser.getLangKey());
         managedUserVM.setCreatedBy(updatedUser.getCreatedBy());
@@ -433,7 +433,7 @@ public class UserResourceIT {
         managedUserVM.setFirstName(updatedUser.getFirstName());
         managedUserVM.setLastName(updatedUser.getLastName());
         managedUserVM.setEmail(updatedUser.getEmail());
-        managedUserVM.setActivated(updatedUser.getActivated());
+        managedUserVM.setActivated(updatedUser.isActivated());
         managedUserVM.setImageUrl(updatedUser.getImageUrl());
         managedUserVM.setLangKey(updatedUser.getLangKey());
         managedUserVM.setCreatedBy(updatedUser.getCreatedBy());
@@ -513,7 +513,7 @@ public class UserResourceIT {
         assertThat(user.getFirstName()).isEqualTo(DEFAULT_FIRSTNAME);
         assertThat(user.getLastName()).isEqualTo(DEFAULT_LASTNAME);
         assertThat(user.getEmail()).isEqualTo(DEFAULT_EMAIL);
-        assertThat(user.getActivated()).isEqualTo(true);
+        assertThat(user.isActivated()).isEqualTo(true);
         assertThat(user.getImageUrl()).isEqualTo(DEFAULT_IMAGEURL);
         assertThat(user.getLangKey()).isEqualTo(DEFAULT_LANGKEY);
         assertThat(user.getCreatedBy()).isNull();
