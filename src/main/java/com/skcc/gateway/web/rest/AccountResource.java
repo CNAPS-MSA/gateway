@@ -1,5 +1,6 @@
 package com.skcc.gateway.web.rest;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.skcc.gateway.domain.User;
 import com.skcc.gateway.repository.UserRepository;
 import com.skcc.gateway.security.SecurityUtils;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.*;
+import java.util.concurrent.ExecutionException;
 
 /**
  * REST controller for managing the current user's account.
@@ -59,12 +61,12 @@ public class AccountResource {
      */
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
-    public void registerAccount(@Valid @RequestBody ManagedUserVM managedUserVM) {
+    public void registerAccount(@Valid @RequestBody ManagedUserVM managedUserVM) throws InterruptedException, ExecutionException, JsonProcessingException {
         if (!checkPasswordLength(managedUserVM.getPassword())) {
             throw new InvalidPasswordException();
         }
         User user = userService.registerUser(managedUserVM, managedUserVM.getPassword());
-        mailService.sendActivationEmail(user);
+       // mailService.sendActivationEmail(user);
     }
 
     /**
