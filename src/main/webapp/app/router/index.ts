@@ -1,12 +1,13 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
+import Router from 'vue-router';
+import { Authority } from '@/shared/security/authority';
+
 Component.registerHooks([
   'beforeRouteEnter',
   'beforeRouteLeave',
   'beforeRouteUpdate', // for vue-router 2.2+
 ]);
-import Router from 'vue-router';
-import { Authority } from '@/shared/security/authority';
 const Home = () => import('../core/home/home.vue');
 const Error = () => import('../core/error/error.vue');
 const Register = () => import('../account/register/register.vue');
@@ -75,10 +76,12 @@ const ReturnedItemUpdate = () => import('../entities/rental/returned-item/return
 // prettier-ignore
 const ReturnedItemDetails = () => import('../entities/rental/returned-item/returned-item-details.vue');
 // jhipster-needle-add-entity-to-router-import - JHipster will import entities to the router here
-
+const BookRental = () => import('../cnaps/book-rental-service/book-rental.vue'); // 도서 대여 페이지
+const BookRentalDetails = () => import('../cnaps/book-rental-service/book-rental-details.vue');
 Vue.use(Router);
 
 // prettier-ignore
+
 export default new Router({
   mode: 'history',
   routes: [
@@ -397,6 +400,18 @@ export default new Router({
       name: 'ReturnedItemView',
       component: ReturnedItemDetails,
       meta: { authorities: [Authority.USER] }
+    },
+    {
+      path: '/rent',
+      name: 'BookRental',
+      component: BookRental,
+      meta: { authorities: [Authority.USER]}
+    },
+    {
+      path: '/rent/:bookTitle/view',
+      name: 'BookRentalView',
+      component: BookRentalDetails,
+      meta: { authorities: [Authority.USER]}
     }
     // jhipster-needle-add-entity-to-router - JHipster will add entities to the router here
   ]

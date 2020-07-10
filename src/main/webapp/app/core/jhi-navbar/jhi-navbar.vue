@@ -3,18 +3,18 @@
         <b-navbar-brand class="logo" b-link to="/">
             <span class="logo-img"></span>
             <span v-text="$t('global.title')" class="navbar-title">gateway</span> <span class="navbar-version">{{version}}</span>
-        </b-navbar-brand>      
-        <b-navbar-toggle 
-        right 
-        class="jh-navbar-toggler d-lg-none" 
-        href="javascript:void(0);"  
-        data-toggle="collapse" 
-        target="header-tabs" 
-        aria-expanded="false" 
+        </b-navbar-brand>
+        <b-navbar-toggle
+        right
+        class="jh-navbar-toggler d-lg-none"
+        href="javascript:void(0);"
+        data-toggle="collapse"
+        target="header-tabs"
+        aria-expanded="false"
         aria-label="Toggle navigation">
             <font-awesome-icon icon="bars" />
         </b-navbar-toggle>
-           
+
         <b-collapse is-nav id="header-tabs">
             <b-navbar-nav class="ml-auto">
                 <b-nav-item to="/" exact>
@@ -22,6 +22,10 @@
                         <font-awesome-icon icon="home" />
                         <span v-text="$t('global.menu.home')">Home</span>
                     </span>
+                </b-nav-item>
+                <b-nav-item to="/rent">
+                    <font-awesome-icon icon="book"/>
+                    <span v-text="$t('global.menu.rentalpage')">Rental Page</span>
                 </b-nav-item>
                 <b-nav-item-dropdown
                     right
