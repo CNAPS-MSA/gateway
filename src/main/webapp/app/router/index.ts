@@ -408,7 +408,7 @@ export default new Router({
       meta: { authorities: [Authority.USER]}
     },
     {
-      path: '/rent/:bookTitle/view',
+      path: '/rent/:bookId/view',
       name: 'BookRentalView',
       component: BookRentalDetails,
       meta: { authorities: [Authority.USER]}

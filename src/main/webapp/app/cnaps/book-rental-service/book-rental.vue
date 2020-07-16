@@ -14,23 +14,25 @@
         <div class="alert alert-warning" v-if="!isFetching && books && books.length === 0">
             <span>No books found</span>
         </div>
-        <div class="input-group mb-3">
-            <label>
-                <input type="text" class="form-control" placeholder="Search by title"
-                       v-model="title"/>
-            </label>
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button"
-                        @click="search(title)"
-                >
-                    Search
-                </button>
-            </div>
-        </div>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" v-model="title">
+            <button class="btn btn-secondary my-2 my-sm-0" type="submit" @click="search(title)">Search</button>
+            <div class="text-uppercase text-bold"><strong>id selected: {{selected}}</strong></div>
+            <button v-if="selected.length > 0 " type="button" class="btn btn-primary" @click="prepareRent()">
+                <span v-text="$t('global.bookrent')">Rent</span>
+            </button>
+        </form>
+
+
         <div class="table-responsive" v-if="books && books.length > 0">
             <table class="table table-striped">
                 <thead>
                 <tr>
+                    <th>
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" v-model="selectAll" @click="select">
+                        </label>
+                    </th>
                     <th><span v-text="$t('gatewayApp.bookCatalogBookCatalog.title')">Title</span></th>
                     <th><span v-text="$t('gatewayApp.bookCatalogBookCatalog.description')">Description</span></th>
                     <th><span v-text="$t('gatewayApp.bookCatalogBookCatalog.classification')">Classification</span></th>
@@ -43,9 +45,14 @@
                 </thead>
                 <tbody>
                 <tr v-for="book in books"
-                    :key="book.title">
+                    :key="book.id">
                     <td>
-                        <router-link :to="{name: 'BookRentalView', params: {bookTitle: book.title}}">{{book.title}}</router-link>
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" v-model="selected" :value="book.bookId" number>
+                        </label>
+                    </td>
+                    <td>
+                        <router-link :to="{name: 'BookRentalView', params: {bookId: book.id}}">{{book.title}}</router-link>
                     </td>
                     <td>{{book.description}}</td>
                     <td>{{book.classification}}</td>
@@ -55,11 +62,11 @@
                     <td>{{book.rentCnt}}</td>
                     <td class="text-right">
                         <div class="btn-group">
-                            <router-link :to="{name: 'BookRentalView', params: {bookTitle: book.title}}" tag="button" class="btn btn-info btn-sm details">
+                            <router-link :to="{name: 'BookRentalView', params: {bookId: book.id}}" tag="button" class="btn btn-info btn-sm details">
                                 <font-awesome-icon icon="eye"></font-awesome-icon>
                                 <span class="d-none d-md-inline" v-text="$t('entity.action.view')">View</span>
                             </router-link>
-<!--                            <router-link :to="{name: 'RentalEdit', params: {rentalId: book.id}}" tag="button" class="btn btn-primary btn-sm edit">-->
+<!--                        <router-link :to="{name: 'BookRentalDo', params: {rentalId: book.id}}" tag="button" class="btn btn-primary btn-sm edit">-->
 <!--                                <font-awesome-icon icon="pencil-alt"></font-awesome-icon>-->
 <!--                                <span class="d-none d-md-inline" v-text="$t('entity.action.edit')">Edit</span>-->
 <!--                            </router-link>-->
@@ -76,6 +83,16 @@
                 </tbody>
             </table>
         </div>
+        <b-modal ref="doRental" id="doRental">
+            <span slot="modal-title"><span v-text="$t('gatewayApp.rental.Rental.doRent.title')"></span>Confirm rent books</span>
+            <div class="modal-body">
+                <p v-text="$t('gatewayApp.rentalRental.doRent.question', {'selected' : selected})">Are you sure want to rent these books?</p>
+            </div>
+            <div slot="modal-footer">
+                <button type="button" class="btn btn-secondary" @click="closeDialog()">Cancel</button>
+                <button type="button" class="btn btn-primary" @click="rentBooks()">Confirm</button>
+            </div>
+        </b-modal>
 <!--        <b-modal ref="removeEntity" id="removeEntity" >-->
 <!--            <span slot="modal-title"><span id="gatewayApp.rentalRental.delete.question" v-text="$t('entity.delete.title')">Confirm delete operation</span></span>-->
 <!--            <div class="modal-body">-->

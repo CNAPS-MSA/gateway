@@ -47,6 +47,19 @@ export default class BookRentalService {
         });
     });
   }
+
+  public rentBooks(userId: any, selected: Array<any>): Promise<IRental> {
+    return new Promise<IRental>((resolve, reject) => {
+      axios
+        .post(`${rentalApiUrl}/rental/user/${userId}/books/${selected}`)
+        .then(res => {
+          resolve(res.data);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  }
   // public delete(id: number): Promise<any> {
   //   return new Promise<any>((resolve, reject) => {
   //     axios
