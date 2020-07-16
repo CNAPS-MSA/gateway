@@ -13,6 +13,11 @@
       "detail": {
         "title": "Rental"
       },
+      "doRent": {
+        "title": "도서 대여 신청",
+        "question": "{{ selected }} 을 대여하시겠습니까?",
+        "rented": "대여완료되었습니다."
+      },
       "userId": "User Id",
       "rentalStatus": "Rental Status",
       "lateFee": "Late Fee",

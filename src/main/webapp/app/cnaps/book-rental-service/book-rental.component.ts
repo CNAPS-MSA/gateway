@@ -7,6 +7,7 @@ import { IBookCatalog } from '@/shared/model/bookCatalog/book-catalog.model';
 import AlertMixin from '@/shared/alert/alert.mixin';
 
 import BookRentalService from './book-rental.service';
+import { IRentedItem } from '@/shared/model/rental/rented-item.model';
 
 @Component({
   mixins: [Vue2Filters.mixin],
@@ -22,10 +23,21 @@ export default class BookRental extends mixins(AlertMixin) {
   public reverse = false;
   public totalItems = 0;
   public title = '';
-  public rentals: IRental[] = [];
+  public rental: IRental;
   public books: IBookCatalog[] = [];
+  public rentedItems: IRentedItem[] = [];
   public isFetching = false;
-
+  public selected = [];
+  public selectAll = false;
+  public userId: any = null;
+  public select() {
+    this.selected = [];
+    if (!this.selectAll) {
+      for (let i in this.books) {
+        this.selected.push(this.books[i].bookId);
+      }
+    }
+  }
   public mounted(): void {
     this.retrieveAllBooks();
   }
@@ -77,7 +89,31 @@ export default class BookRental extends mixins(AlertMixin) {
   //       this.closeDialog();
   //     });
   // }
+  public prepareRent(): void {
+    this.userId = this.getUserId;
+    if (<any>this.$refs.doRental) {
+      (<any>this.$refs.doRental).show();
+    }
+  }
 
+  public rentBooks(): void {
+    this.bookRentalService()
+      .rentBooks(this.userId, this.selected)
+      .then(
+        res => {
+          this.rental = res;
+          const message = this.$t('gatewayApp.rentalRental.doRent.rented');
+          this.alertService().showAlert(message, 'danger');
+          this.getAlertFromStore();
+          this.selected = [];
+          this.retrieveAllBooks();
+          this.closeDialog();
+        },
+        err => {
+          this.isFetching = false;
+        }
+      );
+  }
   public sort(): Array<any> {
     const result = [this.propOrder + ',' + (this.reverse ? 'asc' : 'desc')];
     if (this.propOrder !== 'id') {
@@ -104,8 +140,9 @@ export default class BookRental extends mixins(AlertMixin) {
   }
 
   public closeDialog(): void {
-    (<any>this.$refs.removeEntity).hide();
+    (<any>this.$refs.doRental).hide();
   }
+
   public search(title: String): void {
     let foundBook: IBookCatalog[] = [];
     this.bookRentalService()
@@ -114,5 +151,9 @@ export default class BookRental extends mixins(AlertMixin) {
         foundBook.push(res);
         this.books = foundBook;
       });
+  }
+
+  public get getUserId(): any {
+    return this.$store.getters.account.id;
   }
 }
