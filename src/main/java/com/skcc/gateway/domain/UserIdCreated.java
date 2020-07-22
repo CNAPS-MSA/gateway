@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class CreateRentalEvent {
+public class UserIdCreated {
 
     private Long userId;
 

@@ -5,7 +5,8 @@
         "title": "In Stock Books",
         "createLabel": "Create a new In Stock Book",
         "createOrEditLabel": "Create or edit a In Stock Book",
-        "notFound": "No In Stock Books found"
+        "notFound": "No In Stock Books found",
+        "registerLabel": "신규 도서 등록"
       },
       "delete": {
         "question": "Are you sure you want to delete In Stock Book {{ id }}?"
@@ -13,13 +14,13 @@
       "detail": {
         "title": "In Stock Book"
       },
-      "title": "Title",
-      "description": "Description",
-      "author": "Author",
-      "publisher": "Publisher",
-      "isbn": "Isbn",
-      "publicationDate": "Publication Date",
-      "source": "Source"
+      "title": "책 이름",
+      "description": "설명",
+      "author": "저자",
+      "publisher": "출판사",
+      "isbn": "ISBN",
+      "publicationDate": "출판 날짜",
+      "source": "책 출처"
     }
   },
   "bookApp": {

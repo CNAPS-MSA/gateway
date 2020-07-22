@@ -2,18 +2,17 @@ import { mixins } from 'vue-class-component';
 
 import { Component, Vue, Inject } from 'vue-property-decorator';
 import Vue2Filters from 'vue2-filters';
-import { IRental } from '@/shared/model/rental/rental.model';
-import { IBookCatalog } from '@/shared/model/bookCatalog/book-catalog.model';
+import { IInStockBook } from '@/shared/model/book/in-stock-book.model';
+import { IBook } from '@/shared/model/book/book.model';
 import AlertMixin from '@/shared/alert/alert.mixin';
 
-import BookRentalService from './book-rental.service';
-import { IRentedItem } from '@/shared/model/rental/rented-item.model';
+import BookRegisterService from '@/cnaps/book-register-service/book-register.service';
 
 @Component({
   mixins: [Vue2Filters.mixin],
 })
-export default class BookRental extends mixins(AlertMixin) {
-  @Inject('bookRentalService') private bookRentalService: () => BookRentalService;
+export default class BookRegister extends mixins(AlertMixin) {
+  @Inject('bookRegisterService') private bookRegisterService: () => BookRegisterService;
   private removeId: number = null;
   public itemsPerPage = 20;
   public queryCount: number = null;
@@ -23,21 +22,13 @@ export default class BookRental extends mixins(AlertMixin) {
   public reverse = false;
   public totalItems = 0;
   public title = '';
-  public rental: IRental;
-  public books: IBookCatalog[] = [];
-  public rentedItems: IRentedItem[] = [];
+  public books: IBook[] = [];
+  public instockBooks: IInStockBook[] = [];
   public isFetching = false;
   public selected = [];
   public selectAll = false;
   public userId: any = null;
-  public select() {
-    this.selected = [];
-    if (!this.selectAll) {
-      for (let i in this.books) {
-        this.selected.push(this.books[i].bookId);
-      }
-    }
-  }
+
   public mounted(): void {
     this.retrieveAllBooks();
   }
@@ -55,11 +46,11 @@ export default class BookRental extends mixins(AlertMixin) {
       size: this.itemsPerPage,
       sort: this.sort(),
     };
-    this.bookRentalService()
+    this.bookRegisterService()
       .retrieve(paginationQuery)
       .then(
         res => {
-          this.books = res.data;
+          this.instockBooks = res.data;
           this.totalItems = Number(res.headers['x-total-count']);
           this.queryCount = this.totalItems;
           this.isFetching = false;
@@ -89,31 +80,13 @@ export default class BookRental extends mixins(AlertMixin) {
   //       this.closeDialog();
   //     });
   // }
-  public prepareRent(): void {
-    this.userId = this.getUserId;
-    if (<any>this.$refs.doRental) {
-      (<any>this.$refs.doRental).show();
-    }
-  }
+  // public prepareRent(): void {
+  //   this.userId = this.getUserId;
+  //   if (<any>this.$refs.doRental) {
+  //     (<any>this.$refs.doRental).show();
+  //   }
+  // }
 
-  public rentBooks(): void {
-    this.bookRentalService()
-      .rentBooks(this.userId, this.selected)
-      .then(
-        res => {
-          this.rental = res;
-          const message = this.$t('gatewayApp.rentalRental.doRent.rented');
-          this.alertService().showAlert(message, 'danger');
-          this.getAlertFromStore();
-          this.selected = [];
-          this.retrieveAllBooks();
-          this.closeDialog();
-        },
-        err => {
-          this.isFetching = false;
-        }
-      );
-  }
   public sort(): Array<any> {
     const result = [this.propOrder + ',' + (this.reverse ? 'asc' : 'desc')];
     if (this.propOrder !== 'id') {
@@ -144,14 +117,14 @@ export default class BookRental extends mixins(AlertMixin) {
   }
 
   public search(title: String): void {
-    this.bookRentalService()
+    this.bookRegisterService()
       .findByTitle(title)
       .then(res => {
-        this.books = res.data;
+        this.instockBooks = res.data;
       });
   }
 
-  public get getUserId(): any {
-    return this.$store.getters.account.id;
-  }
+  // public get getUserId(): any {
+  //   return this.$store.getters.account.id;
+  // }
 }

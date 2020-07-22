@@ -78,6 +78,8 @@ const ReturnedItemDetails = () => import('../entities/rental/returned-item/retur
 // jhipster-needle-add-entity-to-router-import - JHipster will import entities to the router here
 const BookRental = () => import('../cnaps/book-rental-service/book-rental.vue'); // 도서 대여 페이지
 const BookRentalDetails = () => import('../cnaps/book-rental-service/book-rental-details.vue');
+const BookRegisterInStock = () => import('../cnaps/book-register-service/book-register.vue');
+const BookRegisterForm = () => import('../cnaps/book-register-service/book-register-form.vue');
 Vue.use(Router);
 
 // prettier-ignore
@@ -412,6 +414,18 @@ export default new Router({
       name: 'BookRentalView',
       component: BookRentalDetails,
       meta: { authorities: [Authority.USER]}
+    },
+    {
+      path: '/register/book',
+      name: 'RegisterBookView',
+      component : BookRegisterInStock,
+      meta: { authorities: [Authority.ADMIN]}
+    },
+    {
+      path : '/register/book/:inStockId',
+      name : 'RegisterBookForm',
+      component: BookRegisterForm,
+      meta : { authorities: [Authority.ADMIN]}
     }
     // jhipster-needle-add-entity-to-router - JHipster will add entities to the router here
   ]
