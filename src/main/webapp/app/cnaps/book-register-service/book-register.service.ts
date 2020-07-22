@@ -2,17 +2,17 @@ import axios from 'axios';
 
 import buildPaginationQueryOpts from '@/shared/sort/sorts';
 
-import { IRental } from '@/shared/model/rental/rental.model';
-import { IBookCatalog } from '@/shared/model/bookCatalog/book-catalog.model';
+import { IInStockBook } from '@/shared/model/book/in-stock-book.model';
+import { IBook } from '@/shared/model/book/book.model';
 
-const rentalApiUrl = 'services/rental/api/rentals';
-const bookApiUrl = 'services/bookcatalog/api/book-catalogs';
+const inStockBookApiUrl = 'services/book/api/in-stock-books';
+const bookApiUrl = 'services/book/api/books';
 
-export default class BookRentalService {
-  public find(id: number): Promise<IBookCatalog> {
-    return new Promise<IBookCatalog>((resolve, reject) => {
+export default class BookRegisterService {
+  public find(id: number): Promise<IInStockBook> {
+    return new Promise<IInStockBook>((resolve, reject) => {
       axios
-        .get(`${bookApiUrl}/${id}`)
+        .get(`${inStockBookApiUrl}/${id}`)
         .then(res => {
           resolve(res.data);
         })
@@ -25,7 +25,7 @@ export default class BookRentalService {
   public retrieve(paginationQuery?: any): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios
-        .get(bookApiUrl + `?${buildPaginationQueryOpts(paginationQuery)}`)
+        .get(inStockBookApiUrl + `?${buildPaginationQueryOpts(paginationQuery)}`)
         .then(res => {
           resolve(res);
         })
@@ -38,7 +38,7 @@ export default class BookRentalService {
   public findByTitle(title: String): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios
-        .get(`${bookApiUrl}/title/${title}`)
+        .get(`${inStockBookApiUrl}/title/${title}`)
         .then(res => {
           resolve(res);
         })
@@ -48,10 +48,10 @@ export default class BookRentalService {
     });
   }
 
-  public rentBooks(userId: any, selected: Array<any>): Promise<IRental> {
-    return new Promise<IRental>((resolve, reject) => {
+  public create(entity: IBook, inStockId: number): Promise<IBook> {
+    return new Promise<IBook>((resolve, reject) => {
       axios
-        .post(`${rentalApiUrl}/${userId}/RentedItem/${selected}`)
+        .post(`${bookApiUrl}/${inStockId}`, entity)
         .then(res => {
           resolve(res.data);
         })

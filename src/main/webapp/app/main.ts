@@ -40,6 +40,7 @@ import OverdueItemService from '@/entities/rental/overdue-item/overdue-item.serv
 import RentedItemService from '@/entities/rental/rented-item/rented-item.service';
 import ReturnedItemService from '@/entities/rental/returned-item/returned-item.service';
 import BookRentalService from '@/cnaps/book-rental-service/book-rental.service';
+import BookRegisterService from '@/cnaps/book-register-service/book-register.service';
 // jhipster-needle-add-entity-service-to-main-import - JHipster will import entities services here
 
 /* tslint:enable */
@@ -115,6 +116,7 @@ new Vue({
     // jhipster-needle-add-entity-service-to-main - JHipster will import entities services here
     accountService: () => accountService,
     bookRentalService: () => new BookRentalService(),
+    bookRegisterService: () => new BookRegisterService(),
   },
   i18n,
   store,

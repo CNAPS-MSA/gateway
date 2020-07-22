@@ -6,6 +6,7 @@
     "menu": {
       "home": "홈",
       "rentalpage": "도서 대여",
+      "registerbook": "도서 등록",
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Entities",
@@ -109,7 +110,8 @@
       "edit": "수정",
       "open": "Open",
       "save": "저장",
-      "view": "보기"
+      "view": "보기",
+      "register": "등록"
     },
     "detail": {
       "field": "필드",

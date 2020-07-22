@@ -23,9 +23,15 @@
                         <span v-text="$t('global.menu.home')">Home</span>
                     </span>
                 </b-nav-item>
+                <b-nav-item to="/register/book">
+                    <font-awesome-icon icon="plus"/>
+                    <span v-text="$t('global.menu.registerbook')">Register New Book</span>
+                </b-nav-item>
                 <b-nav-item to="/rent">
-                    <font-awesome-icon icon="book"/>
-                    <span v-text="$t('global.menu.rentalpage')">Rental Page</span>
+                    <span>
+                        <font-awesome-icon icon="book"/>
+                        <span v-text="$t('global.menu.rentalpage')">Rental Page</span>
+                    </span>
                 </b-nav-item>
                 <b-nav-item-dropdown
                     right

@@ -3,7 +3,7 @@ package com.skcc.gateway.adaptor;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.skcc.gateway.config.KafkaProperties;
-import com.skcc.gateway.domain.CreateRentalEvent;
+import com.skcc.gateway.domain.UserIdCreated;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;
@@ -43,8 +43,8 @@ public class GatewayKafkaProducer {
 
     public PublishResult createRental(Long userId) throws ExecutionException, InterruptedException, JsonProcessingException{
 
-        CreateRentalEvent createRentalEvent = new CreateRentalEvent(userId);
-        String message = objectMapper.writeValueAsString(createRentalEvent);
+        UserIdCreated userIdCreated = new UserIdCreated(userId);
+        String message = objectMapper.writeValueAsString(userIdCreated);
         RecordMetadata metadata = producer.send(new ProducerRecord<>(TOPIC_RENTAL, message)).get();
         return new PublishResult(metadata.topic(), metadata.partition(), metadata.offset(), Instant.ofEpochMilli(metadata.timestamp()));
 
