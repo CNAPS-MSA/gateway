@@ -17,19 +17,19 @@
         <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="text" placeholder="Search" v-model="title">
             <button class="btn btn-secondary my-2 my-sm-0" type="submit" @click="search(title)">Search</button>
-            <div class="text-uppercase text-bold"><strong>id selected: {{selected}}</strong></div>
+            <div class="text-uppercase text-bold" style="padding: 0px 0px 0px 10px;"><strong>id selected: {{selected}}</strong></div>
             <button v-if="selected.length > 0 " type="button" class="btn btn-primary" @click="prepareRent()">
                 <span v-text="$t('global.bookrent')">Rent</span>
             </button>
         </form>
 
 
-        <div class="table-responsive" v-if="books && books.length > 0">
+        <div class="table-responsive" style="margin-top: 10px;" v-if="books && books.length > 0" >
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th>
-                        <label class="form-check-label">
+                    <th style="text-align: center;">
+                        <label class="form-check-label" style="padding: 0px 0px 15px 25px;">
                             <input class="form-check-input" type="checkbox" v-model="selectAll" @click="select">
                         </label>
                     </th>
@@ -46,8 +46,8 @@
                 <tbody>
                 <tr v-for="book in books"
                     :key="book.id">
-                    <td>
-                        <label class="form-check-label">
+                    <td style="width: 56px; text-align: center;">
+                        <label class="form-check-label" style="padding: 0px 0px 15px 25px;">
                             <input class="form-check-input" type="checkbox" v-model="selected" :value="book.bookId" number>
                         </label>
                     </td>
