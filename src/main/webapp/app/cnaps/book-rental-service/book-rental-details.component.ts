@@ -8,15 +8,15 @@ export default class BookRentalDetails extends Vue {
 
   beforeRouteEnter(to, from, next) {
     next(vm => {
-      if (to.params.id) {
-        vm.retrieveBookRental(to.params.id);
+      if (to.params.bookId) {
+        vm.retrieveBookRental(to.params.bookId);
       }
     });
   }
 
-  public retrieveBookRental(id) {
+  public retrieveBookRental(bookId) {
     this.bookRentalService()
-      .find(id)
+      .find(bookId)
       .then(res => {
         this.book = res;
       });

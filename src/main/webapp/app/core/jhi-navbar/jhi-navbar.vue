@@ -23,16 +23,42 @@
                         <span v-text="$t('global.menu.home')">Home</span>
                     </span>
                 </b-nav-item>
-                <b-nav-item to="/register/book">
-                    <font-awesome-icon icon="plus"/>
-                    <span v-text="$t('global.menu.registerbook')">Register New Book</span>
-                </b-nav-item>
-                <b-nav-item to="/rent">
-                    <span>
-                        <font-awesome-icon icon="book"/>
-                        <span v-text="$t('global.menu.rentalpage')">Rental Page</span>
+                <b-nav-item-dropdown
+                    right
+                    id="bookManagement-menu"
+                    v-if="hasAnyAuthority('ROLE_ADMIN') && authenticated"
+                    :class="{'router-link-active': subIsActive('/admin')}"
+                    active-class="active" class="pointer">
+                    <span slot="button-content" class="navbar-dropdown-menu">
+                        <font-awesome-icon icon="th-list"/>
+                        <span v-text="$t('global.menu.bookManagement')">Book Management</span>
                     </span>
-                </b-nav-item>
+                    <b-dropdown-item to="/register/book">
+                        <font-awesome-icon icon="plus"/>
+                        <span v-text="$t('global.menu.registerbook')">Register New Book</span>
+                    </b-dropdown-item>
+                    <b-dropdown-item to="/manage/rentedBook">
+                        <font-awesome-icon icon="book"/>
+                        <span v-text="$t('global.menu.manageRented')">RentedBooks Management</span>
+                    </b-dropdown-item>
+                </b-nav-item-dropdown>
+                <b-nav-item-dropdown
+                    right
+                    id="rent-menu"
+                    v-if="authenticated"
+                    active-class="active" class="pointer">
+                    <span slot="button-content" class="navbar-dropdown-menu">
+                        <font-awesome-icon icon="th-list" />
+                        <span v-text="$t('global.menu.rentalManagement')">Rental Management</span>
+                    </span>
+                    <b-dropdown-item to="/rent">
+                        <span>
+                            <font-awesome-icon icon="book"/>
+                            <span v-text="$t('global.menu.rentalpage')">Rental Page</span>
+                        </span>
+                    </b-dropdown-item>
+                </b-nav-item-dropdown>
+
                 <b-nav-item-dropdown
                     right
                     id="entity-menu"
