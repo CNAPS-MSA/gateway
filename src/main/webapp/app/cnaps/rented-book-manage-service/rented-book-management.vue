@@ -38,10 +38,6 @@
                     <td>{{book.dueDate}}</td>
                     <td class="text-right">
                         <div class="btn-group">
-                            <router-link :to="{name: 'RentedBookDetailsView', params: {bookId: book.id}}" tag="button" class="btn btn-info btn-sm details">
-                                <font-awesome-icon icon="eye"></font-awesome-icon>
-                                <span class="d-none d-md-inline" v-text="$t('entity.action.view')">View</span>
-                            </router-link>
                             <b-button class="btn btn-primary" @click="prepareOverdue(book.rentalId, book.bookId)"
                                         v-b-modal.doOverdue>
                                 <span class="d-none d-md-inline" v-text="$t('global.overdueBook')">Overdue Books</span>

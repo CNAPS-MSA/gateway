@@ -42,23 +42,18 @@
                         <span v-text="$t('global.menu.manageRented')">RentedBooks Management</span>
                     </b-dropdown-item>
                 </b-nav-item-dropdown>
-                <b-nav-item-dropdown
-                    right
-                    id="rent-menu"
-                    v-if="authenticated"
-                    active-class="active" class="pointer">
-                    <span slot="button-content" class="navbar-dropdown-menu">
-                        <font-awesome-icon icon="th-list" />
-                        <span v-text="$t('global.menu.rentalManagement')">Rental Management</span>
+                <b-nav-item to="/rent">
+                    <span>
+                        <font-awesome-icon icon="book"/>
+                        <span v-text="$t('global.menu.rentalpage')">Rental Page</span>
                     </span>
-                    <b-dropdown-item to="/rent">
-                        <span>
-                            <font-awesome-icon icon="book"/>
-                            <span v-text="$t('global.menu.rentalpage')">Rental Page</span>
-                        </span>
-                    </b-dropdown-item>
-                </b-nav-item-dropdown>
-
+                </b-nav-item>
+                <b-nav-item to="/mypage">
+                    <span>
+                        <font-awesome-icon icon="user"/>
+                        <span v-text="$t('global.menu.mypage')">MyPage</span>
+                    </span>
+                </b-nav-item>
                 <b-nav-item-dropdown
                     right
                     id="entity-menu"

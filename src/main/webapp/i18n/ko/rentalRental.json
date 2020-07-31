@@ -18,6 +18,11 @@
         "question": "{{ selected }} 을 대여하시겠습니까?",
         "rented": "신청한 도서 중 {{ param }} 이 대여완료되었습니다."
       },
+      "releaseOverdue": {
+        "title": "연체료 결제 신청",
+        "question": "연체료 결제 후 연체 상태를 해제하시겠습니까?",
+        "result": "연체 해제가 완료되었습니다."
+      },
       "userId": "User Id",
       "rentalStatus": "Rental Status",
       "lateFee": "연체료",

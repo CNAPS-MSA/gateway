@@ -8,9 +8,11 @@
       "home": "홈",
       "rentalManagement": "대여 관리",
       "rentalpage": "도서 대여",
+      "returnpage": "도서 반납",
       "registerbook": "도서 등록",
       "bookManagement": "도서 관리",
       "manageRented": "대여 도서 관리",
+      "mypage": "MyPage",
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Entities",
