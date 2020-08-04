@@ -51,7 +51,7 @@
                 <b-nav-item to="/mypage">
                     <span>
                         <font-awesome-icon icon="user"/>
-                        <span v-text="$t('global.menu.mypage')">MyPage</span>
+                        <span v-text="$t('global.menu.mypage.home')">MyPage</span>
                     </span>
                 </b-nav-item>
                 <b-nav-item-dropdown

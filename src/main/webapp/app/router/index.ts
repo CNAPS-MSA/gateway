@@ -81,9 +81,6 @@ const BookRentalDetails = () => import('../cnaps/book-rental-service/book-rental
 const BookRegisterInStock = () => import('../cnaps/book-register-service/book-register.vue'); // 도서 등록
 const BookRegisterForm = () => import('../cnaps/book-register-service/book-register-form.vue'); // 도서 등록 form
 const RentedBookManagement = () => import('../cnaps/rented-book-manage-service/rented-book-management.vue');
-const MyRentedItems = () => import('../cnaps/mypage-service/mypage-sub/my-rented-items.vue');
-const MyOverdueItems = () => import('../cnaps/mypage-service/mypage-sub/my-overdue-items.vue');
-const MyReturnedItems = () => import('../cnaps/mypage-service/mypage-sub/my-returned-items.vue');
 const MyPage = () => import('../cnaps/mypage-service/mypage.vue');
 Vue.use(Router);
 
@@ -442,25 +439,8 @@ export default new Router({
       path : '/mypage',
       name : 'MyPage',
       component : MyPage,
-      meta : { authorities: [Authority.USER]},
-      children: [
-        {
-          path : 'my-rented',
-          name : 'MyRentedItems',
-          component : MyRentedItems
-        },
-        {
-          path : 'my-overdue',
-          name : 'MyOverdueItems',
-          component : MyOverdueItems,
-        },
-        {
-          path : 'my-returned',
-          name : 'MyReturnedItems',
-          component : MyReturnedItems,
-        }
-      ]
-    },
+      meta : { authorities: [Authority.USER]}
+    }
 
     // jhipster-needle-add-entity-to-router - JHipster will add entities to the router here
   ]

@@ -1,7 +1,7 @@
 <template>
     <div>
         <h2 id="page-heading">
-            <span v-text="$t('global.menu.mypage')">My Page</span>
+            <span v-text="$t('global.menu.mypage.home')">My Page</span>
         </h2>
         <b-alert :show="dismissCountDown"
                  dismissible
@@ -13,99 +13,147 @@
         <br/>
         <br/>
         <h3>나의 대여 정보</h3>
-        <ul class="list-group">
-            <li class="list-group-item d-flex justify-content-between align-items-center">
+        <ul class="list-group" style="max-width: 30rem;">
+            <li class="list-group-item d-flex justify-content-between align-items-center" v-if="rental">
                 대여 가능 상태
-                <span class="badge badge-primary badge-pill" v-text="$t('gatewayApp.RentalStatus.' + rental.rentalStatus)">{{rental.rentalStatus}}}</span>
+                <span class="badge badge-primary badge-pill" v-text="$t('gatewayApp.RentalStatus.' + rental.rentalStatus)">{{rental.rentalStatus}}</span>
             </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
+            <li class="list-group-item d-flex justify-content-between align-items-center" v-if="user">
                 잔여 POINT
-                <span class="badge badge-primary badge-pill">{{user.point}}}</span>
+                <span class="badge badge-primary badge-pill">{{user.point}}</span>
             </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
+            <li class="list-group-item d-flex justify-content-between align-items-center" v-if="rental">
                 연체료
                 <span class="badge badge-primary badge-pill">{{rental.lateFee}}</span>
             </li>
         </ul>
-        <button v-if="rental.lateFee > 0" type="button" class="btn btn-primary" @click="prepareReleaseOverdue()">연체료 결제</button>
+        <button style="margin-top: 10px" v-if="rental&&rental.lateFee > 0" type="button" class="btn btn-primary" @click="prepareReleaseOverdue()">연체료 결제</button>
         <br/>
         <br/>
-        <ul class="nav nav-tabs">
-            <li class="nav-item">
-                <router-link class="nav-link" data-toggle="tab" to="/mypage/my-rented">My Rented Items</router-link>
-            </li>
-            <li class="nav-item">
-                <router-link class="nav-link" data-toggle="tab" to="/mypage/my-overdue">My Overdue Items</router-link>
-            </li>
-            <li class="nav-item">
-                <router-link class="nav-link" data-toggle="tab" to="/mypage/my-returned">My Returned Items</router-link>
-            </li>
-        </ul>
-        <div id="myTabContent" class="tab-content">
-            <router-view></router-view>
+        <div v-if="rental" class="card border-primary mb-3" >
+            <div class="card-header" v-text="$t('global.menu.mypage.rentedpage')">My Rented Items</div>
+            <div class="card-body">
+                <div class="table-responsive" v-if="rentedBooks && rentedBooks.length > 0">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th v-on:click="changeOrder('bookTitle')"><span v-text="$t('gatewayApp.rentalRentedItem.bookTitle')">Book Title</span> </th>
+                            <th v-on:click="changeOrder('rentedDate')"><span v-text="$t('gatewayApp.rentalRentedItem.rentedDate')">Rented Date</span> </th>
+                            <th v-on:click="changeOrder('dueDate')"><span v-text="$t('gatewayApp.rentalRentedItem.dueDate')">Due Date</span> </th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr v-for="rentedBook in rentedBooks"
+                            :key="rentedBook.id">
+                            <td>{{rentedBook.bookTitle}}</td>
+                            <td>{{rentedBook.rentedDate}}</td>
+                            <td>{{rentedBook.dueDate}}</td>
+                            <td class="text-right">
+                                <div class="btn-group">
+
+                                    <b-button v-on:click="prepareReturn(rentedBook.bookId)"
+                                              variant="danger"
+                                              class="btn btn-sm"
+                                              v-b-modal.returnBook>
+                                        <font-awesome-icon icon="times"></font-awesome-icon>
+                                        <span class="d-none d-md-inline" v-text="$t('global.menu.mypage.returnBook.return')">Return Book</span>
+                                    </b-button>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div v-show="rentedBooks && rentedBooks.length > 0">
+                    <div class="row justify-content-center">
+                        <jhi-item-count :page="page" :total="queryCount" :itemsPerPage="itemsPerPage"></jhi-item-count>
+                    </div>
+                    <div class="row justify-content-center">
+                        <b-pagination size="md" :total-rows="totalItems" v-model="page" :per-page="itemsPerPage" :change="loadPage(page)"></b-pagination>
+                    </div>
+                </div>
+            </div>
         </div>
-<!--        <div id="myTabContent" class="tab-content">-->
-<!--            <div class="tab-pane fade active show" id="home">-->
-<!--                <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>-->
-<!--            </div>-->
-<!--            <div class="tab-pane fade" id="profile">-->
-<!--                <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.</p>-->
-<!--            </div>-->
-<!--            <div class="tab-pane fade" id="dropdown1">-->
-<!--                <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork.</p>-->
-<!--            </div>-->
-<!--            <div class="tab-pane fade" id="dropdown2">-->
-<!--                <p>Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table VHS viral locavore cosby sweater.</p>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="alert alert-warning" v-if="!isFetching && books && books.length === 0">-->
-<!--            <span>No books found</span>-->
-<!--        </div>-->
-<!--        <form class="form-inline my-2 my-lg-0" v-on:submit.prevent="search">-->
-<!--            <input class="form-control mr-sm-2" type="text" placeholder="Search" v-model="title">-->
-<!--            <button class="btn btn-secondary my-2 my-sm-0" type="submit" >Search</button>-->
-<!--        </form>-->
+        <div v-if="rental" class="card border-primary mb-3" >
+            <div class="card-header" v-text="$t('global.menu.mypage.overduepage')">My Overdue Items</div>
+            <div class="card-body">
+                <div class="table-responsive" v-if="overdueBooks && overdueBooks.length > 0">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th v-on:click="changeOrder('bookTitle')"><span v-text="$t('gatewayApp.rentalOverdueItem.bookTitle')">Book Title</span> </th>
+                            <th v-on:click="changeOrder('rentedDate')"><span v-text="$t('gatewayApp.rentalOverdueItem.rentedDate')">Rented Date</span> </th>
+                            <th v-on:click="changeOrder('dueDate')"><span v-text="$t('gatewayApp.rentalOverdueItem.dueDate')">Due Date</span> </th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr v-for="overdueBook in overdueBooks"
+                            :key="overdueBook.id">
+                            <td>{{overdueBook.bookTitle}}</td>
+                            <td>{{overdueBook.rentedDate}}</td>
+                            <td>{{overdueBook.dueDate}}</td>
+                            <td class="text-right">
+                                <div class="btn-group">
 
+                                    <b-button v-on:click="prepareOverdueReturn(overdueBook.bookId)"
+                                              variant="danger"
+                                              class="btn btn-sm"
+                                              v-b-modal.returnOverdueBook>
+                                        <font-awesome-icon icon="times"></font-awesome-icon>
+                                        <span class="d-none d-md-inline" v-text="$t('global.menu.mypage.returnBook.return')">Return Book</span>
+                                    </b-button>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
 
-<!--        <div class="table-responsive" v-if="books && books.length > 0">-->
-<!--            <table class="table table-striped">-->
-<!--                <thead>-->
-<!--                <tr>-->
-<!--                    <th><span v-text="$t('gatewayApp.rentalRentedItem.bookTitle')">Book Title</span></th>-->
-<!--                    <th><span v-text="$t('gatewayApp.rentalRentedItem.rentedDate')">Rented Date</span></th>-->
-<!--                    <th><span v-text="$t('gatewayApp.rentalRentedItem.dueDate')">Due Date</span></th>-->
-<!--                    <th></th>-->
-<!--                </tr>-->
-<!--                </thead>-->
-<!--                <tbody>-->
-<!--                <tr v-for="book in books"-->
-<!--                    :key="book.id">-->
-<!--                    <td>{{book.bookTitle}}</td>-->
-<!--                    <td>{{book.rentedDate}}</td>-->
-<!--                    <td>{{book.dueDate}}</td>-->
-<!--                    <td class="text-right">-->
-<!--                        <div class="btn-group">-->
-<!--                            <b-button class="btn btn-primary" @click="prepareOverdue(book.rentalId, book.bookId)"-->
-<!--                                        v-b-modal.doOverdue>-->
-<!--                                <span class="d-none d-md-inline" v-text="$t('global.overdueBook')">Overdue Books</span>-->
-<!--                            </b-button>-->
-<!--                            &lt;!&ndash;                        <router-link :to="{name: 'BookRentalDo', params: {rentalId: book.id}}" tag="button" class="btn btn-primary btn-sm edit">&ndash;&gt;-->
-<!--                            &lt;!&ndash;                                <font-awesome-icon icon="pencil-alt"></font-awesome-icon>&ndash;&gt;-->
-<!--                            &lt;!&ndash;                                <span class="d-none d-md-inline" v-text="$t('entity.action.edit')">Edit</span>&ndash;&gt;-->
-<!--                            &lt;!&ndash;                            </router-link>&ndash;&gt;-->
-<!--                            &lt;!&ndash;                            <b-button v-on:click="prepareRemove(book)"&ndash;&gt;-->
-<!--                            &lt;!&ndash;                                   variant="danger"&ndash;&gt;-->
-<!--                            &lt;!&ndash;                                   class="btn btn-sm"&ndash;&gt;-->
-<!--                            &lt;!&ndash;                                   v-b-modal.removeEntity>&ndash;&gt;-->
-<!--                            &lt;!&ndash;                                <font-awesome-icon icon="times"></font-awesome-icon>&ndash;&gt;-->
-<!--                            &lt;!&ndash;                                <span class="d-none d-md-inline" v-text="$t('entity.action.delete')">Delete</span>&ndash;&gt;-->
-<!--                            &lt;!&ndash;                            </b-button>&ndash;&gt;-->
-<!--                        </div>-->
-<!--                    </td>-->
-<!--                </tr>-->
-<!--                </tbody>-->
-<!--            </table>-->
-<!--        </div>-->
+                <div v-show="overdueBooks && overdueBooks.length > 0">
+                    <div class="row justify-content-center">
+                        <jhi-item-count :page="page" :total="queryCount" :itemsPerPage="itemsPerPage"></jhi-item-count>
+                    </div>
+                    <div class="row justify-content-center">
+                        <b-pagination size="md" :total-rows="totalItems" v-model="page" :per-page="itemsPerPage" :change="loadPage(page)"></b-pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div v-if="rental" class="card border-primary mb-3" >
+            <div class="card-header" v-text="$t('global.menu.mypage.returnedpage')">My Returned Items</div>
+            <div class="card-body">
+                <div class="table-responsive" v-if="returnedBooks && returnedBooks.length > 0">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th v-on:click="changeOrder('bookTitle')"><span v-text="$t('gatewayApp.rentalReturnedItem.bookTitle')">Book Title</span> </th>
+                            <th v-on:click="changeOrder('rentedDate')"><span v-text="$t('gatewayApp.rentalReturnedItem.returnedDate')">Returned Date</span> </th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr v-for="returnedBook in returnedBooks"
+                            :key="returnedBook.id">
+                            <td>{{returnedBook.bookTitle}}</td>
+                            <td>{{returnedBook.returnedDate}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div v-show="returnedBooks && returnedBooks.length > 0">
+                    <div class="row justify-content-center">
+                        <jhi-item-count :page="page" :total="queryCount" :itemsPerPage="itemsPerPage"></jhi-item-count>
+                    </div>
+                    <div class="row justify-content-center">
+                        <b-pagination size="md" :total-rows="totalItems" v-model="page" :per-page="itemsPerPage" :change="loadPage(page)"></b-pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
         <b-modal ref="releaseOverdue" id="releaseOverdue">
             <span slot="modal-title"><span v-text="$t('gatewayApp.rentalRental.releaseOverdue.title')"></span>Confirm Release Overdue State</span>
             <div class="modal-body">
@@ -116,24 +164,27 @@
                 <button type="button" class="btn btn-primary" @click="releaseOverdue()">Confirm</button>
             </div>
         </b-modal>
-        <!--        <b-modal ref="removeEntity" id="removeEntity" >-->
-        <!--            <span slot="modal-title"><span id="gatewayApp.rentalRental.delete.question" v-text="$t('entity.delete.title')">Confirm delete operation</span></span>-->
-        <!--            <div class="modal-body">-->
-        <!--                <p id="jhi-delete-rental-heading" v-text="$t('gatewayApp.rentalRental.delete.question', {'id': removeId})">Are you sure you want to delete this Rental?</p>-->
-        <!--            </div>-->
-        <!--            <div slot="modal-footer">-->
-        <!--                <button type="button" class="btn btn-secondary" v-text="$t('entity.action.cancel')" v-on:click="closeDialog()">Cancel</button>-->
-        <!--                <button type="button" class="btn btn-primary" id="jhi-confirm-delete-rental" v-text="$t('entity.action.delete')" v-on:click="removeRental()">Delete</button>-->
-        <!--            </div>-->
-        <!--        </b-modal>-->
-<!--        <div v-show="bookLength > 0">-->
-<!--            <div class="row justify-content-center">-->
-<!--                <jhi-item-count :page="page" :total="queryCount" :itemsPerPage="itemsPerPage"></jhi-item-count>-->
-<!--            </div>-->
-<!--            <div class="row justify-content-center">-->
-<!--                <b-pagination size="md" :total-rows="totalItems" v-model="page" :per-page="itemsPerPage" :change="loadPage(page)"></b-pagination>-->
-<!--            </div>-->
-<!--        </div>-->
+        <b-modal ref="returnBook" id="returnBook" >
+            <span slot="modal-title"><span  v-text="$t('global.menu.mypage.returnBook.return')">Return Book</span></span>
+            <div class="modal-body">
+                <p id="jhi-delete-rentedItem-heading" v-text="$t('global.menu.mypage.returnBook.question')">Are you sure you want to return this Rented Book?</p>
+            </div>
+            <div slot="modal-footer">
+                <button type="button" class="btn btn-secondary" v-text="$t('entity.action.cancel')" v-on:click="closeReturnDialog()">Cancel</button>
+                <button type="button" class="btn btn-primary"  v-text="$t('global.menu.mypage.returnBook.return')" v-on:click="returnBook()">Delete</button>
+            </div>
+        </b-modal>
+        <b-modal ref="returnOverdueBook" id="returnOverdueBook" >
+            <span slot="modal-title"><span  v-text="$t('global.menu.mypage.returnBook.return')">Return Book</span></span>
+            <div class="modal-body">
+                <p id="jhi-delete-OverdueItem-heading" v-text="$t('global.menu.mypage.returnBook.question')">Are you sure you want to return this Rented Book?</p>
+            </div>
+            <div slot="modal-footer">
+                <button type="button" class="btn btn-secondary" v-text="$t('entity.action.cancel')" v-on:click="closeOverdueReturnDialog()">Cancel</button>
+                <button type="button" class="btn btn-primary"  v-text="$t('global.menu.mypage.returnBook.return')" v-on:click="returnOverdueBook()">Delete</button>
+            </div>
+        </b-modal>
+
     </div>
 </template>
 

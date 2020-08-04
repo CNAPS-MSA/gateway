@@ -27,36 +27,74 @@ export default class MyPage extends mixins(AlertMixin) {
   public reverse = false;
   public totalItems = 0;
   public title = '';
+  public isFetching = false;
+  public user: any = null;
+  public rental: IRental = null;
   public rentedBooks: IRentedItem[] = [];
   public overdueBooks: IOverdueItem[] = [];
   public returnedBooks: IReturnedItem[] = [];
-  public users: IUser[] = [];
-  public isFetching = false;
-  public user: IUser;
-  public rental: IRental;
-  public created(): void {
-    this.loadRentalInfo();
-  }
+  public requestReturnId: number = null;
+  public created(): void {}
   public mounted(): void {
-    this.retrieveRentedBooks();
-    this.retrieveOverdueBooks();
-    this.retrieveReturnedBooks();
+    this.getUser();
   }
 
   public loadRentalInfo(): void {
-    this.user = this.$store.getters.account;
     this.myPageService()
       .retrieveRental(this.user.id)
       .then(res => {
         this.rental = res;
+        this.retrieveRentedBooks();
+        this.retrieveOverdueBooks();
+        this.retrieveReturnedBooks();
+        this.isFetching = false;
       });
   }
 
   public clear(): void {
     this.page = 1;
-    this.retrieveRentedBooks();
-    this.retrieveOverdueBooks();
-    this.retrieveReturnedBooks();
+    this.loadRentalInfo();
+  }
+
+  public prepareReleaseOverdue(): void {
+    if (<any>this.$refs.releaseOverdue) {
+      (<any>this.$refs.releaseOverdue).show();
+    }
+  }
+  //
+  public releaseOverdue(): void {
+    this.myPageService()
+      .releaseOverdue(this.user.id)
+      .then(() => {
+        const message = this.$t('gatewayApp.rentalRental.result');
+        this.alertService().showAlert(message, 'danger');
+        this.getAlertFromStore();
+        this.getUser();
+        this.closeOverdueDialog();
+      });
+  }
+
+  public sort(): Array<any> {
+    const result = [this.propOrder + ',' + (this.reverse ? 'asc' : 'desc')];
+    if (this.propOrder !== 'id') {
+      result.push('id');
+    }
+    return result;
+  }
+  //
+  public loadPage(page: number): void {
+    if (page !== this.previousPage) {
+      this.previousPage = page;
+      this.transition();
+    }
+  }
+
+  public transition(): void {
+    this.getUser();
+  }
+
+  public closeOverdueDialog(): void {
+    (<any>this.$refs.releaseOverdue).hide();
   }
 
   public retrieveRentedBooks(): void {
@@ -125,85 +163,57 @@ export default class MyPage extends mixins(AlertMixin) {
         }
       );
   }
-  public prepareReleaseOverdue(instance: IRental): void {
-    if (<any>this.$refs.releaseOverdue) {
-      (<any>this.$refs.releaseOVerdue).show();
+  public prepareReturn(requestReturnBook: number): void {
+    this.requestReturnId = requestReturnBook;
+    if (<any>this.$refs.returnBook) {
+      (<any>this.$refs.returnBook).show();
     }
   }
-  //
-  public releaseOverdue(): void {
+  public returnBook(): void {
     this.myPageService()
-      .releaseOverdue(this.user.id)
+      .requestReturn(this.user.id, this.requestReturnId)
       .then(() => {
-        const message = this.$t('gatewayApp.rentalRental.result');
+        const message = this.$t('gatewayApp.menu.mypage.returnBook.result');
+        this.requestReturnId = null;
         this.alertService().showAlert(message, 'danger');
         this.getAlertFromStore();
-        this.loadRentalInfo();
-        this.closeOverdueDialog();
+        this.getUser();
+        this.closeReturnDialog();
       });
   }
 
-  //
-  // public overdueBook(): void {
-  //   this.rentedBookManagementService()
-  //     .overdue(this.overdueRentalId, this.overdueBookId)
-  //     .then(() => {
-  //       const message = this.$t('gatewayApp.rentalRentedItem.doOverdue.completed');
-  //       this.alertService().showAlert(message, 'danger');
-  //       this.getAlertFromStore();
-  //       this.overdueRentalId = null;
-  //       this.overdueBookId = null;
-  //       this.retrieveAllBooks();
-  //       this.closeDialog();
-  //     });
-  // }
-
-  public sort(): Array<any> {
-    const result = [this.propOrder + ',' + (this.reverse ? 'asc' : 'desc')];
-    if (this.propOrder !== 'id') {
-      result.push('id');
+  public prepareOverdueReturn(requestReturnBook: number): void {
+    this.requestReturnId = requestReturnBook;
+    if (<any>this.$refs.returnOverdueBook) {
+      (<any>this.$refs.returnOverdueBook).show();
     }
-    return result;
   }
-  //
-  // public loadPage(page: number): void {
-  //   if (page !== this.previousPage) {
-  //     this.previousPage = page;
-  //     this.transition();
-  //   }
-  // }
-  // //
-  // // public transition(): void {
-  // //   this.retrieveAllBooks();
-  // // }
-  //
-  // public changeOrder(propOrder): void {
-  //   this.propOrder = propOrder;
-  //   this.reverse = !this.reverse;
-  //   this.transition();
-  // }
 
-  public closeOverdueDialog(): void {
-    (<any>this.$refs.releaseOverdue).hide();
+  public returnOverdueBook(): void {
+    this.myPageService()
+      .requestOverdueReturn(this.user.id, this.requestReturnId)
+      .then(() => {
+        const message = this.$t('gatewayApp.menu.mypage.returnBook.result');
+        this.requestReturnId = null;
+        this.alertService().showAlert(message, 'danger');
+        this.getAlertFromStore();
+        this.getUser();
+        this.closeOverdueReturnDialog();
+      });
   }
-  //
-  // public search(): void {
-  //   this.isFetching = true;
-  //
-  //   const paginationQuery = {
-  //     page: this.page - 1,
-  //     size: this.itemsPerPage,
-  //     sort: this.sort(),
-  //   };
-  //   this.rentedBookManagementService()
-  //     .findByTitle(this.title, paginationQuery)
-  //     .then(res => {
-  //       this.books = res.data;
-  //       this.title = '';
-  //     });
-  // }
 
-  public get getUserId(): any {
-    return this.$store.getters.account;
+  public closeReturnDialog(): void {
+    (<any>this.$refs.returnBook).hide();
+  }
+  public closeOverdueReturnDialog(): void {
+    (<any>this.$refs.returnOverdueBook).hide();
+  }
+  public getUser(): void {
+    this.myPageService()
+      .loadUserInfo(this.$store.getters.account.id)
+      .then(res => {
+        this.user = res;
+        this.loadRentalInfo();
+      });
   }
 }

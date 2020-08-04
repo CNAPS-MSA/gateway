@@ -75,56 +75,6 @@ export default class MyPageService {
     });
   }
 
-  // public create(entity: IBook, inStockId: number): Promise<IBook> {
-  //   return new Promise<IBook>((resolve, reject) => {
-  //     axios
-  //       .post(`${bookApiUrl}/${inStockId}`, entity)
-  //       .then(res => {
-  //         resolve(res.data);
-  //       })
-  //       .catch(err => {
-  //         reject(err);
-  //       });
-  //   });
-  // }
-  // public delete(id: number): Promise<any> {
-  //   return new Promise<any>((resolve, reject) => {
-  //     axios
-  //       .delete(`${baseApiUrl}/${id}`)
-  //       .then(res => {
-  //         resolve(res);
-  //       })
-  //       .catch(err => {
-  //         reject(err);
-  //       });
-  //   });
-  // }
-
-  // public create(entity: IRental): Promise<IRental> {
-  //   return new Promise<IRental>((resolve, reject) => {
-  //     axios
-  //       .post(`${baseApiUrl}`, entity)
-  //       .then(res => {
-  //         resolve(res.data);
-  //       })
-  //       .catch(err => {
-  //         reject(err);
-  //       });
-  //   });
-  // }
-
-  // public update(entity: IRental): Promise<IRental> {
-  //   return new Promise<IRental>((resolve, reject) => {
-  //     axios
-  //       .put(`${baseApiUrl}`, entity)
-  //       .then(res => {
-  //         resolve(res.data);
-  //       })
-  //       .catch(err => {
-  //         reject(err);
-  //       });
-  //   });
-  // }
   public retrieveRental(userId: any): Promise<IRental> {
     return new Promise<IRental>((resolve, reject) => {
       axios
@@ -144,6 +94,45 @@ export default class MyPageService {
         .put(`${rentalApiUrl}/release-overdue/user/${userId}`)
         .then(res => {
           resolve(res);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  }
+
+  public requestReturn(userId: any, requestReturnId: number): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      axios
+        .delete(`${rentalApiUrl}/${userId}/RentedItem/${requestReturnId}`)
+        .then(res => {
+          resolve(res);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  }
+
+  public requestOverdueReturn(userId: any, requestReturnId: number): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      axios
+        .delete(`${rentalApiUrl}/${userId}/OverdueItem/${requestReturnId}`)
+        .then(res => {
+          resolve(res);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  }
+
+  public loadUserInfo(userid: any): Promise<IUser> {
+    return new Promise<IUser>((resolve, reject) => {
+      axios
+        .get(`api/users/${userid}`)
+        .then(res => {
+          resolve(res.data);
         })
         .catch(err => {
           reject(err);

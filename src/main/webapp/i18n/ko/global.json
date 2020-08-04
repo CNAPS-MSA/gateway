@@ -12,7 +12,17 @@
       "registerbook": "도서 등록",
       "bookManagement": "도서 관리",
       "manageRented": "대여 도서 관리",
-      "mypage": "MyPage",
+      "mypage": {
+        "home": "My Page",
+        "rentedpage": "나의 대여 도서",
+        "overduepage": "나의 연체 도서",
+        "returnedpage": "나의 반납 도서",
+        "returnBook": {
+          "return": "반납하기",
+          "question": "해당 도서를 반납하시겠습니까?",
+          "result": "반납 완료 되었습니다."
+        }
+      },
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Entities",
