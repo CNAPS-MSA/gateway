@@ -9,6 +9,7 @@ import com.skcc.gateway.service.MailService;
 import com.skcc.gateway.service.UserService;
 import com.skcc.gateway.service.dto.LatefeeDTO;
 import com.skcc.gateway.service.dto.UserDTO;
+import com.skcc.gateway.service.mapper.UserMapper;
 import com.skcc.gateway.web.rest.errors.BadRequestAlertException;
 import com.skcc.gateway.web.rest.errors.EmailAlreadyUsedException;
 import com.skcc.gateway.web.rest.errors.LoginAlreadyUsedException;
@@ -73,11 +74,12 @@ public class UserResource {
     private final UserRepository userRepository;
 
     private final MailService mailService;
-
-    public UserResource(UserService userService, UserRepository userRepository, MailService mailService) {
+    private final UserMapper userMapper;
+    public UserResource(UserService userService, UserRepository userRepository, MailService mailService, UserMapper userMapper) {
         this.userService = userService;
         this.userRepository = userRepository;
         this.mailService = mailService;
+        this.userMapper = userMapper;
     }
 
     /**
@@ -198,5 +200,11 @@ public class UserResource {
         }else{
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @GetMapping("/users/{userId}")
+    public ResponseEntity<UserDTO> getUserById(@PathVariable("userId")Long userId){
+        UserDTO userDTO = userMapper.userToUserDTO(userService.loadUserById(userId));
+        return ResponseEntity.ok().body(userDTO);
     }
 }

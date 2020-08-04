@@ -2,8 +2,8 @@
   "gatewayApp": {
     "RentalStatus": {
       "null": "",
-      "RENT_AVAILABLE": "RENT_AVAILABLE",
-      "RENT_UNAVAILABLE": "RENT_UNAVAILABLE"
+      "RENT_AVAILABLE": "대여 가능",
+      "RENT_UNAVAILABLE": "대여 불가능"
     }
   }
 }

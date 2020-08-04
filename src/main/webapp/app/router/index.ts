@@ -77,9 +77,11 @@ const ReturnedItemUpdate = () => import('../entities/rental/returned-item/return
 const ReturnedItemDetails = () => import('../entities/rental/returned-item/returned-item-details.vue');
 // jhipster-needle-add-entity-to-router-import - JHipster will import entities to the router here
 const BookRental = () => import('../cnaps/book-rental-service/book-rental.vue'); // 도서 대여 페이지
-const BookRentalDetails = () => import('../cnaps/book-rental-service/book-rental-details.vue');
-const BookRegisterInStock = () => import('../cnaps/book-register-service/book-register.vue');
-const BookRegisterForm = () => import('../cnaps/book-register-service/book-register-form.vue');
+const BookRentalDetails = () => import('../cnaps/book-rental-service/book-rental-details.vue'); // 도서 상세정보
+const BookRegisterInStock = () => import('../cnaps/book-register-service/book-register.vue'); // 도서 등록
+const BookRegisterForm = () => import('../cnaps/book-register-service/book-register-form.vue'); // 도서 등록 form
+const RentedBookManagement = () => import('../cnaps/rented-book-manage-service/rented-book-management.vue');
+const MyPage = () => import('../cnaps/mypage-service/mypage.vue');
 Vue.use(Router);
 
 // prettier-ignore
@@ -426,7 +428,20 @@ export default new Router({
       name : 'RegisterBookForm',
       component: BookRegisterForm,
       meta : { authorities: [Authority.ADMIN]}
+    },
+    {
+      path : '/manage/rentedBook',
+      name : 'RentedBookManagement',
+      component : RentedBookManagement,
+      meta : { authorities: [Authority.ADMIN]}
+    },
+    {
+      path : '/mypage',
+      name : 'MyPage',
+      component : MyPage,
+      meta : { authorities: [Authority.USER]}
     }
+
     // jhipster-needle-add-entity-to-router - JHipster will add entities to the router here
   ]
 });

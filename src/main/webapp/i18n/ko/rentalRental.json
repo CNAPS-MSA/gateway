@@ -16,14 +16,19 @@
       "doRent": {
         "title": "도서 대여 신청",
         "question": "{{ selected }} 을 대여하시겠습니까?",
-        "rented": "대여완료되었습니다."
+        "rented": "신청한 도서 중 {{ param }} 이 대여완료되었습니다."
+      },
+      "releaseOverdue": {
+        "title": "연체료 결제 신청",
+        "question": "연체료 결제 후 연체 상태를 해제하시겠습니까?",
+        "result": "연체 해제가 완료되었습니다."
       },
       "userId": "User Id",
       "rentalStatus": "Rental Status",
-      "lateFee": "Late Fee",
-      "rentedItem": "Rented Item",
-      "overdueItem": "Overdue Item",
-      "returnedItem": "Returned Item"
+      "lateFee": "연체료",
+      "rentedItem": "대여 도서",
+      "overdueItem": "연체 도서",
+      "returnedItem": "반납 도서"
     }
   },
   "rentalApp": {

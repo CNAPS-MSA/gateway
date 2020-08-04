@@ -30,6 +30,7 @@ export default class BookRental extends mixins(AlertMixin) {
   public selected = [];
   public selectAll = false;
   public userId: any = null;
+
   public select() {
     this.selected = [];
     if (!this.selectAll) {
@@ -101,8 +102,12 @@ export default class BookRental extends mixins(AlertMixin) {
       .rentBooks(this.userId, this.selected)
       .then(
         res => {
-          this.rental = res;
-          const message = this.$t('gatewayApp.rentalRental.doRent.rented');
+          this.rentedItems = res.data;
+          let resultItems = [];
+          this.rentedItems.forEach(i => {
+            resultItems.push(i.bookTitle);
+          });
+          const message = this.$t('gatewayApp.rentalRental.doRent.rented', { param: resultItems });
           this.alertService().showAlert(message, 'danger');
           this.getAlertFromStore();
           this.selected = [];
@@ -110,6 +115,7 @@ export default class BookRental extends mixins(AlertMixin) {
           this.closeDialog();
         },
         err => {
+          this.selected = [];
           this.isFetching = false;
         }
       );
@@ -143,11 +149,20 @@ export default class BookRental extends mixins(AlertMixin) {
     (<any>this.$refs.doRental).hide();
   }
 
-  public search(title: String): void {
+  public search(): void {
+    this.isFetching = true;
+
+    const paginationQuery = {
+      page: this.page - 1,
+      size: this.itemsPerPage,
+      sort: this.sort(),
+    };
     this.bookRentalService()
-      .findByTitle(title)
+      .findByTitle(this.title, paginationQuery)
       .then(res => {
         this.books = res.data;
+        this.title = '';
+        this.isFetching = false;
       });
   }
 

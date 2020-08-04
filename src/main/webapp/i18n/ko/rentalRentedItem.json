@@ -13,10 +13,15 @@
       "detail": {
         "title": "Rented Item"
       },
+      "doOverdue": {
+        "title": "해당 도서 연체처리 승인",
+        "question": " 해당 도서를 연체 처리 하시겠습니까? ",
+        "completed": " 해당 도서 연체 처리가 완료되었습니다. "
+      },
       "bookId": "Book Id",
-      "rentedDate": "Rented Date",
-      "dueDate": "Due Date",
-      "bookTitle": "Book Title",
+      "rentedDate": "대여 날짜",
+      "dueDate": "반납 예정 날짜",
+      "bookTitle": "도서 이름",
       "rental": "Rental"
     }
   },

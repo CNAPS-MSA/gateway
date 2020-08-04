@@ -2,18 +2,19 @@ import { mixins } from 'vue-class-component';
 
 import { Component, Vue, Inject } from 'vue-property-decorator';
 import Vue2Filters from 'vue2-filters';
-import { IInStockBook } from '@/shared/model/book/in-stock-book.model';
-import { IBook } from '@/shared/model/book/book.model';
-import AlertMixin from '@/shared/alert/alert.mixin';
+import { IRentedItem } from '@/shared/model/rental/rented-item.model';
+import { IRental } from '@/shared/model/rental/rental.model';
+import { IUser } from '@/shared/model/user.model';
 
-import BookRegisterService from '@/cnaps/book-register-service/book-register.service';
+import AlertMixin from '@/shared/alert/alert.mixin';
+import RentedBookManagementService from '@/cnaps/rented-book-manage-service/rented-book-management.service';
 
 @Component({
   mixins: [Vue2Filters.mixin],
 })
-export default class BookRegister extends mixins(AlertMixin) {
-  @Inject('bookRegisterService') private bookRegisterService: () => BookRegisterService;
-  private removeId: number = null;
+export default class RentedBookManagement extends mixins(AlertMixin) {
+  @Inject('rentedBookManagementService') private rentedBookManagementService: () => RentedBookManagementService;
+  // private removeId: number = null;
   public itemsPerPage = 20;
   public queryCount: number = null;
   public page = 1;
@@ -22,12 +23,11 @@ export default class BookRegister extends mixins(AlertMixin) {
   public reverse = false;
   public totalItems = 0;
   public title = '';
-  public books: IBook[] = [];
-  public instockBooks: IInStockBook[] = [];
+  public books: IRentedItem[] = [];
+  public users: IUser[] = [];
   public isFetching = false;
-  public selected = [];
-  public selectAll = false;
-  public userId: any = null;
+  public overdueRentalId: number = null;
+  public overdueBookId: number = null;
 
   public mounted(): void {
     this.retrieveAllBooks();
@@ -46,11 +46,11 @@ export default class BookRegister extends mixins(AlertMixin) {
       size: this.itemsPerPage,
       sort: this.sort(),
     };
-    this.bookRegisterService()
+    this.rentedBookManagementService()
       .retrieve(paginationQuery)
       .then(
         res => {
-          this.instockBooks = res.data;
+          this.books = res.data;
           this.totalItems = Number(res.headers['x-total-count']);
           this.queryCount = this.totalItems;
           this.isFetching = false;
@@ -80,12 +80,27 @@ export default class BookRegister extends mixins(AlertMixin) {
   //       this.closeDialog();
   //     });
   // }
-  // public prepareRent(): void {
-  //   this.userId = this.getUserId;
-  //   if (<any>this.$refs.doRental) {
-  //     (<any>this.$refs.doRental).show();
-  //   }
-  // }
+  public prepareOverdue(rentalId: number, bookId: number): void {
+    this.overdueRentalId = rentalId;
+    this.overdueBookId = bookId;
+    if (<any>this.$refs.doOverdue) {
+      (<any>this.$refs.doOverdue).show();
+    }
+  }
+
+  public overdueBook(): void {
+    this.rentedBookManagementService()
+      .overdue(this.overdueRentalId, this.overdueBookId)
+      .then(() => {
+        const message = this.$t('gatewayApp.rentalRentedItem.doOverdue.completed');
+        this.alertService().showAlert(message, 'danger');
+        this.getAlertFromStore();
+        this.overdueRentalId = null;
+        this.overdueBookId = null;
+        this.retrieveAllBooks();
+        this.closeDialog();
+      });
+  }
 
   public sort(): Array<any> {
     const result = [this.propOrder + ',' + (this.reverse ? 'asc' : 'desc')];
@@ -113,22 +128,22 @@ export default class BookRegister extends mixins(AlertMixin) {
   }
 
   public closeDialog(): void {
-    (<any>this.$refs.doRental).hide();
+    (<any>this.$refs.doOverdue).hide();
   }
 
   public search(): void {
     this.isFetching = true;
+
     const paginationQuery = {
       page: this.page - 1,
       size: this.itemsPerPage,
       sort: this.sort(),
     };
-    this.bookRegisterService()
+    this.rentedBookManagementService()
       .findByTitle(this.title, paginationQuery)
       .then(res => {
-        this.instockBooks = res.data;
+        this.books = res.data;
         this.title = '';
-        this.isFetching = false;
       });
   }
 

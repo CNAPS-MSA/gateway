@@ -14,8 +14,8 @@
         "title": "Returned Item"
       },
       "bookId": "Book Id",
-      "returnedDate": "Returned Date",
-      "bookTitle": "Book Title",
+      "returnedDate": "반납한 날짜",
+      "bookTitle": "도서 이름",
       "rental": "Rental"
     }
   },

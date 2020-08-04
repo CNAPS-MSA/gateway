@@ -14,22 +14,28 @@
         <div class="alert alert-warning" v-if="!isFetching && books && books.length === 0">
             <span>No books found</span>
         </div>
-        <form class="form-inline my-2 my-lg-0">
+        <form class="form-inline my-2 my-lg-0" v-on:submit.prevent="search()" >
             <input class="form-control mr-sm-2" type="text" placeholder="Search" v-model="title">
-            <button class="btn btn-secondary my-2 my-sm-0" type="submit" @click="search(title)">Search</button>
-            <div class="text-uppercase text-bold" style="padding: 0px 0px 0px 10px;"><strong>id selected: {{selected}}</strong></div>
-            <button v-if="selected.length > 0 " type="button" class="btn btn-primary" @click="prepareRent()">
-                <span v-text="$t('global.bookrent')">Rent</span>
-            </button>
+
+            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        <form class="form-inline my-2 my-lg-0" style="margin-top: 10px">
+        <button v-if="selected.length > 0 " type="button" class="btn btn-primary" @click="prepareRent()">
+            <span v-text="$t('global.bookrent')">Rent</span>
+        </button>
         </form>
 
-
-        <div class="table-responsive" style="margin-top: 10px;" v-if="books && books.length > 0" >
-            <table class="table table-striped">
+        <div class="table-responsive" style="margin-top: 10px;" v-if="books && books.length > 0">
+            <table class="table table-striped" >
                 <thead>
                 <tr>
                     <th style="text-align: center;">
-                        <label class="form-check-label" style="padding: 0px 0px 15px 25px;">
+<!--                        <label class="custom-control-label" for="selectAllBox">-->
+<!--                            <input type="checkbox" class="custom-control-input" id="selectAllBox" v-model="selectAll" @click="select">-->
+<!--                        </label>-->
+
+                        <label class="form-check-label"  style="padding: 0px 0px 15px 25px;">
+
                             <input class="form-check-input" type="checkbox" v-model="selectAll" @click="select">
                         </label>
                     </th>
@@ -47,6 +53,7 @@
                 <tr v-for="book in books"
                     :key="book.id">
                     <td style="width: 56px; text-align: center;">
+
                         <label class="form-check-label" style="padding: 0px 0px 15px 25px;">
                             <input class="form-check-input" type="checkbox" v-model="selected" :value="book.bookId" number>
                         </label>
@@ -58,7 +65,9 @@
                     <td>{{book.classification}}</td>
                     <td>{{book.author}}</td>
                     <td>{{book.publicationDate}}</td>
-                    <td>{{book.rented}}</td>
+                    <td v-if="book.rented">대여중</td>
+                    <td v-if="!book.rented">대여 가능</td>
+<!--                        {{book.rented}}</td>-->
                     <td>{{book.rentCnt}}</td>
                     <td class="text-right">
                         <div class="btn-group">
@@ -108,6 +117,7 @@
                 <jhi-item-count :page="page" :total="queryCount" :itemsPerPage="itemsPerPage"></jhi-item-count>
             </div>
             <div class="row justify-content-center">
+<!--                <b-pagination size="md" :total-rows="totalItems" v-model="page" :per-page="itemsPerPage" ></b-pagination>-->
                 <b-pagination size="md" :total-rows="totalItems" v-model="page" :per-page="itemsPerPage" :change="loadPage(page)"></b-pagination>
             </div>
         </div>

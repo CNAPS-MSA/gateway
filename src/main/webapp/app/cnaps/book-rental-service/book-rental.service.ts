@@ -4,6 +4,8 @@ import buildPaginationQueryOpts from '@/shared/sort/sorts';
 
 import { IRental } from '@/shared/model/rental/rental.model';
 import { IBookCatalog } from '@/shared/model/bookCatalog/book-catalog.model';
+import { IRentedItem } from '@/shared/model/rental/rented-item.model';
+import { IBook } from '@/shared/model/book/book.model';
 
 const rentalApiUrl = 'services/rental/api/rentals';
 const bookApiUrl = 'services/bookcatalog/api/book-catalogs';
@@ -35,10 +37,10 @@ export default class BookRentalService {
     });
   }
 
-  public findByTitle(title: String): Promise<any> {
+  public findByTitle(title: String, paginationQuery?: any): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios
-        .get(`${bookApiUrl}/title/${title}`)
+        .get(`${bookApiUrl}/title/${title}` + `?${buildPaginationQueryOpts(paginationQuery)}`)
         .then(res => {
           resolve(res);
         })
@@ -48,12 +50,12 @@ export default class BookRentalService {
     });
   }
 
-  public rentBooks(userId: any, selected: Array<any>): Promise<IRental> {
-    return new Promise<IRental>((resolve, reject) => {
+  public rentBooks(userId: any, selected: Array<any>): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
       axios
         .post(`${rentalApiUrl}/${userId}/RentedItem/${selected}`)
         .then(res => {
-          resolve(res.data);
+          resolve(res);
         })
         .catch(err => {
           reject(err);

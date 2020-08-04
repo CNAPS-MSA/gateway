@@ -2,17 +2,18 @@ import axios from 'axios';
 
 import buildPaginationQueryOpts from '@/shared/sort/sorts';
 
-import { IInStockBook } from '@/shared/model/book/in-stock-book.model';
-import { IBook } from '@/shared/model/book/book.model';
+import { IRentedItem } from '@/shared/model/rental/rented-item.model';
+import { IRental } from '@/shared/model/rental/rental.model';
+import { IUser } from '@/shared/model/user.model';
 
-const inStockBookApiUrl = 'services/book/api/in-stock-books';
-const bookApiUrl = 'services/book/api/books';
+const rentedItemApiUrl = 'services/rental/api/rented-items';
+const rentalApiUrl = 'services/rental/api/rentals';
 
-export default class BookRegisterService {
-  public find(id: number): Promise<IInStockBook> {
-    return new Promise<IInStockBook>((resolve, reject) => {
+export default class RentedBookManagementService {
+  public find(id: number): Promise<IRentedItem> {
+    return new Promise<IRentedItem>((resolve, reject) => {
       axios
-        .get(`${inStockBookApiUrl}/${id}`)
+        .get(`${rentedItemApiUrl}/${id}`)
         .then(res => {
           resolve(res.data);
         })
@@ -25,7 +26,7 @@ export default class BookRegisterService {
   public retrieve(paginationQuery?: any): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios
-        .get(inStockBookApiUrl + `?${buildPaginationQueryOpts(paginationQuery)}`)
+        .get(rentedItemApiUrl + `?${buildPaginationQueryOpts(paginationQuery)}`)
         .then(res => {
           resolve(res);
         })
@@ -38,7 +39,19 @@ export default class BookRegisterService {
   public findByTitle(title: String, paginationQuery?: any): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios
-        .get(`${inStockBookApiUrl}/title/${title}` + `?${buildPaginationQueryOpts(paginationQuery)}`)
+        .get(`${rentedItemApiUrl}/title/${title}` + `?${buildPaginationQueryOpts(paginationQuery)}`)
+        .then(res => {
+          resolve(res);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  }
+  public overdue(overdueRentalId: number, overdueBookId: number): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      axios
+        .post(`${rentalApiUrl}/${overdueRentalId}/OverdueItem/${overdueBookId}`)
         .then(res => {
           resolve(res);
         })
@@ -48,18 +61,18 @@ export default class BookRegisterService {
     });
   }
 
-  public create(entity: IBook, inStockId: number): Promise<IBook> {
-    return new Promise<IBook>((resolve, reject) => {
-      axios
-        .post(`${bookApiUrl}/${inStockId}`, entity)
-        .then(res => {
-          resolve(res.data);
-        })
-        .catch(err => {
-          reject(err);
-        });
-    });
-  }
+  // public create(entity: IBook, inStockId: number): Promise<IBook> {
+  //   return new Promise<IBook>((resolve, reject) => {
+  //     axios
+  //       .post(`${bookApiUrl}/${inStockId}`, entity)
+  //       .then(res => {
+  //         resolve(res.data);
+  //       })
+  //       .catch(err => {
+  //         reject(err);
+  //       });
+  //   });
+  // }
   // public delete(id: number): Promise<any> {
   //   return new Promise<any>((resolve, reject) => {
   //     axios

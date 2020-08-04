@@ -41,6 +41,8 @@ import RentedItemService from '@/entities/rental/rented-item/rented-item.service
 import ReturnedItemService from '@/entities/rental/returned-item/returned-item.service';
 import BookRentalService from '@/cnaps/book-rental-service/book-rental.service';
 import BookRegisterService from '@/cnaps/book-register-service/book-register.service';
+import RentedBookManagementService from '@/cnaps/rented-book-manage-service/rented-book-management.service';
+import MyPageService from '@/cnaps/mypage-service/mypage.service';
 // jhipster-needle-add-entity-service-to-main-import - JHipster will import entities services here
 
 /* tslint:enable */
@@ -117,6 +119,8 @@ new Vue({
     accountService: () => accountService,
     bookRentalService: () => new BookRentalService(),
     bookRegisterService: () => new BookRegisterService(),
+    rentedBookManagementService: () => new RentedBookManagementService(),
+    myPageService: () => new MyPageService(),
   },
   i18n,
   store,
