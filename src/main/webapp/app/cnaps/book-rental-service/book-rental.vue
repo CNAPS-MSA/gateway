@@ -19,7 +19,7 @@
             <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
         </form>
         <form class="form-inline my-2 my-lg-0" style="margin-top: 10px">
-        <button v-if="selected.length > 0 " type="button" class="btn btn-primary" @click="prepareRent()">
+        <button v-if="selected.length > 0 " type="button" class="btn btn-primary" @click="prepareRent()" style="margin-top: 10px">
             <span v-text="$t('global.bookrent')">Rent</span>
         </button>
         </form>
@@ -43,7 +43,7 @@
                     <th><span v-text="$t('gatewayApp.bookCatalogBookCatalog.author')">Author</span></th>
                     <th><span v-text="$t('gatewayApp.bookCatalogBookCatalog.publicationDate')">Publication Date</span></th>
                     <th><span v-text="$t('gatewayApp.bookCatalogBookCatalog.rented')">Rented</span></th>
-                    <th><span v-text="$t('gatewayApp.bookCatalogBookCatalog.rentCnt')">Rental Count</span></th>
+                    <th v-on:click="changeOrder('rentCnt')"><span v-text="$t('gatewayApp.bookCatalogBookCatalog.rentCnt')">Rental Count</span><jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'rentCnt'"></jhi-sort-indicator></th>
                     <th></th>
                 </tr>
                 </thead>
@@ -67,7 +67,6 @@
                     <td>{{book.publicationDate}}</td>
                     <td v-if="book.rented">대여중</td>
                     <td v-if="!book.rented">대여 가능</td>
-<!--                        {{book.rented}}</td>-->
                     <td>{{book.rentCnt}}</td>
                     <td class="text-right">
                         <div class="btn-group">
@@ -75,17 +74,6 @@
                                 <font-awesome-icon icon="eye"></font-awesome-icon>
                                 <span class="d-none d-md-inline" v-text="$t('entity.action.view')">View</span>
                             </router-link>
-<!--                        <router-link :to="{name: 'BookRentalDo', params: {rentalId: book.id}}" tag="button" class="btn btn-primary btn-sm edit">-->
-<!--                                <font-awesome-icon icon="pencil-alt"></font-awesome-icon>-->
-<!--                                <span class="d-none d-md-inline" v-text="$t('entity.action.edit')">Edit</span>-->
-<!--                            </router-link>-->
-<!--                            <b-button v-on:click="prepareRemove(book)"-->
-<!--                                   variant="danger"-->
-<!--                                   class="btn btn-sm"-->
-<!--                                   v-b-modal.removeEntity>-->
-<!--                                <font-awesome-icon icon="times"></font-awesome-icon>-->
-<!--                                <span class="d-none d-md-inline" v-text="$t('entity.action.delete')">Delete</span>-->
-<!--                            </b-button>-->
                         </div>
                     </td>
                 </tr>
@@ -102,22 +90,11 @@
                 <button type="button" class="btn btn-primary" @click="rentBooks()">Confirm</button>
             </div>
         </b-modal>
-<!--        <b-modal ref="removeEntity" id="removeEntity" >-->
-<!--            <span slot="modal-title"><span id="gatewayApp.rentalRental.delete.question" v-text="$t('entity.delete.title')">Confirm delete operation</span></span>-->
-<!--            <div class="modal-body">-->
-<!--                <p id="jhi-delete-rental-heading" v-text="$t('gatewayApp.rentalRental.delete.question', {'id': removeId})">Are you sure you want to delete this Rental?</p>-->
-<!--            </div>-->
-<!--            <div slot="modal-footer">-->
-<!--                <button type="button" class="btn btn-secondary" v-text="$t('entity.action.cancel')" v-on:click="closeDialog()">Cancel</button>-->
-<!--                <button type="button" class="btn btn-primary" id="jhi-confirm-delete-rental" v-text="$t('entity.action.delete')" v-on:click="removeRental()">Delete</button>-->
-<!--            </div>-->
-<!--        </b-modal>-->
         <div v-show="books && books.length > 0">
             <div class="row justify-content-center">
                 <jhi-item-count :page="page" :total="queryCount" :itemsPerPage="itemsPerPage"></jhi-item-count>
             </div>
             <div class="row justify-content-center">
-<!--                <b-pagination size="md" :total-rows="totalItems" v-model="page" :per-page="itemsPerPage" ></b-pagination>-->
                 <b-pagination size="md" :total-rows="totalItems" v-model="page" :per-page="itemsPerPage" :change="loadPage(page)"></b-pagination>
             </div>
         </div>

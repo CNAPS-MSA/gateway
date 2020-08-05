@@ -38,13 +38,22 @@
                         <span v-text="$t('gatewayApp.bookCatalogBookCatalog.rented')">Rented</span>
                     </dt>
                     <dd>
-                        <span>{{book.rented}}</span>
+                        <span v-if="book.rented">대여중</span>
+                        <span v-if="!book.rented">대여 가능</span>
                     </dd>
                     <dt>
                         <span v-text="$t('gatewayApp.bookCatalogBookCatalog.rentCnt')">Rent Cnt</span>
                     </dt>
                     <dd>
                         <span>{{book.rentCnt}}</span>
+                    </dd>
+                    <dt>
+                        <span>대여</span>
+                    </dt>
+                    <dd>
+                        <button type="button" class="btn btn-primary" @click="prepareRent(book.bookId)">
+                            <span v-text="$t('global.bookrent')">Rent</span>
+                        </button>
                     </dd>
                 </dl>
 <!--                <button type="submit"-->

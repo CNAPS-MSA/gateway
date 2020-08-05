@@ -4,7 +4,7 @@
             <span class="hipster img-fluid rounded"></span>
         </div>
         <div class="col-md-9">
-            <h1 class="display-4" v-text="$t('home.title')">Welcome, Java Hipster!</h1>
+            <h1 class="display-4" v-text="$t('home.title')">Welcome, CNAPS 3.0's Library System!</h1>
             <p class="lead" v-text="$t('home.subtitle')">This is your homepage</p>
 
             <div>
@@ -22,21 +22,46 @@
                 </div>
             </div>
 
-            <p v-text="$t('home.question')">
-                If you have any question on JHipster:
-            </p>
-
-            <ul>
-                <li><a href="https://www.jhipster.tech/" target="_blank" rel="noopener" v-text="$t('home.link.homepage')">JHipster homepage</a></li>
-                <li><a href="http://stackoverflow.com/tags/jhipster/info" target="_blank" rel="noopener" v-text="$t('home.link.stackoverflow')">JHipster on Stack Overflow</a></li>
-                <li><a href="https://github.com/jhipster/generator-jhipster/issues?state=open" target="_blank" rel="noopener" v-text="$t('home.link.bugtracker')">JHipster bug tracker</a></li>
-                <li><a href="https://gitter.im/jhipster/generator-jhipster" target="_blank" rel="noopener" v-text="$t('home.link.chat')">JHipster public chat room</a></li>
-                <li><a href="https://twitter.com/java_hipster" target="_blank" rel="noopener" v-text="$t('home.link.follow')">follow @java_hipster on Twitter</a></li>
-            </ul>
-
-            <p>
-                <span v-text="$t('home.like')">If you like JHipster, don't forget to give us a star on</span> <a href="https://github.com/jhipster/generator-jhipster" target="_blank" rel="noopener" v-text="$t('home.github')">GitHub</a>!
-            </p>
+            <div  class="table-responsive" style="margin-top: 10px;" v-if="authenticated&& books && books.length> 0">
+                <h4><strong>인기 대여 도서 목록</strong></h4>
+                <table class="table table-striped" >
+                    <thead>
+                    <tr>
+                        <th><span v-text="$t('gatewayApp.bookCatalogBookCatalog.title')">Title</span></th>
+                        <th><span v-text="$t('gatewayApp.bookCatalogBookCatalog.description')">Description</span></th>
+                        <th><span v-text="$t('gatewayApp.bookCatalogBookCatalog.classification')">Classification</span></th>
+                        <th><span v-text="$t('gatewayApp.bookCatalogBookCatalog.author')">Author</span></th>
+                        <th><span v-text="$t('gatewayApp.bookCatalogBookCatalog.publicationDate')">Publication Date</span></th>
+                        <th><span v-text="$t('gatewayApp.bookCatalogBookCatalog.rented')">Rented</span></th>
+                        <th><span v-text="$t('gatewayApp.bookCatalogBookCatalog.rentCnt')">Rental Count</span></th>
+                        <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr v-for="book in books"
+                            :key="book.id">
+                            <td>
+                                <router-link :to="{name: 'BookRentalView', params: {bookId: book.id}}">{{book.title}}</router-link>
+                            </td>
+                            <td>{{book.description}}</td>
+                            <td>{{book.classification}}</td>
+                            <td>{{book.author}}</td>
+                            <td>{{book.publicationDate}}</td>
+                            <td v-if="book.rented">대여중</td>
+                            <td v-if="!book.rented">대여 가능</td>
+                            <td>{{book.rentCnt}}</td>
+                            <td class="text-right">
+                                <div class="btn-group">
+                                    <router-link :to="{name: 'BookRentalView', params: {bookId: book.id}}" tag="button" class="btn btn-info btn-sm details">
+                                        <font-awesome-icon icon="eye"></font-awesome-icon>
+                                        <span class="d-none d-md-inline" v-text="$t('entity.action.view')">View</span>
+                                    </router-link>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
         </div>
     </div>
 </template>
