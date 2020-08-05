@@ -131,7 +131,6 @@
                         <tr>
                             <th v-on:click="changeOrder('bookTitle')"><span v-text="$t('gatewayApp.rentalReturnedItem.bookTitle')">Book Title</span> </th>
                             <th v-on:click="changeOrder('rentedDate')"><span v-text="$t('gatewayApp.rentalReturnedItem.returnedDate')">Returned Date</span> </th>
-                            <th></th>
                         </tr>
                         </thead>
                         <tbody>

@@ -62,42 +62,17 @@ export default class BookRentalService {
         });
     });
   }
-  // public delete(id: number): Promise<any> {
-  //   return new Promise<any>((resolve, reject) => {
-  //     axios
-  //       .delete(`${baseApiUrl}/${id}`)
-  //       .then(res => {
-  //         resolve(res);
-  //       })
-  //       .catch(err => {
-  //         reject(err);
-  //       });
-  //   });
-  // }
 
-  // public create(entity: IRental): Promise<IRental> {
-  //   return new Promise<IRental>((resolve, reject) => {
-  //     axios
-  //       .post(`${baseApiUrl}`, entity)
-  //       .then(res => {
-  //         resolve(res.data);
-  //       })
-  //       .catch(err => {
-  //         reject(err);
-  //       });
-  //   });
-  // }
-
-  // public update(entity: IRental): Promise<IRental> {
-  //   return new Promise<IRental>((resolve, reject) => {
-  //     axios
-  //       .put(`${baseApiUrl}`, entity)
-  //       .then(res => {
-  //         resolve(res.data);
-  //       })
-  //       .catch(err => {
-  //         reject(err);
-  //       });
-  //   });
-  // }
+  public retrieveTop10(): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      axios
+        .get(`${bookApiUrl}/top-10`)
+        .then(res => {
+          resolve(res);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  }
 }

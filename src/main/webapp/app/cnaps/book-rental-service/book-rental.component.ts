@@ -71,25 +71,6 @@ export default class BookRental extends mixins(AlertMixin) {
       );
   }
 
-  // public prepareRemove(instance: IRental): void {
-  //   this.removeId = instance.id;
-  //   if (<any>this.$refs.removeEntity) {
-  //     (<any>this.$refs.removeEntity).show();
-  //   }
-  // }
-  //
-  // public removeRental(): void {
-  //   this.bookRentalService()
-  //     .delete(this.removeId)
-  //     .then(() => {
-  //       const message = this.$t('gatewayApp.rentalRental.deleted', { param: this.removeId });
-  //       this.alertService().showAlert(message, 'danger');
-  //       this.getAlertFromStore();
-  //       this.removeId = null;
-  //       this.retrieveAllRentals();
-  //       this.closeDialog();
-  //     });
-  // }
   public prepareRent(): void {
     this.userId = this.getUserId;
     if (<any>this.$refs.doRental) {
