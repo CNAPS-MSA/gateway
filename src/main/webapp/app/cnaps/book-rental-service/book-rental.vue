@@ -16,29 +16,12 @@
         </div>
         <form class="form-inline my-2 my-lg-0" v-on:submit.prevent="search()" >
             <input class="form-control mr-sm-2" type="text" placeholder="Search" v-model="title">
-
             <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
         </form>
-        <form class="form-inline my-2 my-lg-0" style="margin-top: 10px">
-        <button v-if="selected.length > 0 " type="button" class="btn btn-primary" @click="prepareRent()" style="margin-top: 10px">
-            <span v-text="$t('global.bookrent')">Rent</span>
-        </button>
-        </form>
-
         <div class="table-responsive" style="margin-top: 10px;" v-if="books && books.length > 0">
             <table class="table table-striped" >
                 <thead>
                 <tr>
-                    <th style="text-align: center;">
-<!--                        <label class="custom-control-label" for="selectAllBox">-->
-<!--                            <input type="checkbox" class="custom-control-input" id="selectAllBox" v-model="selectAll" @click="select">-->
-<!--                        </label>-->
-
-                        <label class="form-check-label"  style="padding: 0px 0px 15px 25px;">
-
-                            <input class="form-check-input" type="checkbox" v-model="selectAll" @click="select">
-                        </label>
-                    </th>
                     <th><span v-text="$t('gatewayApp.bookCatalogBookCatalog.title')">Title</span></th>
                     <th><span v-text="$t('gatewayApp.bookCatalogBookCatalog.description')">Description</span></th>
                     <th><span v-text="$t('gatewayApp.bookCatalogBookCatalog.classification')">Classification</span></th>
@@ -52,12 +35,6 @@
                 <tbody>
                 <tr v-for="book in books"
                     :key="book.id">
-                    <td style="width: 56px; text-align: center;">
-
-                        <label class="form-check-label" style="padding: 0px 0px 15px 25px;">
-                            <input class="form-check-input" type="checkbox" v-model="selected" :value="book.bookId" number>
-                        </label>
-                    </td>
                     <td>
                         <router-link :to="{name: 'BookRentalView', params: {bookId: book.id}}">{{book.title}}</router-link>
                     </td>
@@ -74,16 +51,19 @@
                                 <font-awesome-icon icon="eye"></font-awesome-icon>
                                 <span class="d-none d-md-inline" v-text="$t('entity.action.view')">View</span>
                             </router-link>
+                            <b-button v-if="!book.rented" type="button" class="btn btn-primary" @click="prepareRent(book)">
+                                <span  class="d-none d-md-inline" v-text="$t('global.bookrent')">Rent</span>
+                            </b-button>
                         </div>
                     </td>
                 </tr>
                 </tbody>
             </table>
         </div>
-        <b-modal ref="doRental" id="doRental">
+        <b-modal ref="doRental" id="doRental" v-if="selected">
             <span slot="modal-title"><span v-text="$t('gatewayApp.rental.Rental.doRent.title')"></span>Confirm rent books</span>
             <div class="modal-body">
-                <p v-text="$t('gatewayApp.rentalRental.doRent.question', {'selected' : selected})">Are you sure want to rent these books?</p>
+                <p v-text="$t('gatewayApp.rentalRental.doRent.question', {'selected' : selected.title})">Are you sure want to rent these books?</p>
             </div>
             <div slot="modal-footer">
                 <button type="button" class="btn btn-secondary" @click="closeDialog()">Cancel</button>

@@ -51,7 +51,7 @@
                         <span>대여</span>
                     </dt>
                     <dd>
-                        <button type="button" class="btn btn-primary" @click="prepareRent(book.bookId)">
+                        <button v-if="!book.rented" type="button" class="btn btn-primary" @click="prepareRent(book)">
                             <span v-text="$t('global.bookrent')">Rent</span>
                         </button>
                     </dd>

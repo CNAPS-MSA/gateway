@@ -50,7 +50,7 @@ export default class BookRentalService {
     });
   }
 
-  public rentBooks(userId: any, selected: Array<any>): Promise<any> {
+  public rentBooks(userId: any, selected: number): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios
         .post(`${rentalApiUrl}/${userId}/RentedItem/${selected}`)

@@ -25,20 +25,10 @@ export default class BookRental extends mixins(AlertMixin) {
   public title = '';
   public rental: IRental;
   public books: IBookCatalog[] = [];
-  public rentedItems: IRentedItem[] = [];
   public isFetching = false;
-  public selected = [];
-  public selectAll = false;
+  public selected: IBookCatalog = {};
   public userId: any = null;
 
-  public select() {
-    this.selected = [];
-    if (!this.selectAll) {
-      for (let i in this.books) {
-        this.selected.push(this.books[i].bookId);
-      }
-    }
-  }
   public mounted(): void {
     this.retrieveAllBooks();
   }
@@ -71,8 +61,9 @@ export default class BookRental extends mixins(AlertMixin) {
       );
   }
 
-  public prepareRent(): void {
+  public prepareRent(book: IBookCatalog): void {
     this.userId = this.getUserId;
+    this.selected = book;
     if (<any>this.$refs.doRental) {
       (<any>this.$refs.doRental).show();
     }
@@ -80,23 +71,18 @@ export default class BookRental extends mixins(AlertMixin) {
 
   public rentBooks(): void {
     this.bookRentalService()
-      .rentBooks(this.userId, this.selected)
+      .rentBooks(this.userId, this.selected.bookId)
       .then(
         res => {
-          this.rentedItems = res.data;
-          let resultItems = [];
-          this.rentedItems.forEach(i => {
-            resultItems.push(i.bookTitle);
-          });
-          const message = this.$t('gatewayApp.rentalRental.doRent.rented', { param: resultItems });
+          const message = this.$t('gatewayApp.rentalRental.doRent.rented', { param: this.selected.title });
           this.alertService().showAlert(message, 'danger');
           this.getAlertFromStore();
-          this.selected = [];
+          this.selected = {};
           this.retrieveAllBooks();
           this.closeDialog();
         },
         err => {
-          this.selected = [];
+          this.selected = {};
           this.isFetching = false;
         }
       );

@@ -10,7 +10,7 @@ export default class BookRentalDetails extends Vue {
   @Inject('bookRentalService') private bookRentalService: () => BookRentalService;
   public book: IBookCatalog = {};
   public userId: any = null;
-  public selected = [];
+  public selected: IBookCatalog = {};
   public isFetching = false;
   public rentedItems: IRentedItem[] = [];
   beforeRouteEnter(to, from, next) {
@@ -33,14 +33,14 @@ export default class BookRentalDetails extends Vue {
     this.$router.go(-1);
   }
 
-  public prepareRent(bookId: number): void {
+  public prepareRent(rentBook: IBookCatalog): void {
     this.userId = this.getUserId;
-    this.selected.push(bookId);
+    this.selected = rentBook;
     this.rentBooks();
   }
   public rentBooks(): void {
     this.bookRentalService()
-      .rentBooks(this.userId, this.selected)
+      .rentBooks(this.userId, this.selected.bookId)
       .then(
         res => {
           this.rentedItems = res.data;
@@ -51,10 +51,10 @@ export default class BookRentalDetails extends Vue {
           const message = this.$t('gatewayApp.rentalRental.doRent.rented', { param: resultItems });
           this.$router.go(-1);
           this.alertService().showAlert(message, 'info');
-          this.selected = [];
+          this.selected = {};
         },
         err => {
-          this.selected = [];
+          this.selected = {};
           this.isFetching = false;
         }
       );

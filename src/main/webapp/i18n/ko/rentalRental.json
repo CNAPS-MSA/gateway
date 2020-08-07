@@ -16,7 +16,7 @@
       "doRent": {
         "title": "도서 대여 신청",
         "question": "{{ selected }} 을 대여하시겠습니까?",
-        "rented": "신청한 도서 중 {{ param }} 이 대여완료되었습니다."
+        "rented": "신청한 도서 {{ selected}} 가 대여완료되었습니다."
       },
       "releaseOverdue": {
         "title": "연체료 결제 신청",
