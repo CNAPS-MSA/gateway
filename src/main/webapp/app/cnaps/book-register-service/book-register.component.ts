@@ -26,7 +26,6 @@ export default class BookRegister extends mixins(AlertMixin) {
   public instockBooks: IInStockBook[] = [];
   public isFetching = false;
   public selected = [];
-  public selectAll = false;
   public userId: any = null;
 
   public mounted(): void {
@@ -60,32 +59,6 @@ export default class BookRegister extends mixins(AlertMixin) {
         }
       );
   }
-
-  // public prepareRemove(instance: IRental): void {
-  //   this.removeId = instance.id;
-  //   if (<any>this.$refs.removeEntity) {
-  //     (<any>this.$refs.removeEntity).show();
-  //   }
-  // }
-  //
-  // public removeRental(): void {
-  //   this.bookRentalService()
-  //     .delete(this.removeId)
-  //     .then(() => {
-  //       const message = this.$t('gatewayApp.rentalRental.deleted', { param: this.removeId });
-  //       this.alertService().showAlert(message, 'danger');
-  //       this.getAlertFromStore();
-  //       this.removeId = null;
-  //       this.retrieveAllRentals();
-  //       this.closeDialog();
-  //     });
-  // }
-  // public prepareRent(): void {
-  //   this.userId = this.getUserId;
-  //   if (<any>this.$refs.doRental) {
-  //     (<any>this.$refs.doRental).show();
-  //   }
-  // }
 
   public sort(): Array<any> {
     const result = [this.propOrder + ',' + (this.reverse ? 'asc' : 'desc')];
@@ -131,8 +104,4 @@ export default class BookRegister extends mixins(AlertMixin) {
         this.isFetching = false;
       });
   }
-
-  // public get getUserId(): any {
-  //   return this.$store.getters.account.id;
-  // }
 }

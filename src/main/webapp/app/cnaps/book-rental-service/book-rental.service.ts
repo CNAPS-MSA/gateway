@@ -1,11 +1,7 @@
 import axios from 'axios';
 
 import buildPaginationQueryOpts from '@/shared/sort/sorts';
-
-import { IRental } from '@/shared/model/rental/rental.model';
 import { IBookCatalog } from '@/shared/model/bookCatalog/book-catalog.model';
-import { IRentedItem } from '@/shared/model/rental/rented-item.model';
-import { IBook } from '@/shared/model/book/book.model';
 
 const rentalApiUrl = 'services/rental/api/rentals';
 const bookApiUrl = 'services/bookcatalog/api/book-catalogs';

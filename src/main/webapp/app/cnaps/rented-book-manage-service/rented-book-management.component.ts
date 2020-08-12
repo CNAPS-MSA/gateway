@@ -3,7 +3,6 @@ import { mixins } from 'vue-class-component';
 import { Component, Vue, Inject } from 'vue-property-decorator';
 import Vue2Filters from 'vue2-filters';
 import { IRentedItem } from '@/shared/model/rental/rented-item.model';
-import { IRental } from '@/shared/model/rental/rental.model';
 import { IUser } from '@/shared/model/user.model';
 
 import AlertMixin from '@/shared/alert/alert.mixin';
@@ -14,7 +13,7 @@ import RentedBookManagementService from '@/cnaps/rented-book-manage-service/rent
 })
 export default class RentedBookManagement extends mixins(AlertMixin) {
   @Inject('rentedBookManagementService') private rentedBookManagementService: () => RentedBookManagementService;
-  // private removeId: number = null;
+
   public itemsPerPage = 20;
   public queryCount: number = null;
   public page = 1;
@@ -61,25 +60,6 @@ export default class RentedBookManagement extends mixins(AlertMixin) {
       );
   }
 
-  // public prepareRemove(instance: IRental): void {
-  //   this.removeId = instance.id;
-  //   if (<any>this.$refs.removeEntity) {
-  //     (<any>this.$refs.removeEntity).show();
-  //   }
-  // }
-  //
-  // public removeRental(): void {
-  //   this.bookRentalService()
-  //     .delete(this.removeId)
-  //     .then(() => {
-  //       const message = this.$t('gatewayApp.rentalRental.deleted', { param: this.removeId });
-  //       this.alertService().showAlert(message, 'danger');
-  //       this.getAlertFromStore();
-  //       this.removeId = null;
-  //       this.retrieveAllRentals();
-  //       this.closeDialog();
-  //     });
-  // }
   public prepareOverdue(rentalId: number, bookId: number): void {
     this.overdueRentalId = rentalId;
     this.overdueBookId = bookId;
@@ -146,8 +126,4 @@ export default class RentedBookManagement extends mixins(AlertMixin) {
         this.title = '';
       });
   }
-
-  // public get getUserId(): any {
-  //   return this.$store.getters.account.id;
-  // }
 }

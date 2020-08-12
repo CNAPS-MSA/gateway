@@ -61,26 +61,6 @@
                 </tbody>
             </table>
         </div>
-<!--        <b-modal ref="doRental" id="doRental">-->
-<!--            <span slot="modal-title"><span v-text="$t('gatewayApp.rental.Rental.doRent.title')"></span>Confirm rent books</span>-->
-<!--            <div class="modal-body">-->
-<!--                <p v-text="$t('gatewayApp.rentalRental.doRent.question', {'selected' : selected})">Are you sure want to rent these books?</p>-->
-<!--            </div>-->
-<!--            <div slot="modal-footer">-->
-<!--                <button type="button" class="btn btn-secondary" @click="closeDialog()">Cancel</button>-->
-<!--                <button type="button" class="btn btn-primary" @click="rentBooks()">Confirm</button>-->
-<!--            </div>-->
-<!--        </b-modal>-->
-        <!--        <b-modal ref="removeEntity" id="removeEntity" >-->
-        <!--            <span slot="modal-title"><span id="gatewayApp.rentalRental.delete.question" v-text="$t('entity.delete.title')">Confirm delete operation</span></span>-->
-        <!--            <div class="modal-body">-->
-        <!--                <p id="jhi-delete-rental-heading" v-text="$t('gatewayApp.rentalRental.delete.question', {'id': removeId})">Are you sure you want to delete this Rental?</p>-->
-        <!--            </div>-->
-        <!--            <div slot="modal-footer">-->
-        <!--                <button type="button" class="btn btn-secondary" v-text="$t('entity.action.cancel')" v-on:click="closeDialog()">Cancel</button>-->
-        <!--                <button type="button" class="btn btn-primary" id="jhi-confirm-delete-rental" v-text="$t('entity.action.delete')" v-on:click="removeRental()">Delete</button>-->
-        <!--            </div>-->
-        <!--        </b-modal>-->
         <div v-show="instockBooks && instockBooks.length > 0">
             <div class="row justify-content-center">
                 <jhi-item-count :page="page" :total="queryCount" :itemsPerPage="itemsPerPage"></jhi-item-count>

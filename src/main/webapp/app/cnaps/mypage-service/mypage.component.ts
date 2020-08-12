@@ -4,13 +4,9 @@ import { Component, Vue, Inject } from 'vue-property-decorator';
 import Vue2Filters from 'vue2-filters';
 import { IRentedItem } from '@/shared/model/rental/rented-item.model';
 import { IRental } from '@/shared/model/rental/rental.model';
-import { IUser } from '@/shared/model/user.model';
 import { IOverdueItem } from '@/shared/model/rental/overdue-item.model';
 import { IReturnedItem } from '@/shared/model/rental/returned-item.model';
-import { RentalStatus } from '@/shared/model/rental/rental.model';
 import AlertMixin from '@/shared/alert/alert.mixin';
-import RentedBookManagementService from '@/cnaps/rented-book-manage-service/rented-book-management.service';
-import MypageService from '@/cnaps/mypage-service/mypage.service';
 import MyPageService from '@/cnaps/mypage-service/mypage.service';
 
 @Component({

@@ -56,14 +56,7 @@
                         </button>
                     </dd>
                 </dl>
-<!--                <button type="submit"-->
-<!--                        v-on:click.prevent="previousState()"-->
-<!--                        class="btn btn-info">-->
-<!--                    <font-awesome-icon icon="arrow-left"></font-awesome-icon>&nbsp;<span v-text="$t('entity.action.back')"> Back</span>-->
-<!--                </button>-->
-<!--                <router-link v-if="bookCatalog.id" :to="{name: 'BookCatalogEdit', params: {bookCatalogId: bookCatalog.id}}" tag="button" class="btn btn-primary">-->
-<!--                    <font-awesome-icon icon="pencil-alt"></font-awesome-icon>&nbsp;<span v-text="$t('entity.action.edit')"> Edit</span>-->
-<!--                </router-link>-->
+
             </div>
         </div>
     </div>

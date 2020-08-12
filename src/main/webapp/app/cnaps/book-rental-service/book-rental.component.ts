@@ -7,14 +7,12 @@ import { IBookCatalog } from '@/shared/model/bookCatalog/book-catalog.model';
 import AlertMixin from '@/shared/alert/alert.mixin';
 
 import BookRentalService from './book-rental.service';
-import { IRentedItem } from '@/shared/model/rental/rented-item.model';
 
 @Component({
   mixins: [Vue2Filters.mixin],
 })
 export default class BookRental extends mixins(AlertMixin) {
   @Inject('bookRentalService') private bookRentalService: () => BookRentalService;
-  private removeId: number = null;
   public itemsPerPage = 20;
   public queryCount: number = null;
   public page = 1;

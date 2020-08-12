@@ -2,7 +2,7 @@
     <div class="row justify-content-center">
         <div class="col-8">
             <form name="editForm" role="form" novalidate v-on:submit.prevent="save()" >
-                <h2 id="gatewayApp.bookInStockBook.home.register" v-text="$t('gatewayApp.bookInStockBook.home.register')">Register New Book</h2>
+                <h2 id="gatewayApp.bookInStockBook.home.registerLabel" v-text="$t('gatewayApp.bookInStockBook.home.registerLabel')">Register New Book</h2>
                 <div>
                     <div class="form-group">
                         <label class="form-control-label" v-text="$t('gatewayApp.bookInStockBook.title')" for="book-title">Title</label>

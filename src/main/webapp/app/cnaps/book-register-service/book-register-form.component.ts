@@ -77,6 +77,4 @@ export default class BookUpdate extends Vue {
   public previousState(): void {
     this.$router.go(-1);
   }
-
-  public initRelationships(): void {}
 }

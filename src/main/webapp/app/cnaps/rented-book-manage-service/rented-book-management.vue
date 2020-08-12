@@ -42,17 +42,6 @@
                                         v-b-modal.doOverdue>
                                 <span class="d-none d-md-inline" v-text="$t('global.overdueBook')">Overdue Books</span>
                             </b-button>
-                            <!--                        <router-link :to="{name: 'BookRentalDo', params: {rentalId: book.id}}" tag="button" class="btn btn-primary btn-sm edit">-->
-                            <!--                                <font-awesome-icon icon="pencil-alt"></font-awesome-icon>-->
-                            <!--                                <span class="d-none d-md-inline" v-text="$t('entity.action.edit')">Edit</span>-->
-                            <!--                            </router-link>-->
-                            <!--                            <b-button v-on:click="prepareRemove(book)"-->
-                            <!--                                   variant="danger"-->
-                            <!--                                   class="btn btn-sm"-->
-                            <!--                                   v-b-modal.removeEntity>-->
-                            <!--                                <font-awesome-icon icon="times"></font-awesome-icon>-->
-                            <!--                                <span class="d-none d-md-inline" v-text="$t('entity.action.delete')">Delete</span>-->
-                            <!--                            </b-button>-->
                         </div>
                     </td>
                 </tr>
@@ -60,7 +49,7 @@
             </table>
         </div>
         <b-modal ref="doOverdue" id="doOverdue">
-            <span slot="modal-title"><span v-text="$t('gatewayApp.rentalRentedItem.doOverdue.title')"></span>Confirm Overdue This Book</span>
+            <span slot="modal-title"><span v-text="$t('gatewayApp.rentalRentedItem.doOverdue.title')">Confirm Overdue This Book</span></span>
             <div class="modal-body">
                 <p v-text="$t('gatewayApp.rentalRentedItem.doOverdue.question')">Are you sure want to set this book be Overdue?</p>
             </div>
@@ -69,16 +58,7 @@
                 <button type="button" class="btn btn-primary" @click="overdueBook()">Confirm</button>
             </div>
         </b-modal>
-        <!--        <b-modal ref="removeEntity" id="removeEntity" >-->
-        <!--            <span slot="modal-title"><span id="gatewayApp.rentalRental.delete.question" v-text="$t('entity.delete.title')">Confirm delete operation</span></span>-->
-        <!--            <div class="modal-body">-->
-        <!--                <p id="jhi-delete-rental-heading" v-text="$t('gatewayApp.rentalRental.delete.question', {'id': removeId})">Are you sure you want to delete this Rental?</p>-->
-        <!--            </div>-->
-        <!--            <div slot="modal-footer">-->
-        <!--                <button type="button" class="btn btn-secondary" v-text="$t('entity.action.cancel')" v-on:click="closeDialog()">Cancel</button>-->
-        <!--                <button type="button" class="btn btn-primary" id="jhi-confirm-delete-rental" v-text="$t('entity.action.delete')" v-on:click="removeRental()">Delete</button>-->
-        <!--            </div>-->
-        <!--        </b-modal>-->
+
         <div v-show="books && books.length > 0">
             <div class="row justify-content-center">
                 <jhi-item-count :page="page" :total="queryCount" :itemsPerPage="itemsPerPage"></jhi-item-count>

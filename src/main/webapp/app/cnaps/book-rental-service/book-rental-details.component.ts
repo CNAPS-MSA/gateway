@@ -12,7 +12,6 @@ export default class BookRentalDetails extends Vue {
   public userId: any = null;
   public selected: IBookCatalog = {};
   public isFetching = false;
-  public rentedItems: IRentedItem[] = [];
   beforeRouteEnter(to, from, next) {
     next(vm => {
       if (to.params.bookId) {
