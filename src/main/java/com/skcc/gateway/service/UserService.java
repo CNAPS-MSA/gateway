@@ -12,6 +12,7 @@ import com.skcc.gateway.security.SecurityUtils;
 import com.skcc.gateway.service.dto.UserDTO;
 
 import com.skcc.gateway.service.mapper.UserMapper;
+import com.skcc.gateway.web.rest.errors.UsePointsUnavailableException;
 import io.github.jhipster.security.RandomUtil;
 
 import org.slf4j.Logger;
@@ -313,8 +314,7 @@ public class UserService {
         }
     }
 
-    public User usepoints(Long userId, int latefee)  {
-
+    public User usepoints(Long userId, int latefee) throws UsePointsUnavailableException {
         User user = userRepository.findById(userId).get();
         user= user.usePoints(latefee);
         return userRepository.save(user);

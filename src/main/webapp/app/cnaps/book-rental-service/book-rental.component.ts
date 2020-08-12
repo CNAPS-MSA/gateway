@@ -75,14 +75,20 @@ export default class BookRental extends mixins(AlertMixin) {
       .then(
         res => {
           const message = this.$t('gatewayApp.rentalRental.doRent.rented', { param: this.selected.title });
-          this.alertService().showAlert(message, 'danger');
+          this.alertService().showAlert(message, 'info');
           this.getAlertFromStore();
           this.selected = {};
           this.retrieveAllBooks();
           this.closeDialog();
+          this.isFetching = false;
         },
         err => {
+          const errorMessage = err.response.data.message;
+          this.alertService().showAlert(errorMessage, 'danger');
+          this.getAlertFromStore();
           this.selected = {};
+          this.retrieveAllBooks();
+          this.closeDialog();
           this.isFetching = false;
         }
       );

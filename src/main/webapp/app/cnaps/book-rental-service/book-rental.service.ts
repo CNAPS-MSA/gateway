@@ -58,6 +58,7 @@ export default class BookRentalService {
           resolve(res);
         })
         .catch(err => {
+          console.log(err.response.data.message);
           reject(err);
         });
     });

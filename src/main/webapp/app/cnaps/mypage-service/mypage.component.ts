@@ -35,6 +35,7 @@ export default class MyPage extends mixins(AlertMixin) {
   public returnedBooks: IReturnedItem[] = [];
   public requestReturnId: number = null;
   public created(): void {}
+
   public mounted(): void {
     this.getUser();
   }
@@ -65,13 +66,24 @@ export default class MyPage extends mixins(AlertMixin) {
   public releaseOverdue(): void {
     this.myPageService()
       .releaseOverdue(this.user.id)
-      .then(() => {
-        const message = this.$t('gatewayApp.rentalRental.result');
-        this.alertService().showAlert(message, 'danger');
-        this.getAlertFromStore();
-        this.getUser();
-        this.closeOverdueDialog();
-      });
+      .then(
+        res => {
+          const message = this.$t('gatewayApp.rentalRental.releaseOverdue.result');
+          this.alertService().showAlert(message, 'danger');
+          this.getAlertFromStore();
+          this.getAlertFromStore();
+          this.getUser();
+          this.closeOverdueDialog();
+        },
+        err => {
+          const errorMessage = err.response.data.message;
+          this.alertService().showAlert(errorMessage, 'danger');
+          this.getAlertFromStore();
+          this.getUser();
+          this.closeOverdueDialog();
+          this.isFetching = false;
+        }
+      );
   }
 
   public sort(): Array<any> {
@@ -81,7 +93,7 @@ export default class MyPage extends mixins(AlertMixin) {
     }
     return result;
   }
-  //
+
   public loadPage(page: number): void {
     if (page !== this.previousPage) {
       this.previousPage = page;

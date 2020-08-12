@@ -14,6 +14,7 @@ import com.skcc.gateway.web.rest.errors.BadRequestAlertException;
 import com.skcc.gateway.web.rest.errors.EmailAlreadyUsedException;
 import com.skcc.gateway.web.rest.errors.LoginAlreadyUsedException;
 
+import com.skcc.gateway.web.rest.errors.UsePointsUnavailableException;
 import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -192,14 +193,10 @@ public class UserResource {
         return ResponseEntity.noContent().headers(HeaderUtil.createAlert(applicationName,  "userManagement.deleted", login)).build();
     }
 
-    @PutMapping("/usepoints")
-    public ResponseEntity usePoint(@RequestBody LatefeeDTO latefeeDTO) throws InterruptedException, ExecutionException, JsonProcessingException {
-        User user=userService.usepoints(latefeeDTO.getUserId(), latefeeDTO.getLatefee());
-        if(user!=null){
-            return new ResponseEntity<>(HttpStatus.OK);
-        }else{
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+    @PutMapping("/users/usepoints")
+    public ResponseEntity usePoint(@RequestBody LatefeeDTO latefeeDTO) throws UsePointsUnavailableException {
+        userService.usepoints(latefeeDTO.getUserId(), latefeeDTO.getLatefee());
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/users/{userId}")

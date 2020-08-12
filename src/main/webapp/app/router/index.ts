@@ -46,12 +46,6 @@ const BookCatalogUpdate = () => import('../entities/bookCatalog/book-catalog/boo
 // prettier-ignore
 const BookCatalogDetails = () => import('../entities/bookCatalog/book-catalog/book-catalog-details.vue');
 // prettier-ignore
-const TopListBooks = () => import('../entities/bookCatalog/top-list-books/top-list-books.vue');
-// prettier-ignore
-const TopListBooksUpdate = () => import('../entities/bookCatalog/top-list-books/top-list-books-update.vue');
-// prettier-ignore
-const TopListBooksDetails = () => import('../entities/bookCatalog/top-list-books/top-list-books-details.vue');
-// prettier-ignore
 const Rental = () => import('../entities/rental/rental/rental.vue');
 // prettier-ignore
 const RentalUpdate = () => import('../entities/rental/rental/rental-update.vue');
@@ -278,31 +272,6 @@ export default new Router({
       path: '/book-catalog/:bookCatalogId/view',
       name: 'BookCatalogView',
       component: BookCatalogDetails,
-      meta: { authorities: [Authority.USER] }
-    }
-    ,
-    {
-      path: '/top-list-books',
-      name: 'TopListBooks',
-      component: TopListBooks,
-      meta: { authorities: [Authority.USER] }
-    },
-    {
-      path: '/top-list-books/new',
-      name: 'TopListBooksCreate',
-      component: TopListBooksUpdate,
-      meta: { authorities: [Authority.USER] }
-    },
-    {
-      path: '/top-list-books/:topListBooksId/edit',
-      name: 'TopListBooksEdit',
-      component: TopListBooksUpdate,
-      meta: { authorities: [Authority.USER] }
-    },
-    {
-      path: '/top-list-books/:topListBooksId/view',
-      name: 'TopListBooksView',
-      component: TopListBooksDetails,
       meta: { authorities: [Authority.USER] }
     }
     ,

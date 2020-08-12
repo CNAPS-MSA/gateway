@@ -3,6 +3,7 @@ package com.skcc.gateway.domain;
 import com.skcc.gateway.config.Constants;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.skcc.gateway.web.rest.errors.UsePointsUnavailableException;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -135,13 +136,12 @@ public class User extends AbstractAuditingEntity implements Serializable {
         return this;
     }
 
-    public User usePoints(int points){
+    public User usePoints(int points) throws UsePointsUnavailableException{
         if(this.point>=points) {
             this.point -=points;
-
             return this;
         }else{
-            return null;
+            throw new UsePointsUnavailableException("잔여 포인트가 모자라 결제가 불가능 합니다.");
         }
     }
 }

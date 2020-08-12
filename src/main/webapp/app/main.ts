@@ -34,7 +34,6 @@ import GatewayService from '@/admin/gateway/gateway.service';
 import BookService from '@/entities/book/book/book.service';
 import InStockBookService from '@/entities/book/in-stock-book/in-stock-book.service';
 import BookCatalogService from '@/entities/bookCatalog/book-catalog/book-catalog.service';
-import TopListBooksService from '@/entities/bookCatalog/top-list-books/top-list-books.service';
 import RentalService from '@/entities/rental/rental/rental.service';
 import OverdueItemService from '@/entities/rental/overdue-item/overdue-item.service';
 import RentedItemService from '@/entities/rental/rented-item/rented-item.service';
@@ -110,7 +109,6 @@ new Vue({
     bookService: () => new BookService(),
     inStockBookService: () => new InStockBookService(),
     bookCatalogService: () => new BookCatalogService(),
-    topListBooksService: () => new TopListBooksService(),
     rentalService: () => new RentalService(),
     overdueItemService: () => new OverdueItemService(),
     rentedItemService: () => new RentedItemService(),
