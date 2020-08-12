@@ -185,7 +185,7 @@ export default class MyPage extends mixins(AlertMixin) {
     this.myPageService()
       .requestReturn(this.user.id, this.requestReturnId)
       .then(() => {
-        const message = this.$t('gatewayApp.menu.mypage.returnBook.result');
+        const message = this.$t('global.menu.mypage.returnBook.result');
         this.requestReturnId = null;
         this.alertService().showAlert(message, 'danger');
         this.getAlertFromStore();
@@ -205,7 +205,7 @@ export default class MyPage extends mixins(AlertMixin) {
     this.myPageService()
       .requestOverdueReturn(this.user.id, this.requestReturnId)
       .then(() => {
-        const message = this.$t('gatewayApp.menu.mypage.returnBook.result');
+        const message = this.$t('global.menu.mypage.returnBook.result');
         this.requestReturnId = null;
         this.alertService().showAlert(message, 'danger');
         this.getAlertFromStore();

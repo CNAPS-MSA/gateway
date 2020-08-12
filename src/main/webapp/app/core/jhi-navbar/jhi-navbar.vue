@@ -75,10 +75,6 @@
                         <font-awesome-icon icon="asterisk" />
                         <span v-text="$t('global.menu.entities.bookCatalogBookCatalog')">BookCatalog</span>
                     </b-dropdown-item>
-                    <b-dropdown-item to="/top-list-books">
-                        <font-awesome-icon icon="asterisk" />
-                        <span v-text="$t('global.menu.entities.bookCatalogTopListBooks')">TopListBooks</span>
-                    </b-dropdown-item>
                     <b-dropdown-item to="/rental">
                         <font-awesome-icon icon="asterisk" />
                         <span v-text="$t('global.menu.entities.rentalRental')">Rental</span>

@@ -21,7 +21,6 @@
                     <router-link class="alert-link" to="/register" v-text="$t('global.messages.info.register.link')">Register a new account</router-link>
                 </div>
             </div>
-
             <div  class="table-responsive" style="margin-top: 10px;" v-if="authenticated&& books && books.length> 0">
                 <h4><strong>인기 대여 도서 목록</strong></h4>
                 <table class="table table-striped" >

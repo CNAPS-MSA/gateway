@@ -61,9 +61,9 @@
             </table>
         </div>
         <b-modal ref="doRental" id="doRental" v-if="selected">
-            <span slot="modal-title"><span v-text="$t('gatewayApp.rental.Rental.doRent.title')"></span>Confirm rent books</span>
+            <span slot="modal-title"><span v-text="$t('gatewayApp.rentalRental.doRent.title')">Confirm rent books</span></span>
             <div class="modal-body">
-                <p v-text="$t('gatewayApp.rentalRental.doRent.question', {'selected' : selected.title})">Are you sure want to rent these books?</p>
+                <p v-text="$t('gatewayApp.rentalRental.doRent.question', {'param' : selected.title})">Are you sure want to rent these books?</p>
             </div>
             <div slot="modal-footer">
                 <button type="button" class="btn btn-secondary" @click="closeDialog()">Cancel</button>

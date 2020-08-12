@@ -2,8 +2,8 @@
   "gatewayApp": {
     "Source": {
       "null": "",
-      "Donated": "Donated",
-      "Purchased": "Purchased"
+      "Donated": "기부 도서",
+      "Purchased": "구매 도서"
     }
   }
 }

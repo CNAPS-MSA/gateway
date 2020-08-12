@@ -43,15 +43,10 @@ export default class BookRentalDetails extends Vue {
       .rentBooks(this.userId, this.selected.bookId)
       .then(
         res => {
-          this.rentedItems = res.data;
-          let resultItems = [];
-          this.rentedItems.forEach(i => {
-            resultItems.push(i.bookTitle);
-          });
-          const message = this.$t('gatewayApp.rentalRental.doRent.rented', { param: resultItems });
-          this.$router.go(-1);
+          const message = this.$t('gatewayApp.rentalRental.doRent.rented', { param: this.selected.title });
           this.alertService().showAlert(message, 'info');
           this.selected = {};
+          this.retrieveBookRental(this.book.id);
         },
         err => {
           this.selected = {};
