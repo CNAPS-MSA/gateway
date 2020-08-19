@@ -324,7 +324,7 @@ public class UserService {
         gatewayKafkaProducer.createRental(id);
     }
 
-    public User loadUserById(Long userId) {
-        return userRepository.findById(userId).get();
+    public Optional<UserDTO> loadUserById(Long userId) {
+        return userRepository.findById(userId).map(UserDTO::new);
     }
 }
