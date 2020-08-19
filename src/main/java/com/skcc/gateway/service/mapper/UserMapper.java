@@ -5,6 +5,7 @@ import com.skcc.gateway.domain.User;
 import com.skcc.gateway.service.dto.UserDTO;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
  * support is still in beta, and requires a manual step with an IDE.
  */
 @Service
+@Transactional
 public class UserMapper {
 
     public List<UserDTO> usersToUserDTOs(List<User> users) {
