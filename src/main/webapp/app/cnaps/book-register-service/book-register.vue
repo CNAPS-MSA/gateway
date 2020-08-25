@@ -48,13 +48,7 @@
                                 <font-awesome-icon icon="pencil-alt"></font-awesome-icon>
                                 <span class="d-none d-md-inline" v-text="$t('entity.action.register')">Register</span>
                             </router-link>
-                            <!--                            <b-button v-on:click="prepareRemove(book)"-->
-                            <!--                                   variant="danger"-->
-                            <!--                                   class="btn btn-sm"-->
-                            <!--                                   v-b-modal.removeEntity>-->
-                            <!--                                <font-awesome-icon icon="times"></font-awesome-icon>-->
-                            <!--                                <span class="d-none d-md-inline" v-text="$t('entity.action.delete')">Delete</span>-->
-                            <!--                            </b-button>-->
+
                         </div>
                     </td>
                 </tr>

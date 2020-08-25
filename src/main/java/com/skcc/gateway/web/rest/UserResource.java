@@ -201,8 +201,6 @@ public class UserResource {
 
     @GetMapping("/users/{userId}")
     public ResponseEntity<Optional<UserDTO>> getUserById(@PathVariable("userId")Long userId){
-//        UserDTO userDTO = userMapper.userToUserDTO(userService.loadUserById(userId));
-//        return ResponseEntity.ok().body(userDTO);
         Optional<UserDTO> userDTO = userService.loadUserById(userId);
         return new ResponseEntity<>(userDTO, HttpStatus.OK);
     }
