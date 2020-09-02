@@ -3,7 +3,7 @@ package com.skcc.gateway.adaptor;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.skcc.gateway.config.KafkaProperties;
-import com.skcc.gateway.domain.UserIdCreated;
+import com.skcc.gateway.domain.event.UserIdCreated;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.clients.producer.RecordMetadata;

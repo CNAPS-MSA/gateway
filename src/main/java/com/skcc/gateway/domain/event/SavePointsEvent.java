@@ -1,4 +1,4 @@
-package com.skcc.gateway.domain;
+package com.skcc.gateway.domain.event;
 
 import lombok.Getter;
 import lombok.Setter;

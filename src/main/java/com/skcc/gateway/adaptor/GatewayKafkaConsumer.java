@@ -2,7 +2,7 @@ package com.skcc.gateway.adaptor;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.skcc.gateway.config.KafkaProperties;
-import com.skcc.gateway.domain.SavePointsEvent;
+import com.skcc.gateway.domain.event.SavePointsEvent;
 import com.skcc.gateway.domain.User;
 import com.skcc.gateway.repository.UserRepository;
 import org.apache.kafka.clients.consumer.ConsumerRecord;

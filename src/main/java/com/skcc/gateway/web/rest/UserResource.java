@@ -193,7 +193,7 @@ public class UserResource {
         return ResponseEntity.noContent().headers(HeaderUtil.createAlert(applicationName,  "userManagement.deleted", login)).build();
     }
 
-    @PutMapping("/users/usepoints")
+    @PutMapping("/users/latefee")
     public ResponseEntity usePoint(@RequestBody LatefeeDTO latefeeDTO) throws UsePointsUnavailableException {
         userService.usepoints(latefeeDTO.getUserId(), latefeeDTO.getLatefee());
         return new ResponseEntity<>(HttpStatus.OK);
