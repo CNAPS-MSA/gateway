@@ -1,7 +1,7 @@
 package com.skcc.gateway.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.skcc.gateway.adaptor.GatewayKafkaProducer;
+import com.skcc.gateway.adaptor.GatewayProducer;
 import com.skcc.gateway.config.Constants;
 import com.skcc.gateway.domain.Authority;
 import com.skcc.gateway.domain.User;
@@ -11,7 +11,6 @@ import com.skcc.gateway.security.AuthoritiesConstants;
 import com.skcc.gateway.security.SecurityUtils;
 import com.skcc.gateway.service.dto.UserDTO;
 
-import com.skcc.gateway.service.mapper.UserMapper;
 import com.skcc.gateway.web.rest.errors.UsePointsUnavailableException;
 import io.github.jhipster.security.RandomUtil;
 
@@ -48,14 +47,14 @@ public class UserService {
 
     private final CacheManager cacheManager;
 
-    private final GatewayKafkaProducer gatewayKafkaProducer;
+    private final GatewayProducer gatewayProducer;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository, CacheManager cacheManager, GatewayKafkaProducer gatewayKafkaProducer) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository, CacheManager cacheManager, GatewayProducer gatewayProducer) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.authorityRepository = authorityRepository;
         this.cacheManager = cacheManager;
-        this.gatewayKafkaProducer = gatewayKafkaProducer;
+        this.gatewayProducer = gatewayProducer;
     }
 
     public Optional<User> activateRegistration(String key) {
@@ -321,7 +320,7 @@ public class UserService {
     }
 
     public void createRental(Long id) throws InterruptedException, ExecutionException, JsonProcessingException {
-        gatewayKafkaProducer.createRental(id);
+        gatewayProducer.createRental(id);
     }
 
     public Optional<UserDTO> loadUserById(Long userId) {

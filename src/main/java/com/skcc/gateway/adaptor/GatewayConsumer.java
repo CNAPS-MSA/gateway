@@ -3,8 +3,6 @@ package com.skcc.gateway.adaptor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.skcc.gateway.config.KafkaProperties;
 import com.skcc.gateway.domain.event.SavePointsEvent;
-import com.skcc.gateway.domain.User;
-import com.skcc.gateway.repository.UserRepository;
 import com.skcc.gateway.service.UserService;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
@@ -22,8 +20,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 @Service
-public class GatewayKafkaConsumer {
-    private final Logger log = LoggerFactory.getLogger(GatewayKafkaConsumer.class);
+public class GatewayConsumer {
+    private final Logger log = LoggerFactory.getLogger(GatewayConsumer.class);
 
     private final AtomicBoolean closed = new AtomicBoolean(false);
 
@@ -37,7 +35,7 @@ public class GatewayKafkaConsumer {
     private ExecutorService executorService = Executors.newCachedThreadPool();
 
 
-    public GatewayKafkaConsumer(KafkaProperties kafkaProperties, UserService userService) {
+    public GatewayConsumer(KafkaProperties kafkaProperties, UserService userService) {
         this.kafkaProperties = kafkaProperties;
         this.userService = userService;
     }

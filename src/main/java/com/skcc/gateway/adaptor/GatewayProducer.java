@@ -17,19 +17,19 @@ import java.time.Instant;
 import java.util.concurrent.ExecutionException;
 
 @Service
-public class GatewayKafkaProducer {
-    private final Logger log = LoggerFactory.getLogger(GatewayKafkaProducer.class);
+public class GatewayProducer {
+    private final Logger log = LoggerFactory.getLogger(GatewayProducer.class);
 
     private static final String TOPIC_RENTAL = "topic_rental";
 
     private final KafkaProperties kafkaProperties;
 
-    private final static Logger logger = LoggerFactory.getLogger(GatewayKafkaProducer.class);
+    private final static Logger logger = LoggerFactory.getLogger(GatewayProducer.class);
     private KafkaProducer<String, String> producer;
     private final ObjectMapper objectMapper = new ObjectMapper();
 
 
-    public GatewayKafkaProducer(KafkaProperties kafkaProperties) {
+    public GatewayProducer(KafkaProperties kafkaProperties) {
         this.kafkaProperties = kafkaProperties;
     }
 
