@@ -5,6 +5,7 @@ import com.skcc.gateway.config.KafkaProperties;
 import com.skcc.gateway.domain.event.SavePointsEvent;
 import com.skcc.gateway.domain.User;
 import com.skcc.gateway.repository.UserRepository;
+import com.skcc.gateway.service.UserService;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
@@ -32,14 +33,13 @@ public class GatewayKafkaConsumer {
 
     private KafkaConsumer<String, String> kafkaConsumer;
 
-    private UserRepository userRepository;
-
+    private final UserService userService;
     private ExecutorService executorService = Executors.newCachedThreadPool();
 
 
-    public GatewayKafkaConsumer(KafkaProperties kafkaProperties, UserRepository userRepository) {
+    public GatewayKafkaConsumer(KafkaProperties kafkaProperties, UserService userService) {
         this.kafkaProperties = kafkaProperties;
-        this.userRepository = userRepository;
+        this.userService = userService;
     }
 
 
@@ -60,9 +60,8 @@ public class GatewayKafkaConsumer {
                             log.info("Consumed message in {} : {}", TOPIC, record.value());
                             ObjectMapper objectMapper = new ObjectMapper();
                             SavePointsEvent savePointsEvent= objectMapper.readValue(record.value(), SavePointsEvent.class);
-                            User user = userRepository.findById(savePointsEvent.getUserId()).get();
-                            user=user.savePoints(savePointsEvent.getPoints());
-                            userRepository.save(user);
+                            userService.savePoint(savePointsEvent.getUserId(), savePointsEvent.getPoints());
+
 
                         }
 

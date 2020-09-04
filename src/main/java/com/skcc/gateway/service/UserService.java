@@ -327,4 +327,10 @@ public class UserService {
     public Optional<UserDTO> loadUserById(Long userId) {
         return userRepository.findById(userId).map(UserDTO::new);
     }
+
+    public void savePoint(Long userId, int points) {
+        User user = userRepository.findById(userId).get();
+        user=user.savePoints(points);
+        userRepository.save(user);
+    }
 }
