@@ -4,7 +4,7 @@ import buildPaginationQueryOpts from '@/shared/sort/sorts';
 import { Authority } from '@/shared/security/authority';
 
 export default class UserManagementService {
-  public get(userId: number): Promise<any> {
+  public get(userId: string): Promise<any> {
     return axios.get(`api/users/${userId}`);
   }
 
@@ -16,7 +16,7 @@ export default class UserManagementService {
     return axios.put('api/users', user);
   }
 
-  public remove(userId: number): Promise<any> {
+  public remove(userId: string): Promise<any> {
     return axios.delete(`api/users/${userId}`);
   }
 

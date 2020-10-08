@@ -19,7 +19,7 @@ export default class JhiUserManagementComponent extends mixins(AlertMixin) {
   public propOrder = 'id';
   public reverse = false;
   public totalItems = 0;
-  public removeId: number = null;
+  public removeId = '';
 
   public mounted(): void {
     this.loadAll();

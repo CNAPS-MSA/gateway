@@ -199,7 +199,7 @@ public class UserResource {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/users/{userId}")
+    @GetMapping("/users/find/{userId}")
     public ResponseEntity<Optional<UserDTO>> getUserById(@PathVariable("userId")Long userId){
         Optional<UserDTO> userDTO = userService.loadUserById(userId);
         return new ResponseEntity<>(userDTO, HttpStatus.OK);

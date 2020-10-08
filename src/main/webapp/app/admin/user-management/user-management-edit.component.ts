@@ -67,7 +67,7 @@ export default class JhiUserManagementEdit extends Vue {
       });
   }
 
-  public init(userId: number): void {
+  public init(userId: string): void {
     this.userManagementService()
       .get(userId)
       .then(res => {

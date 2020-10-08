@@ -130,7 +130,7 @@ export default class MyPageService {
   public loadUserInfo(userid: any): Promise<IUser> {
     return new Promise<IUser>((resolve, reject) => {
       axios
-        .get(`api/users/${userid}`)
+        .get(`api/users/find/${userid}`)
         .then(res => {
           resolve(res.data);
         })

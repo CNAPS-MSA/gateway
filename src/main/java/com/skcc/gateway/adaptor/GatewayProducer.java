@@ -17,7 +17,7 @@ import java.time.Instant;
 import java.util.concurrent.ExecutionException;
 
 @Service
-public class GatewayProducer {
+public class GatewayProducer implements GatewayProducerService{
     private final Logger log = LoggerFactory.getLogger(GatewayProducer.class);
 
     private static final String TOPIC_RENTAL = "topic_rental";
@@ -41,13 +41,11 @@ public class GatewayProducer {
         log.info("Kafka producer initialized");
     }
 
-    public PublishResult createRental(Long userId) throws ExecutionException, InterruptedException, JsonProcessingException{
+    public void createRental(Long userId) throws ExecutionException, InterruptedException, JsonProcessingException{
 
         UserIdCreated userIdCreated = new UserIdCreated(userId);
         String message = objectMapper.writeValueAsString(userIdCreated);
-        RecordMetadata metadata = producer.send(new ProducerRecord<>(TOPIC_RENTAL, message)).get();
-        return new PublishResult(metadata.topic(), metadata.partition(), metadata.offset(), Instant.ofEpochMilli(metadata.timestamp()));
-
+        producer.send(new ProducerRecord<>(TOPIC_RENTAL, message)).get();
 
     }
 
@@ -58,17 +56,5 @@ public class GatewayProducer {
         producer.close();
     }
 
-    private static class PublishResult {
-        public final String topic;
-        public final int partition;
-        public final long offset;
-        public final Instant timestamp;
 
-        private PublishResult(String topic, int partition, long offset, Instant timestamp) {
-            this.topic = topic;
-            this.partition = partition;
-            this.offset = offset;
-            this.timestamp = timestamp;
-        }
-    }
 }
