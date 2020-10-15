@@ -1,7 +1,7 @@
 package com.skcc.gateway.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.skcc.gateway.adaptor.GatewayProducerService;
+import com.skcc.gateway.adaptor.GatewayProducer;
 import com.skcc.gateway.config.Constants;
 import com.skcc.gateway.domain.Authority;
 import com.skcc.gateway.domain.User;
@@ -47,14 +47,14 @@ public class UserService {
 
     private final CacheManager cacheManager;
 
-    private final GatewayProducerService gatewayProducerService;
+    private final GatewayProducer gatewayProducer;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository, CacheManager cacheManager, GatewayProducerService gatewayProducerService) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository, CacheManager cacheManager, GatewayProducer gatewayProducer) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.authorityRepository = authorityRepository;
         this.cacheManager = cacheManager;
-        this.gatewayProducerService = gatewayProducerService;
+        this.gatewayProducer = gatewayProducer;
     }
 
     public Optional<User> activateRegistration(String key) {
@@ -128,7 +128,7 @@ public class UserService {
         newUser.setAuthorities(authorities);
         newUser.setPoint(1000);
         userRepository.save(newUser);
-        gatewayProducerService.createRental(newUser.getId());
+        gatewayProducer.createRental(newUser.getId());
         this.clearUserCaches(newUser);
         log.debug("Created Information for User: {}", newUser);
         return newUser;
@@ -173,7 +173,7 @@ public class UserService {
         }
         user.setPoint(1000);
         userRepository.save(user);
-        gatewayProducerService.createRental(user.getId());
+        gatewayProducer.createRental(user.getId());
         this.clearUserCaches(user);
         log.debug("Created Information for User: {}", user);
         return user;
