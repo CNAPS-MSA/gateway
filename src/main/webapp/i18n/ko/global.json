@@ -21,7 +21,8 @@
           "return": "반납하기",
           "question": "해당 도서를 반납하시겠습니까?",
           "result": "반납 완료 되었습니다."
-        }
+        },
+        "board": "게시판"
       },
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {

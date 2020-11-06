@@ -42,6 +42,7 @@ import BookRentalService from '@/cnaps/book-rental-service/book-rental.service';
 import BookRegisterService from '@/cnaps/book-register-service/book-register.service';
 import RentedBookManagementService from '@/cnaps/rented-book-manage-service/rented-book-management.service';
 import MyPageService from '@/cnaps/mypage-service/mypage.service';
+import BoardService from '@/cnaps/board-service/board.service';
 // jhipster-needle-add-entity-service-to-main-import - JHipster will import entities services here
 
 /* tslint:enable */
@@ -119,6 +120,7 @@ new Vue({
     bookRegisterService: () => new BookRegisterService(),
     rentedBookManagementService: () => new RentedBookManagementService(),
     myPageService: () => new MyPageService(),
+    boardService: () => new BoardService(),
   },
   i18n,
   store,

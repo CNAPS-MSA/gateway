@@ -97,6 +97,7 @@ jhipster:
       rental: /api,/v2/api-docs
       book: /api,/v2/api-docs
       bookcatalog: /api,/v2/api-docs   #  recommended dev configuration
+      board: /api,/v2/api-docs
   cache: # Cache configuration
     hazelcast: # Hazelcast distributed cache
       time-to-live-seconds: 3600

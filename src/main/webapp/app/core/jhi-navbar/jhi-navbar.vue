@@ -54,6 +54,12 @@
                         <span v-text="$t('global.menu.mypage.home')">MyPage</span>
                     </span>
                 </b-nav-item>
+                <b-nav-item to="/board">
+                    <span>
+                        <font-awesome-icon icon="list"/>
+                        <span v-text="$t('global.menu.board')">Board</span>
+                    </span>
+                </b-nav-item>
                 <b-nav-item-dropdown
                     right
                     id="entity-menu"
