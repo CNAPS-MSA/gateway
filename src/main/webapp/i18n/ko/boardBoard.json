@@ -1,6 +1,6 @@
 {
   "gatewayApp": {
-    "bookBook": {
+    "boardBoard": {
       "home": {
         "title": "게시판",
         "createLabel": "게시글 등록",
@@ -18,7 +18,7 @@
       "writerName": "작성자",
       "createdDate": "게시글 등록 날짜",
       "hit": "조회수",
-      "Category": "카테고리"
+      "category": "카테고리"
     }
   },
   "boardApp": {
