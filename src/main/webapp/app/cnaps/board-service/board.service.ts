@@ -22,7 +22,7 @@ export default class BoardService {
   public retrieve(paginationQuery): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios
-        .get(boardApiUrl + `?${buildPaginationQueryOpts(paginationQuery)}`)
+        .get(`${boardApiUrl}` + `?${buildPaginationQueryOpts(paginationQuery)}`)
         .then(res => {
           resolve(res);
         })
@@ -59,10 +59,10 @@ export default class BoardService {
   //   });
   // }
 
-  public findByCategory(category: any, paginationQuery?: any): Promise<any> {
+  public findByCategory(category: string, paginationQuery): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios
-        .get('${boardApiUrl}/${category}' + `?${buildPaginationQueryOpts(paginationQuery)}`)
+        .get(`${boardApiUrl}/category/${category}` + `?${buildPaginationQueryOpts(paginationQuery)}`)
         .then(res => {
           resolve(res);
         })

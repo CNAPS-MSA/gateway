@@ -26,7 +26,7 @@
                 <b-dropdown-item v-for="option in categorySelect.options"
                                     :key="option.value"
                                     :value="option.value"
-                                 @click="changeCategory(option.value)">{{option.value}}</b-dropdown-item>
+                                 @click="changeCategory(option.value)">{{option.text}}</b-dropdown-item>
             </b-dropdown>
         </div>
         <div class="table-responsive" style="margin-top: 10px;" v-if="boards && boards.length > 0">

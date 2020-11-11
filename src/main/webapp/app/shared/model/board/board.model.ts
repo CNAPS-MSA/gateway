@@ -1,5 +1,5 @@
 export const enum Category {
-  Notify = 'Notice',
+  Notice = 'Notice',
   Normal = 'Normal',
 }
 
