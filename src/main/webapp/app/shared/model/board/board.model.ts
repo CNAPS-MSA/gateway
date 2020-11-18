@@ -1,6 +1,6 @@
 export const enum Category {
-  Notice = 'Notice',
-  Normal = 'Normal',
+  Notice = 'NOTICE',
+  Normal = 'NORMAL',
 }
 
 export interface IBoard {
@@ -10,7 +10,7 @@ export interface IBoard {
   writerName?: string;
   writerId?: number;
   hit?: number;
-  createdDate?: Date;
+  createdDate?: string;
   category?: Category;
 }
 
@@ -22,7 +22,7 @@ export class Board implements IBoard {
     public writerName?: string,
     public writerId?: number,
     public hit?: number,
-    public createdDate?: Date,
+    public createdDate?: string,
     public category?: Category
   ) {}
 }

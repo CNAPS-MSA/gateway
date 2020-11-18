@@ -1,0 +1,8 @@
+{
+  "gatewayApp": {
+    "Category": {
+      "NORMAL": "일반 게시물",
+      "NOTICE": "공지 사항"
+    }
+  }
+}

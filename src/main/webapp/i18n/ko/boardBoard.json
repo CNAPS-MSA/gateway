@@ -18,7 +18,11 @@
       "writerName": "작성자",
       "createdDate": "게시글 등록 날짜",
       "hit": "조회수",
-      "category": "카테고리"
+      "category": "카테고리",
+      "created": "게시글이 등록되었습니다.",
+      "updated": "게시글이 수정되었습니다.",
+      "deleted": "게시글이 삭제되었습니다.",
+      "register": "새로운 게시글 등록"
     }
   },
   "boardApp": {

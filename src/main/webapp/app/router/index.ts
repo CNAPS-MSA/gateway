@@ -77,6 +77,8 @@ const BookRegisterForm = () => import('../cnaps/book-register-service/book-regis
 const RentedBookManagement = () => import('../cnaps/rented-book-manage-service/rented-book-management.vue');
 const MyPage = () => import('../cnaps/mypage-service/mypage.vue');
 const Board = () => import('../cnaps/board-service/board.vue');
+const BoardRegisterForm = () => import('../cnaps/board-service/board-register.vue');
+const BoardDetails = () => import('../cnaps/board-service/board-details.vue');
 Vue.use(Router);
 
 // prettier-ignore
@@ -416,6 +418,24 @@ export default new Router({
       name : 'Board',
       component : Board,
       meta : { authorities: [Authority.USER] }
+    },
+    {
+      path : '/board/new',
+      name : 'RegisterBoardForm',
+      component : BoardRegisterForm,
+      meta : { authorities : [Authority.USER] }
+    },
+    {
+      path : '/board/:boardId',
+      name : 'BoardDetails',
+      component : BoardDetails,
+      meta : { authorities: [Authority.USER]}
+    },
+    {
+      path : '/board/:boardId/edit',
+      name : 'BoardEdit',
+      component : BoardRegisterForm,
+      meta : { authorities: [Authority.USER]}
     }
 
     // jhipster-needle-add-entity-to-router - JHipster will add entities to the router here

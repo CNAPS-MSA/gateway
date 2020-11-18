@@ -2,6 +2,12 @@
     <div>
         <h2 id="page-heading">
             <span v-text="$t('global.menu.board')">Board</span>
+            <router-link :to="{name: 'RegisterBoardForm'}" tag="button"  class="btn btn-primary float-right jh-create-entity create-book">
+                <font-awesome-icon icon="plus"></font-awesome-icon>
+                <span  v-text="$t('gatewayApp.boardBoard.register')">
+                    Register
+                </span>
+            </router-link>
         </h2>
         <b-alert :show="dismissCountDown"
                  dismissible
@@ -14,20 +20,15 @@
         <div class="alert alert-warning" v-if="!isFetching && boards && boards.length === 0">
             <span>No boards found</span>
         </div>
-<!--        <form class="form-inline my-2 my-lg-0" v-on:submit.prevent="search()" >-->
-<!--            <input class="form-control mr-sm-2" type="text" placeholder="Search" v-model="title">-->
-<!--            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>-->
-<!--        </form>-->
-        <div >
-<!--            <b-form-select class="m-md-2" v-model="categorySelect.categorySelected" :options="categorySelect.options"-->
-<!--                           :text="categorySelect.categorySelected" @change="changeCategory"></b-form-select>-->
+        <div>
             <b-dropdown class="m-md-2" v-model="categorySelect.categorySelected"  :text="categorySelect.categorySelected" >
                 <b-dropdown-item disabled value="0">카테고리를 선택하세요.</b-dropdown-item>
                 <b-dropdown-item v-for="option in categorySelect.options"
-                                    :key="option.value"
-                                    :value="option.value"
+                                 :key="option.value"
+                                 :value="option.value"
                                  @click="changeCategory(option.value)">{{option.text}}</b-dropdown-item>
             </b-dropdown>
+
         </div>
         <div class="table-responsive" style="margin-top: 10px;" v-if="boards && boards.length > 0">
             <table class="table table-striped" >
@@ -36,6 +37,7 @@
                     <th>ID</th>
                     <th><span v-text="$t('gatewayApp.boardBoard.title')">Title</span></th>
                     <th><span v-text="$t('gatewayApp.boardBoard.writerName')">writerName</span></th>
+                    <th><span v-text="$t('gatewayApp.boardBoard.content')">Content</span></th>
                     <th><span v-text="$t('gatewayApp.boardBoard.createdDate')">Created Date</span></th>
                     <th><span v-text="$t('gatewayApp.boardBoard.category')">category</span></th>
                     <th v-on:click="changeOrder('hit')"><span v-text="$t('gatewayApp.boardBoard.hit')">Hit</span><jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'hit'"></jhi-sort-indicator></th>
@@ -46,8 +48,10 @@
                 <tr v-for="board in boards"
                     :key="board.id">
                     <td>{{board.id}}</td>
-                    <td>{{board.title}}</td>
+                    <td><router-link :to="{name: 'BoardDetails', params: {boardId: board.id}}">{{board.title}}</router-link></td>
                     <td>{{board.writerName}}</td>
+                    <td v-if="board.content.length>15"><router-link :to="{name: 'BoardDetails', params: {boardId: board.id}}">{{board.content.substring(0,15)}}...</router-link></td>
+                    <td v-if="board.content.length<=15"><router-link :to="{name: 'BoardDetails', params: {boardId: board.id}}">{{board.content}}</router-link></td>
                     <td>{{board.createdDate}}</td>
                     <td>{{board.category}}</td>
                     <td>{{board.hit}}</td>

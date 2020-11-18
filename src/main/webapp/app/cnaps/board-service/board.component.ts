@@ -6,7 +6,6 @@ import AlertMixin from '@/shared/alert/alert.mixin';
 
 import BoardService from '@/cnaps/board-service/board.service';
 import { IBoard } from '@/shared/model/board/board.model';
-import { Category } from '@/shared/model/board/board.model';
 
 @Component({
   mixins: [Vue2Filters.mixin],
@@ -152,7 +151,7 @@ export default class Board extends mixins(AlertMixin) {
   //       this.isFetching = false;
   //     });
   // }
-
+  //
   // public get getUserId(): any {
   //   return this.$store.getters.account.id;
   // }
