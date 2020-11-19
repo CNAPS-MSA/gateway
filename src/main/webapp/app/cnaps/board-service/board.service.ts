@@ -2,9 +2,10 @@ import axios from 'axios';
 
 import buildPaginationQueryOpts from '@/shared/sort/sorts';
 import { IBoard } from '@/shared/model/board/board.model';
+import { IComment } from '@/shared/model/board/comment.model';
 
 const boardApiUrl = 'services/board/api/board';
-const commentApiUrl = 'services/comment/api/comment';
+const commentApiUrl = 'services/board/api/comment';
 
 export default class BoardService {
   public find(id: number): Promise<IBoard> {
@@ -33,10 +34,10 @@ export default class BoardService {
     });
   }
 
-  public retrieveAllComments(paginationQuery, boardId: number): Promise<any> {
+  public retrieveAllComments(boardId: number): Promise<any> {
     return new Promise<any>((resolve, reject) => {
       axios
-        .get(`${commentApiUrl}/${boardId}` + `?${buildPaginationQueryOpts(paginationQuery)}`)
+        .get(`${commentApiUrl}/board/${boardId}`)
         .then(res => {
           resolve(res);
         })
@@ -50,6 +51,19 @@ export default class BoardService {
     return new Promise<any>((resolve, reject) => {
       axios
         .post(`${boardApiUrl}`, board)
+        .then(res => {
+          resolve(res);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  }
+
+  public registerComment(comment: IComment): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      axios
+        .post(`${commentApiUrl}`, comment)
         .then(res => {
           resolve(res);
         })
@@ -84,7 +98,31 @@ export default class BoardService {
         });
     });
   }
+  public deleteComment(commentId: number): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      axios
+        .delete(`${commentApiUrl}/${commentId}`)
+        .then(res => {
+          resolve(res);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  }
 
+  public editComment(comment: IComment): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      axios
+        .put(`${commentApiUrl}`, comment)
+        .then(res => {
+          resolve(res);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  }
   // public findByTitle(title: String, paginationQuery?: any): Promise<any> {
   //   return new Promise<any>((resolve, reject) => {
   //     axios

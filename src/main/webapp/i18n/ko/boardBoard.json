@@ -8,7 +8,8 @@
         "notFound": "게시판에 등록된 글이 없습니다."
       },
       "delete": {
-        "question": "해당 게시글을 삭제하시겠습니까?"
+        "question": "해당 게시글을 삭제하시겠습니까?",
+        "commentQuestion": "해당 댓글을 삭제하시겠습니까?"
       },
       "detail": {
         "title": "게시판"
@@ -22,7 +23,10 @@
       "created": "게시글이 등록되었습니다.",
       "updated": "게시글이 수정되었습니다.",
       "deleted": "게시글이 삭제되었습니다.",
-      "register": "새로운 게시글 등록"
+      "register": "새로운 게시글 등록",
+      "commentCreated": "댓글이 등록되었습니다.",
+      "commentEdited": "댓글이 수정되었습니다.",
+      "commentDeleted": "댓글이 삭제되었습니다."
     }
   },
   "boardApp": {
