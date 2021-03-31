@@ -42,8 +42,8 @@
                     <td>{{book.classification}}</td>
                     <td>{{book.author}}</td>
                     <td>{{book.publicationDate}}</td>
-                    <td v-if="book.rented">대여중</td>
-                    <td v-if="!book.rented">대여 가능</td>
+                    <td v-if="book.rented">대출중</td>
+                    <td v-if="!book.rented">대출 가능</td>
                     <td>{{book.rentCnt}}</td>
                     <td class="text-right">
                         <div class="btn-group">

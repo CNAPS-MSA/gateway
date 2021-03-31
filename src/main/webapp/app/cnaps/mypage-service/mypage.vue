@@ -12,10 +12,10 @@
         </b-alert>
         <br/>
         <br/>
-        <h3>나의 대여 정보</h3>
+        <h3>나의 대출 정보</h3>
         <ul class="list-group" style="max-width: 30rem;">
             <li class="list-group-item d-flex justify-content-between align-items-center" v-if="rental">
-                대여 가능 상태
+                대출 가능 상태
                 <span class="badge badge-primary badge-pill" v-text="$t('gatewayApp.RentalStatus.' + rental.rentalStatus)">{{rental.rentalStatus}}</span>
             </li>
             <li class="list-group-item d-flex justify-content-between align-items-center" v-if="user">

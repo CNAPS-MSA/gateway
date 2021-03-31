@@ -22,7 +22,7 @@
                 </div>
             </div>
             <div  class="table-responsive" style="margin-top: 10px;" v-if="authenticated&& books && books.length> 0">
-                <h4><strong>인기 대여 도서 목록</strong></h4>
+                <h4><strong>인기 대출 도서 목록</strong></h4>
                 <table class="table table-striped" >
                     <thead>
                     <tr>
@@ -46,8 +46,8 @@
                             <td>{{book.classification}}</td>
                             <td>{{book.author}}</td>
                             <td>{{book.publicationDate}}</td>
-                            <td v-if="book.rented">대여중</td>
-                            <td v-if="!book.rented">대여 가능</td>
+                            <td v-if="book.rented">대출중</td>
+                            <td v-if="!book.rented">대출 가능</td>
                             <td>{{book.rentCnt}}</td>
                             <td class="text-right">
                                 <div class="btn-group">

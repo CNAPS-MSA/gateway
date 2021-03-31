@@ -14,9 +14,9 @@
         "title": "Rental"
       },
       "doRent": {
-        "title": "도서 대여 신청",
-        "question": "{{ param }} 을 대여하시겠습니까?",
-        "rented": "신청한 도서 {{ param }} 가 대여완료되었습니다."
+        "title": "도서 대출 신청",
+        "question": "{{ param }} 을 대출하시겠습니까?",
+        "rented": "신청한 도서 {{ param }} 가 대출완료되었습니다."
       },
       "releaseOverdue": {
         "title": "연체료 결제 신청",
@@ -26,7 +26,7 @@
       "userId": "User Id",
       "rentalStatus": "Rental Status",
       "lateFee": "연체료",
-      "rentedItem": "대여 도서",
+      "rentedItem": "대출 도서",
       "overdueItem": "연체 도서",
       "returnedItem": "반납 도서"
     }

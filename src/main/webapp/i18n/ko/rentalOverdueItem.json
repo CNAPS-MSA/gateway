@@ -14,7 +14,7 @@
         "title": "Overdue Item"
       },
       "bookId": "Book Id",
-      "rentedDate": "대여 날짜",
+      "rentedDate": "대출 날짜",
       "dueDate": "반납 예정 날짜",
       "bookTitle": "도서 이름",
       "rental": "Rental"

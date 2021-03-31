@@ -1,20 +1,20 @@
 {
   "global": {
-    "bookrent": "대여하기",
+    "bookrent": "대출하기",
     "title": "Gateway",
     "overdueBook": "연체처리",
     "browsehappy": "당신은 <strong>오래된</strong> 브라우저를 사용하고 있군요. <a href=\"http://browsehappy.com/?locale=en\">브라우저를 업그레이드</a> 해 당신의 경험을 발전시키세요.",
     "menu": {
       "home": "홈",
-      "rentalManagement": "대여 관리",
-      "rentalpage": "도서 대여",
-      "returnpage": "도서 반납",
+      "rentalManagement": "대출 관리",
+      "rentalpage": "대출",
+      "returnpage": "대출 반납",
       "registerbook": "도서 등록",
       "bookManagement": "도서 관리",
-      "manageRented": "대여 도서 관리",
+      "manageRented": "대출 도서 관리",
       "mypage": {
         "home": "My Page",
-        "rentedpage": "나의 대여 도서",
+        "rentedpage": "나의 대출 도서",
         "overduepage": "나의 연체 도서",
         "returnedpage": "나의 반납 도서",
         "returnBook": {

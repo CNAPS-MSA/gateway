@@ -19,8 +19,8 @@
       "author": "작가",
       "publicationDate": "출판 날짜",
       "classification": "분류",
-      "rented": "대여 여부",
-      "rentCnt": "대여 횟수",
+      "rented": "대출 여부",
+      "rentCnt": "대출 횟수",
       "bookId": "Book Id"
     }
   },
