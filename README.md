@@ -1,6 +1,8 @@
 선행조건
+```
 docker desktop 설치
 각 마이크로서비스 소스코드 git clone 
+```
 
 
 jhipster 레지스터리 기동
