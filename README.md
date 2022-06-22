@@ -1,8 +1,10 @@
 # gateway
 
+```
 cd gateway
-docker-compose -f src/main/docker/jhipster-registry.yml up
 
+docker-compose -f src/main/docker/jhipster-registry.yml up
+```
 
 This application was generated using JHipster 6.9.1, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v6.9.1](https://www.jhipster.tech/documentation-archive/v6.9.1).
 
