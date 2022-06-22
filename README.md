@@ -1,11 +1,37 @@
-# gateway
 
+jhipster 레지스터리 기동
 ```
 cd gateway
 
 docker-compose -f src/main/docker/jhipster-registry.yml up
 ```
+카프카 기동
+```
+cd gateway
 
+docker-compose -f src/main/docker/kafka.yml up
+```
+몽고db 기동
+```
+cd bookCatalog
+
+docker-compose -f src/main/docker/mongodb.yml up -d
+```
+각 마이크로서비스 기동
+```
+cd gateway
+./mvnw
+cd rental
+./mvnw
+cd book
+./mvnw
+cd rental
+./mvnw
+cd bookCatalog
+./mvnw
+```
+
+# gateway
 This application was generated using JHipster 6.9.1, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v6.9.1](https://www.jhipster.tech/documentation-archive/v6.9.1).
 
 This is a "gateway" application intended to be part of a microservice architecture, please refer to the [Doing microservices with JHipster][] page of the documentation for more information.
